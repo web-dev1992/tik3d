@@ -1,0 +1,128 @@
+const PlayButtonIcon: React.FC<{ className: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 80 81"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="34.9454" cy="35.4527" r="33.3751" fill="white" />
+      <g filter="url(#filter0_di_31915_39148)">
+        <circle
+          cx="34.9456"
+          cy="35.4528"
+          r="24.8538"
+          fill="url(#paint0_linear_31915_39148)"
+        />
+      </g>
+      <g filter="url(#filter1_d_31915_39148)">
+        <path
+          d="M30.6972 28.3644C30.6972 27.8535 30.9901 27.3878 31.4505 27.1665C31.9111 26.9451 32.4576 27.0074 32.8565 27.3265L41.717 34.4149C42.0323 34.6672 42.2158 35.0491 42.2158 35.4528C42.2158 35.8565 42.0323 36.2383 41.717 36.4907L32.8565 43.5791C32.4576 43.8983 31.9111 43.9605 31.4505 43.7391C30.9901 43.5178 30.6972 43.0521 30.6972 42.5412V28.3644Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_di_31915_39148"
+          x="0.0237522"
+          y="0.530954"
+          width="79.9121"
+          height="79.9118"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="5.03402" dy="5.03402" />
+          <feGaussianBlur stdDeviation="7.55103" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.101961 0 0 0 0 0.133333 0 0 0 0 0.141176 0 0 0 0.34 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_31915_39148"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_31915_39148"
+            result="shape"
+          />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="10.068" dy="10.068" />
+          <feGaussianBlur stdDeviation="7.55103" />
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="shape"
+            result="effect2_innerShadow_31915_39148"
+          />
+        </filter>
+        <filter
+          id="filter1_d_31915_39148"
+          x="28.2098"
+          y="27.0353"
+          width="16.4936"
+          height="21.81"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="2.4875" />
+          <feGaussianBlur stdDeviation="1.24375" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_31915_39148"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_31915_39148"
+            result="shape"
+          />
+        </filter>
+        <linearGradient
+          id="paint0_linear_31915_39148"
+          x1="60.0023"
+          y1="10.599"
+          x2="5.43848"
+          y2="54.9155"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#39AFFD" />
+          <stop offset="1" stopColor="#477FFF" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+};
+
+export default PlayButtonIcon;

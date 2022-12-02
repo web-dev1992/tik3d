@@ -212,7 +212,7 @@ const LanguageDropDown: React.FC<{
         <div className="absolute z-20 w-full top-9 xl:top-14 left-15 rounded divide-y divide-gray-100 shadow  bg-white flex flex-row justify-end border border-stone-300">
           <ul className="xl:py-1 text-sm p-[5px] xl:px-3  text-[10px] ">
             {langItems.map((lang, index) => (
-              <li>
+              <li key={index}>
                 <button
                   type="button"
                   className="inline-flex xl:py-1 text-sm p-[5px] xl:px-3  text-[10px] w-full  text-[#848484]  "

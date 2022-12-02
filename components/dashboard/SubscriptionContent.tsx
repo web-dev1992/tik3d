@@ -21,7 +21,10 @@ const SubscriptionContent = () => {
         </h2>
         <div className="w-full flex flex-col flex-nowrap justify-center items-start gap-[7px] lg:gap-2.5 xl:gap-4 ">
           {subscriptions.map((subscription, index) => (
-            <div className="h-10 flex flex-row flex-nowrap justify-start items-center w-full group hover:bg-[#2F80ED] hover:text-white active:bg-[#2F80ED] active:text-white lg:h-14 xl:h-[90px] py-[3px] px-3 lg:px-4 xl:px-[30px] gap-4 bg-[#F6F8FB] border border-[#E2E2E2] rounded lg:rounded-md xl:rounded-[10px]">
+            <div
+              key={index}
+              className="h-10 flex flex-row flex-nowrap justify-start items-center w-full group hover:bg-[#2F80ED] hover:text-white active:bg-[#2F80ED] active:text-white lg:h-14 xl:h-[90px] py-[3px] px-3 lg:px-4 xl:px-[30px] gap-4 bg-[#F6F8FB] border border-[#E2E2E2] rounded lg:rounded-md xl:rounded-[10px]"
+            >
               <div className="w-2/3 flex flex-row flex-nowrap justify-start items-center gap-4 ">
                 <button
                   className="text-white rounded xl:rounded-lg w-[18px] h-[18px] lg:w-[26px] lg:h-[26px] xl:w-[42px] xl:h-[42px] text-center font-medium text-[8px] lg:text-xs xl:text-xl leading-[13px] xl:leading-[30px]"

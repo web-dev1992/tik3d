@@ -60,6 +60,7 @@ const PaymentMethodDropdown = (props) => {
           <ul className="absolute z-20 w-full top-8 lg:top-[34px] xl:top-14 left-15  p-[9px] lg:p-[15px] xl:p-5 rounded-md divide-y divide-[#E4E6F2] bg-white flex flex-col justify-center  border border-[#E3E1E3]">
             {paymentItems.map((payment, index) => (
               <li
+                key={index}
                 className="cursor-pointer flex flex-row flex-nowrap items-center  gap-4 text-xxs xl:text-sm  w-full  h-8 lg:h-[34px] xl:h-14 text-[#848484] bg-white  group hover:bg-abiStroke hover:text-white"
                 onClick={() => {
                   setCurrentIndex(index);
@@ -71,6 +72,7 @@ const PaymentMethodDropdown = (props) => {
                     src={paymentItems[index].file}
                     width={34}
                     height={24}
+                    alt="bitcoin-icon"
                   />
                 </span>
                 <span className="group-hover:text-white">{payment.label}</span>

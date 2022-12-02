@@ -1,4 +1,3 @@
-import { OmitProps } from "antd/lib/transfer/ListBody";
 import SignupLoginHeader from "./SignupLoginHeader";
 
 const SignupLoginLayout = (props) => {

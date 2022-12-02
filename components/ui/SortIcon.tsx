@@ -1,30 +1,30 @@
-const SortIcon = () => {
+const SortIcon: React.FC<{ className: string }> = ({ className }) => {
   return (
     <svg
-      className="w-2 h-1 lg:w-[13px] "
-      viewBox="0 0 14 6"
+      className={className}
+      viewBox="0 0 23 9"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M0.480957 0.634277H13.3898H0.480957Z" fill="#6F6F6F" />
+      <path d="M1.08997 1.40625H21.848H1.08997Z" fill="#6F6F6F" />
       <path
-        d="M0.480957 0.634277H13.3898"
+        d="M1.08997 1.40625H21.848"
         stroke="#ADADAD"
-        strokeWidth="0.933428"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
-      <path d="M2.63232 2.68628H11.2383H2.63232Z" fill="#6F6F6F" />
+      <path d="M4.55005 4.70312H18.3887H4.55005Z" fill="#6F6F6F" />
       <path
-        d="M2.63232 2.68628H11.2383"
+        d="M4.55005 4.70312H18.3887"
         stroke="#ADADAD"
-        strokeWidth="0.933428"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
-      <path d="M5.50122 4.73608H8.37H5.50122Z" fill="#6F6F6F" />
+      <path d="M9.16296 7.99805H13.7759H9.16296Z" fill="#6F6F6F" />
       <path
-        d="M5.50122 4.73608H8.37"
+        d="M9.16296 7.99805H13.7759"
         stroke="#ADADAD"
-        strokeWidth="0.933428"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
     </svg>

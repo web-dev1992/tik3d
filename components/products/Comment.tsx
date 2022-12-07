@@ -10,7 +10,17 @@ interface commentProp {
   rate: number;
   commentText: string;
 }
-
+const CommentsList: React.FC<{ commentsList: commentProp[] }> = ({
+  commentsList,
+}) => {
+  return (
+    <div className="px-3 w-full lg:w-[55%] flex flex-col flex-nowrap justify-center items-start gap-4 lg:gap-6 xl:gap-9">
+      {commentsList.map((comment) => (
+        <Comment comment={comment} key={comment.id} />
+      ))}
+    </div>
+  );
+};
 const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
   const stars = [];
   for (let i = 0; i < comment.rate; i++) {
@@ -53,36 +63,19 @@ const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
     <div className="w-full flex flex-col justify-center items-center shadow-[0_4px_21px_rgba(38,78,118,0.08)]  bg-white rounded-[9px] lg:rounded-[12px] xl:rounded-[20px] p-4 xl:p-[50px] ">
       <div className="w-full flex flex-row flex-nowrap justify-between items-center  ">
         <div className="flex flex-row flex-nowrap justify-start w-full h-max  gap-2 xl:gap-4 ">
-          <div className="flex lg:hidden justify-center items-center">
-            <Image
-              src={comment.image}
-              alt="user-image"
-              width={25}
-              height={25}
-            />
+          <div className="flex justify-center items-center aspect-square w-6 h-6 lg:w-[34px] lg:h-[34px] xl:w-[55px] xl:h-[55px] relative">
+            <Image src={comment.image} alt="user-image" layout="fill" />
           </div>
-          <div className="hidden lg:flex xl:hidden justify-center items-center">
-            <Image
-              src={comment.image}
-              alt="user-image"
-              width={34}
-              height={34}
-            />
-          </div>
-          <div className="hidden xl:flex justify-center items-center">
-            <Image
-              src={comment.image}
-              alt="user-image"
-              width={55}
-              height={55}
-            />
-          </div>
+
           <div className="flex flex-col flex-nowrap justify-center items-start w-full h-max gap-0  ">
             <span className="text-[7px] lg:text-[10px] xl:text-base lg:leading-6 xl:leading-6 font-bold  text-[#0F2137]   ">
               {comment.commenter}
             </span>
             <Link href="#">
-              <a className="text-abiStroke leading-normal lg:leading-6 xl:leading-6 text-right text-[7px] lg:text-[9px] xl:text-sm font-medium tracking-tight " style={{direction:"ltr"}}>
+              <a
+                className="text-abiStroke leading-normal lg:leading-6 xl:leading-6 text-right text-[7px] lg:text-[9px] xl:text-sm font-medium tracking-tight "
+                style={{ direction: "ltr" }}
+              >
                 {comment.userName}
               </a>
             </Link>
@@ -99,4 +92,4 @@ const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
   );
 };
 
-export default Comment;
+export default CommentsList;

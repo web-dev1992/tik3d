@@ -21,7 +21,7 @@ module.exports = {
         navyBlue: "#02073E",
         navyBluee: "#0F2137",
         abiStroke: "#56CCF2",
-        abi: "#0898E7",
+        // abi: "#0898E7",
       },
       fontSize: {
         xxs: "10px",

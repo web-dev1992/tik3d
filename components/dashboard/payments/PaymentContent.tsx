@@ -1,12 +1,11 @@
 import SortIcon from "@components/ui/SortIcon";
 import { Fragment } from "react";
+import ContentTitle from "../ContentTitle";
 const PaymentContent = () => {
   return (
     <Fragment>
       <div className="w-full flex flex-col flex-nowrap justify-center items-center lg:gap-2 ">
-        <h1 className="w-full text-right text-[#0F2137] text-base xl:text-2xl font-bold leading-[55px] lg:leading-[34px] xl:leading-[55px] tracking-wide">
-          آخرین پرداختی ها
-        </h1>
+        <ContentTitle title="آخرین پرداختی ها" />
         <div className="w-full flex flex-col flex-nowrap justify-center items-center gap-[5px] lg:gap-[7px] xl:gap-2.5">
           {/* first row(header) */}
           <div className="w-full h-6 lg:h-8 xl:h-[50px] flex flex-row flex-nowrap justify-center items-center bluuuu lg:bg-abi  text-white text-[8px] lg:text-xxs xl:text-base  font-normal rounded-[5px] lg:rounded-[7px] xl:rounded-[10px] ">

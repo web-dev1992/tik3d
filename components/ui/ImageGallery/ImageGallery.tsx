@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,12 +15,6 @@ interface imageProps {
 }
 const ImageGallery: React.FC<{ images: imageProps[] }> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [hasWindow, setHasWindow] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
 
   return (
     <div className="container w-[329px] h-[384px] lg:w-[373px] lg:h-[435px] xl:w-[600px] xl:h-[700px] ">

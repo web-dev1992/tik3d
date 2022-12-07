@@ -5,6 +5,7 @@ interface audio {
   address:string;
   ligthImage:string;
   isSpecial: boolean;
+  link:string
 }
 
 const AudioProductList:React.FC<{audios:audio[]}> = ({audios}) => {

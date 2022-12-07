@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProductLayout from "@components/layout/ProductLayout";
 import VideoProductList from "@components/products/videos/VideoProductList";
-import ProductDropdown from "@components/ui/ProductDropdown";
-import RightPanelItem from "@components/ui/RightPanelItem";
 import Pagination from "@components/ui/Pagination";
+import ProductsSidebar from "@components/ui/ProductsSidebar";
 const Dummy_Video_List = [
   {
     id: "v1",
@@ -11,6 +10,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v2",
@@ -18,6 +18,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v3",
@@ -25,6 +26,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v4",
@@ -32,6 +34,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v5",
@@ -39,6 +42,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v6",
@@ -46,6 +50,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v7",
@@ -53,6 +58,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v8",
@@ -60,6 +66,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v9",
@@ -67,6 +74,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v10",
@@ -74,6 +82,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v11",
@@ -81,6 +90,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v12",
@@ -88,6 +98,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v13",
@@ -95,6 +106,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v14",
@@ -102,6 +114,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v15",
@@ -109,6 +122,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v16",
@@ -116,6 +130,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v17",
@@ -123,6 +138,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v18",
@@ -130,6 +146,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v19",
@@ -137,6 +154,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v20",
@@ -144,6 +162,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v21",
@@ -151,6 +170,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v22",
@@ -158,6 +178,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v23",
@@ -165,6 +186,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v24",
@@ -172,6 +194,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v25",
@@ -179,6 +202,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v26",
@@ -186,6 +210,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v27",
@@ -193,6 +218,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v28",
@@ -200,6 +226,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v29",
@@ -207,6 +234,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v30",
@@ -214,6 +242,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v31",
@@ -221,6 +250,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v32",
@@ -228,6 +258,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v33",
@@ -235,6 +266,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v34",
@@ -242,6 +274,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v35",
@@ -249,6 +282,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v36",
@@ -256,6 +290,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v37",
@@ -263,6 +298,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v38",
@@ -270,6 +306,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v39",
@@ -277,6 +314,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v40",
@@ -284,6 +322,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v41",
@@ -291,6 +330,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v42",
@@ -298,6 +338,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v43",
@@ -305,6 +346,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v44",
@@ -312,6 +354,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v45",
@@ -319,6 +362,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v46",
@@ -326,6 +370,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "v47",
@@ -333,6 +378,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "v48",
@@ -340,6 +386,7 @@ const Dummy_Video_List = [
     address: "/videos/webpack.mp4",
     ligthImage: "/images/video-ligth-image.png",
     isSpecial: false,
+    link: "#",
   },
 ];
 
@@ -474,66 +521,24 @@ const Videos = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
-      <div className="my-[72px] w-11/12 sm:w-9/12 xl:w-[1350px] mt-5 m-auto flex flex-col flex-nowrap">
-        <div className="flex flex-row gap-6  xl:gap-10">
-          <div className="hidden lg:flex flex-col  flex-nowrap w-4/10 font-IRANSans gap-5 xl:gap-10 ">
-            <div className="w-full flex flex-row flex-nowrap  justify-center items-start gap-2 ">
-              <div>
-                <button className="flex flex-row justify-center items-center rounded-[3px] w-[71px] h-9 xl:w-[115px] xl:h-14 xl:text-base xl:leading-6 xl:rounded-[5px] bg-abi text-white text-xxs leading-4 font-bold">
-                  آیتم های رایگان
-                </button>
-              </div>
-              <div>
-                <div className="w-full h-max relative ">
-                  <ProductDropdown
-                    className="w-full h-full text-[9px] font-normal relative"
-                    selectItems={[
-                      "جدیدترین ها",
-                      "پربازدیدترین ها",
-                      "قدیمی ترین ها",
-                    ]}
-                    label="دسته بندی بر اساس:جدیدترین ها"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="w-[243px] h-[482px] xl:w-[390px] xl:h-[776px] bg-[#2F80ED] px-2 shadow-[0_0_37px_-3px_#2F80ED] rounded-lg flex flex-col flex-nowrap items-start gap-4">
-              <div className="w-full h-max flex flex-row justify-center items-center relative pt-4">
-                <ProductDropdown
-                  className="h-full text-[11px] font-normal relative"
-                  selectItems={["مدل های سه بعدی ", "مدل های دو بعدی"]}
-                  label="مدل های سه بعدی"
-                />
-              </div>
-              {/* --------- */}
-              <div className="w-full flex flex-col flex-nowrap justify-start items-start font-IRANSans overflow-auto ">
-                <p className="text-abiStroke font-noraml text-[9px] xl:text-sm leading-5 text-right pr-6">
-                  زیر مجموعه های این دسته:
-                </p>
-                <div className="overflow-scroll scrollbar-thin  scrollbar-thumb-white scrollbar-track-[#2D9CDB] w-full">
-                  {ThreeDimension_DummyList.map((tdl) => (
-                    <RightPanelItem item={tdl} key={tdl.id} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col flex-nowrap justify-center ites-center ">
-            <VideoProductList videos={currentVideos} />
-            {/* pagination */}
-            <div
-              className="flex flex-row justify-center items-center font-IRANSans mt-12 "
-              style={{ direction: "rtl" }}
-            >
-              <Pagination
-                ItemsPerPage={videosPerPage}
-                totalItems={videos.length}
-                paginate={paginate}
-                currentPage={currentPage}
-                paginateFront={paginateFront}
-                paginateBack={paginateBack}
-              />
-            </div>
+      <div className="flex flex-row justify-center gap-6  xl:gap-10 my-[72px] m-auto w-11/12 sm:w-9/12  xl:w-[1350px] mt-5">
+        {/* sidebar */}
+        <ProductsSidebar panelList={ThreeDimension_DummyList} />
+        <div className=" flex flex-col flex-nowrap justify-center items-center ">
+          <VideoProductList videos={currentVideos} />
+          {/* pagination */}
+          <div
+            className="flex flex-row justify-center items-center font-IRANSans mt-12 "
+            style={{ direction: "rtl" }}
+          >
+            <Pagination
+              ItemsPerPage={videosPerPage}
+              totalItems={videos.length}
+              paginate={paginate}
+              currentPage={currentPage}
+              paginateFront={paginateFront}
+              paginateBack={paginateBack}
+            />
           </div>
         </div>
       </div>

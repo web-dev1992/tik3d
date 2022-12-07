@@ -33,28 +33,35 @@ const DashboardContent = () => {
       </div>
       <div className="lg:absolute lg:-bottom-5 flex flex-col lg:flex-row flex-nowrap justify-center items-center gap-2 lg:gap-6 ">
         <div className="flex flex-row flex-nowrap justify-center items-center gap-2 lg:gap-6">
-          <button className="w-28 h-10 xl:h-16 xl:w-[180px] bg-white rounded xl:rounded-[5px] px-2.5 py-3 flex flex-row flex-nowrap justify-center items-center gap-2 text-[#535353] text-[11px] xl:text-lg leading-[22px] font-medium shadow-[0_3px_30px_rgba(132,132,132,0.25)] xl:shadow-[0_6px_47px_rgba(132,132,132,0.25)]">
+          <SocialMediaButton>
             <PhoneIcon />
             <span>09127330814</span>
-          </button>
-          <button className="w-28 h-10 xl:h-16 xl:w-[180px] bg-white rounded xl:rounded-[5px] px-2.5 py-3 flex flex-row flex-nowrap justify-center items-center gap-2 text-[#535353] text-[11px] xl:text-lg leading-[22px] font-medium shadow-[0_3px_30px_rgba(132,132,132,0.25)] xl:shadow-[0_6px_47px_rgba(132,132,132,0.25)]">
+          </SocialMediaButton>
+          <SocialMediaButton>
             <InstaIcon />
             <span>اینستاگرام</span>
-          </button>
+          </SocialMediaButton>
         </div>
         <div className="flex flex-row flex-nowrap justify-center items-center gap-2 lg:gap-6">
-          <button className="w-28 h-10 xl:h-16 xl:w-[180px] bg-white rounded xl:rounded-[5px] px-2.5 py-3 flex flex-row flex-nowrap justify-center items-center gap-2 text-[#535353] text-[11px] xl:text-lg leading-[22px] font-medium shadow-[0_3px_30px_rgba(132,132,132,0.25)] xl:shadow-[0_6px_47px_rgba(132,132,132,0.25)]">
+          <SocialMediaButton>
             <TelegramIcon />
             <span>کانال تلگرام</span>
-          </button>
-          <button className="w-28 h-10 xl:h-16 xl:w-[180px] bg-white rounded xl:rounded-[5px] px-2.5 py-3 flex flex-row flex-nowrap justify-center items-center gap-2 text-[#535353] text-[11px] xl:text-lg leading-[22px] font-medium shadow-[0_3px_30px_rgba(132,132,132,0.25)] xl:shadow-[0_6px_47px_rgba(132,132,132,0.25)]">
+          </SocialMediaButton>
+          <SocialMediaButton>
             <TelegramIcon />
             <span>گروه تلگرام</span>
-          </button>
+          </SocialMediaButton>
         </div>
       </div>
     </Fragment>
   );
 };
 
+const SocialMediaButton = (props) => {
+  return (
+    <button className="w-28 h-10 xl:h-16 xl:w-[180px] bg-white rounded xl:rounded-[5px] px-2.5 py-3 flex flex-row flex-nowrap justify-center items-center gap-2 text-[#535353] text-[11px] xl:text-lg leading-[22px] font-medium shadow-[0_3px_30px_rgba(132,132,132,0.25)] xl:shadow-[0_6px_47px_rgba(132,132,132,0.25)]">
+      {props.children}
+    </button>
+  );
+};
 export default DashboardContent;

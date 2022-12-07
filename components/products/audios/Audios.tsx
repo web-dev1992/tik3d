@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ProductLayout from "@components/layout/ProductLayout";
 import AudioProductList from "@components/products/audios/AudioProductList";
-import ProductDropdown from "@components/ui/ProductDropdown";
-import RightPanelItem from "@components/ui/RightPanelItem";
 import Pagination from "@components/ui/Pagination";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import ProductsSidebar from "@components/ui/ProductsSidebar";
 const Dummy_Audio_List = [
   {
     id: "a1",
@@ -12,6 +11,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a2",
@@ -19,6 +19,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a3",
@@ -26,6 +27,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a4",
@@ -33,6 +35,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a5",
@@ -40,6 +43,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a6",
@@ -47,6 +51,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a7",
@@ -54,6 +59,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a8",
@@ -61,6 +67,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a9",
@@ -68,6 +75,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a10",
@@ -75,6 +83,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a11",
@@ -82,6 +91,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a12",
@@ -89,6 +99,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a13",
@@ -96,6 +107,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a14",
@@ -103,6 +115,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a15",
@@ -110,6 +123,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a16",
@@ -117,6 +131,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a17",
@@ -124,6 +139,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a18",
@@ -131,6 +147,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a19",
@@ -138,6 +155,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a20",
@@ -145,6 +163,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a21",
@@ -152,6 +171,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a22",
@@ -159,6 +179,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a23",
@@ -166,6 +187,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a24",
@@ -173,6 +195,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a25",
@@ -180,6 +203,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a26",
@@ -187,6 +211,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a27",
@@ -194,6 +219,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a28",
@@ -201,6 +227,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a29",
@@ -208,6 +235,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a30",
@@ -215,6 +243,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a31",
@@ -222,6 +251,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a32",
@@ -229,6 +259,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a33",
@@ -236,6 +267,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a34",
@@ -243,6 +275,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a35",
@@ -250,6 +283,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a36",
@@ -257,6 +291,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a37",
@@ -264,6 +299,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a38",
@@ -271,6 +307,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a39",
@@ -278,6 +315,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a40",
@@ -285,6 +323,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a41",
@@ -292,6 +331,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a42",
@@ -299,6 +339,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a43",
@@ -306,6 +347,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a44",
@@ -313,6 +355,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a45",
@@ -320,6 +363,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a46",
@@ -327,6 +371,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
   {
     id: "a47",
@@ -334,6 +379,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: true,
+    link: "#",
   },
   {
     id: "a48",
@@ -341,6 +387,7 @@ const Dummy_Audio_List = [
     address: "/musics/Earth.mp3",
     ligthImage: "/images/music-poster.png",
     isSpecial: false,
+    link: "#",
   },
 ];
 
@@ -479,66 +526,25 @@ const Audios = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
-      <div className="my-[72px] w-11/12 sm:w-9/12 xl:w-full mt-5 m-auto flex flex-col items-center flex-nowrap ">
-        <div className="flex flex-row gap-6  xl:gap-10">
-          <div className="hidden lg:flex flex-col  flex-nowrap w-4/10 font-IRANSans gap-5 xl:gap-10 ">
-            <div className="w-full flex flex-row flex-nowrap  justify-center items-start gap-2 ">
-              <div>
-                <button className="flex flex-row justify-center items-center rounded-[3px] w-[71px] h-9 xl:w-[115px] xl:h-14 xl:text-base xl:leading-6 xl:rounded-[5px] bg-abi text-white text-xxs leading-4 font-bold">
-                  آیتم های رایگان
-                </button>
-              </div>
-              <div>
-                <div className="w-full h-max relative ">
-                  <ProductDropdown
-                    className="w-full h-full text-[9px] font-normal relative"
-                    selectItems={[
-                      "جدیدترین ها",
-                      "پربازدیدترین ها",
-                      "قدیمی ترین ها",
-                    ]}
-                    label="دسته بندی بر اساس:جدیدترین ها"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="w-[243px] h-[482px] xl:w-[390px] xl:h-[776px] bg-[#2F80ED] px-2 shadow-[0_0_37px_-3px_#2F80ED] rounded-lg flex flex-col flex-nowrap items-start gap-4">
-              <div className="w-full h-max flex flex-row justify-center items-center relative pt-4">
-                <ProductDropdown
-                  className="h-full text-[11px] font-normal relative"
-                  selectItems={["مدل های سه بعدی ", "مدل های دو بعدی"]}
-                  label="مدل های سه بعدی"
-                />
-              </div>
-              {/* --------- */}
-              <div className="w-full flex flex-col flex-nowrap justify-start items-start font-IRANSans overflow-auto ">
-                <p className="text-abiStroke font-noraml text-[9px] xl:text-sm leading-5 text-right pr-6">
-                  زیر مجموعه های این دسته:
-                </p>
-                <div className="overflow-scroll scrollbar-thin  scrollbar-thumb-white scrollbar-track-[#2D9CDB] w-full">
-                  {ThreeDimension_DummyList.map((tdl) => (
-                    <RightPanelItem item={tdl} key={tdl.id} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col flex-nowrap justify-center items-center ">
-            <AudioProductList audios={currentAudios} />
-            {/* pagination */}
-            <div
-              className="flex flex-row justify-center items-center font-IRANSans mt-12 "
-              style={{ direction: "rtl" }}
-            >
-              <Pagination
-                ItemsPerPage={audiosPerPage}
-                totalItems={audios.length}
-                paginate={paginate}
-                currentPage={currentPage}
-                paginateFront={paginateFront}
-                paginateBack={paginateBack}
-              />
-            </div>
+      <div className="flex flex-row justify-center gap-6  xl:gap-10 my-[72px] m-auto w-11/12 sm:w-9/12 xl:w-full mt-5">
+        {/* sidebar */}
+        <ProductsSidebar panelList={ThreeDimension_DummyList} />
+        {/* productlist */}
+        <div className="flex flex-col flex-nowrap justify-center items-center ">
+          <AudioProductList audios={currentAudios} />
+          {/* pagination */}
+          <div
+            className="flex flex-row justify-center items-center font-IRANSans mt-12 "
+            style={{ direction: "rtl" }}
+          >
+            <Pagination
+              ItemsPerPage={audiosPerPage}
+              totalItems={audios.length}
+              paginate={paginate}
+              currentPage={currentPage}
+              paginateFront={paginateFront}
+              paginateBack={paginateBack}
+            />
           </div>
         </div>
       </div>

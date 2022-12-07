@@ -123,5 +123,4 @@ const VideoControls: React.FC<{
     </div>
   );
 });
-VideoControls.displayName = "VideoControls";
 export default VideoControls;

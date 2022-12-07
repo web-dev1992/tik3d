@@ -177,9 +177,12 @@ const Video = () => {
                   تگ ها:
                 </div>
                 <div className="w-9/12 xl:w-10/12 h-full text-right text-xxs xl:text-[13px] text-[#4F96FF]">
-                  {Dummy_Video_Item.tags.map((tag) => (
+                  {Dummy_Video_Item.tags.map((tag, index) => (
                     <>
-                      <span className=" tex-[8px] font-medium leading-3">
+                      <span
+                        key={index}
+                        className=" tex-[8px] font-medium leading-3"
+                      >
                         {tag}
                       </span>
                       <span> ،&nbsp;</span>
@@ -219,7 +222,10 @@ const Video = () => {
             </h2>
             <div className="w-full flex flex-col justify-center items-center shadow-[0_4px_21px_rgba(38,78,118,0.08)] text-[9px] text-[#959595] font-medium leading-5 tracking-wide  text-right bg-white rounded-[10px] xl:rounded-[20px] p-6  gap-2 xl:gap-3">
               {downloads.map((download) => (
-                <div className="w-full xl:h-12 bg-[#F7F7F7] group hover:bg-[#0051FF] hover:cursor-pointer  hover:text-white rounded xl:rounded-lg flex flex-row justify-between items-center py-1 px-3">
+                <div
+                  key={download.id}
+                  className="w-full xl:h-12 bg-[#F7F7F7] group hover:bg-[#0051FF] hover:cursor-pointer  hover:text-white rounded xl:rounded-lg flex flex-row justify-between items-center py-1 px-3"
+                >
                   <div className="flex text-[#1B1A21] text-[8px] lg:text-xxs xl:text-base xl:leading-6 font-medium gap-1">
                     {download.fileName}
                     <span className="text-[#959595] opacity-60 group-hover:text-abiStroke">
@@ -273,7 +279,7 @@ const Video = () => {
             {/* comments */}
             <div className="px-3 w-full lg:w-[55%] flex flex-col flex-nowrap justify-center items-start gap-4 lg:gap-6 xl:gap-9">
               {Dummy_Comments.map((comment) => (
-                <Comment comment={comment} />
+                <Comment comment={comment} key={comment.id} />
               ))}
             </div>
             {/* insert comment */}

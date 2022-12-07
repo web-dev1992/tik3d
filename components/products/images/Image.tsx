@@ -321,7 +321,7 @@ const ImageComponent = () => {
             {/* comments */}
             <div className="px-3 w-full lg:w-[55%] flex flex-col flex-nowrap justify-center items-start gap-4 lg:gap-6 xl:gap-9">
               {Dummy_Comments.map((comment) => (
-                <Comment comment={comment} />
+                <Comment comment={comment} key={comment.id} />
               ))}
             </div>
             {/* insert comment */}

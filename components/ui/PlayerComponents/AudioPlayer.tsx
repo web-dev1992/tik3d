@@ -156,7 +156,7 @@ const AudioPlayer: React.FC<{ fileAddress: string }> = ({ fileAddress }) => {
           />
 
           <AudioControls
-            videoProps={{
+            audioProps={{
               currentSeek: currentSeek,
               onDuration: handleDuration,
               onPlayPause: handlePlayPause,

@@ -31,7 +31,7 @@ interface videoControlProps {
   onToggleFullScreen: () => void;
   volume: number;
 }
-const videoControls: React.FC<{
+const VideoControls: React.FC<{
   videoProps: videoControlProps;
   ref: React.Ref<HTMLDivElement>;
 }> = forwardRef(({ videoProps }, ref) => {
@@ -123,5 +123,5 @@ const videoControls: React.FC<{
     </div>
   );
 });
-
-export default videoControls;
+VideoControls.displayName = "VideoControls";
+export default VideoControls;

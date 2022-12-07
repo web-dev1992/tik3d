@@ -53,6 +53,7 @@ const Pagination: React.FC<{
           <li className="space-x-0 xl:space-x-2 ">
             {pageNumbers.map((number) => (
               <a
+                key={number}
                 onClick={() => {
                   paginate(number);
                 }}

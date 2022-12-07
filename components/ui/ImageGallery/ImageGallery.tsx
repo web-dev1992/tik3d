@@ -33,9 +33,9 @@ const ImageGallery: React.FC<{ images: imageProps[] }> = ({ images }) => {
         className="mySwiper2"
       >
         {images.map((image, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <div className="top_swiper  w-[329px] h-[329px] lg:w-[373px] lg:h-[373px] xl:w-[600px] xl:h-[600px] relative object-cover overflow-hidden aspect-square rounded lg:rounded-md">
-              <Link href={image.link} key={image.id}>
+              <Link href={image.link}>
                 <Image
                   src={image.address}
                   alt={`Image gallery- image ${index}`}
@@ -58,9 +58,9 @@ const ImageGallery: React.FC<{ images: imageProps[] }> = ({ images }) => {
         className="mySwiper"
       >
         {images.map((image, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <div className="bottom_swiper mt-2 xl:mt-3 w-[48px] h-[48px] lg:w-[55px] lg:h-[55px] xl:w-[88px] xl:h-[88px] relative object-cover overflow-hidden aspect-square rounded xl:rounded-lg">
-              <Link href={image.link} key={image.id}>
+              <Link href={image.link}>
                 <Image
                   src={image.address}
                   alt={`Image gallery- image ${index}`}

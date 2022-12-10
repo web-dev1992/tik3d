@@ -1,9 +1,9 @@
 import { useState, FormEvent } from "react";
 import Link from "next/link";
-import ErrorMessage from "./ui/ErrorMessage";
-import SubmitButton from "./ui/SubmitButton";
+import ErrorMessage from "../layout/ErrorMessage";
+import SubmitButton from "../layout/SubmitButton";
 import CustomeLink from "./ui/CustomeLink";
-import Heading from "./ui/Heading";
+import Heading from "../layout/FormTitle";
 import RemoveIcon from "@components/ui/RemoveIcon";
 import SignupLoginLayout from "@components/layout/SignupLoginLayout";
 const ForgetPassword: React.FC = () => {

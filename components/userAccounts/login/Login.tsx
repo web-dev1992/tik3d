@@ -3,7 +3,7 @@ import SignupLoginLayout from "@components/layout/SignupLoginLayout";
 import PhoneLoginForm from "./PhoneLoginForm";
 import EmailLoginForm from "./EmailLoginForm";
 import LoginMethod from "./LoginMethod";
-import Heading from "../ui/Heading";
+import Heading from "../../layout/FormTitle";
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState<string>("phone");
   const changeLoginMethodhandler = (state: string) => {

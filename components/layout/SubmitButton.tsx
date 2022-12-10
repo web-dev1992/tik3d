@@ -1,9 +1,9 @@
 const SubmitButton: React.FC<{
-//   type?: "submit" | "button" | "reset";
+  //   type?: "submit" | "button" | "reset";
   className?: string;
   text?: string;
 }> = ({
-//   type = "submit",
+  //   type = "submit",
   className = "w-full h-[34px] lg:h-9 xl:h-[58px] rounded-[2px] lg:rounded font-bold text-center bg-abi text-white text-xxs xl:text-base",
   text = "تایید",
 }) => {

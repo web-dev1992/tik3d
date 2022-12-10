@@ -1,28 +1,25 @@
-import {  useState } from "react";
+import { useState } from "react";
 import React from "react";
 import Link from "next/link";
 import OutsideLayout from "@components/layout/OutsideLayout";
 type menuItem = { href: string; label: string };
 interface MenuProps {
-  className:string,
+  className: string;
   menuItems: menuItem[];
 }
 
-const HamburgerMenu = (props:MenuProps) => {
-  const { menuItems,className} = props;
+const HamburgerMenu = (props: MenuProps) => {
+  const { menuItems, className } = props;
   const [showHambugerMenu, setShowHambergerMenu] = useState(false);
   const hamburgerMenuHandler = (): void => {
-    if(showHambugerMenu) setShowHambergerMenu(false);
+    if (showHambugerMenu) setShowHambergerMenu(false);
   };
   const openCloseHaburgerMenu = () => {
-    setShowHambergerMenu((showHambugerMenu) => !showHambugerMenu);    
+    setShowHambergerMenu((showHambugerMenu) => !showHambugerMenu);
   };
   return (
     <OutsideLayout operator={hamburgerMenuHandler} className={className}>
-      <button
-        onClick={openCloseHaburgerMenu}        
-        type="button"
-      >
+      <button onClick={openCloseHaburgerMenu} type="button">
         <svg
           className="h-4 w-5"
           viewBox="0 0 18 16"
@@ -38,19 +35,25 @@ const HamburgerMenu = (props:MenuProps) => {
             strokeLinecap="round"
           />
         </svg>
-       
       </button>
       {/* <!-- list --> */}
       <ul
         className={`z-20 list-none flex flex-col  w-52 bg-gray-100 text-sm font-medium  overflow-hidden ${
           showHambugerMenu
-            ? "h-52 max-h-52 fixed left-4 top-16 lg:left-40 "
+            ? "h-64 max-h-64 fixed left-4 top-16 lg:left-40 "
             : "h-0 max-h-0 "
         }`}
       >
         {menuItems.map((item) => (
-          <li key={item.label} className="text-black hover:bg-abiStroke hover:text-white pr-8">
-            <Link href={item.href}><a className="text-current hover:text-white hover:font-medium">{item.label}</a></Link>
+          <li
+            key={item.label}
+            className="text-black hover:bg-abiStroke hover:text-white pr-8"
+          >
+            <Link href={item.href}>
+              <a className="text-current hover:text-white hover:font-medium">
+                {item.label}
+              </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -10,14 +10,13 @@ const Tik3dDesignApp = () => {
     "بالا بردن سرعت و راندمان کار شما",
   ];
   return (
-    <div className="w-11/12 lg:w-9/12 xl:w-[1350px] flex flex-col md:flex-row flex-nowrap justify-center items-center   mt-32 mb-16 md:my-20 m-auto ">
-      <div className="w-full h-max md:w-1/2 flex justify-center items-center pb-12  ">
+    <div className="w-11/12 lg:w-9/12 xl:w-11/12 flex flex-col md:flex-row flex-nowrap justify-center items-center   mt-32 mb-16 md:my-20 m-auto ">
+      <div className="relative w-[311px] h-[348px]  md:w-[393px] md:h-[439px] xl:w-[633px] xl:h-[707px] flex justify-center items-center   ">
         <Link href="/">
           <Image
             src="/images/shutter.png"
             alt="shutterstock"
-            width={633}
-            height={707}
+            layout="fill"
           />
         </Link>
       </div>

@@ -164,7 +164,7 @@ const PaymentHeader = () => {
           </div>
         </div>
         {/* Xlarg Desktop Header */}
-        <div className="bg-[#F6F8FB] hidden xl:flex flex-col flex-nowrap justify-center items-center w-[1350px] h-52 m-auto font-IRANSans ">
+        <div className="bg-[#F6F8FB] hidden xl:flex flex-col flex-nowrap justify-center items-center w-11/12 h-52 m-auto font-IRANSans ">
           <div className=" flex flex-row flex-nowrap justify-between items-start w-full h-16 gap-0 ">
             <div className=" w-44 h-14 flex flex-row flex-nowrap justify-start items-center  ">
               <Link href="/">

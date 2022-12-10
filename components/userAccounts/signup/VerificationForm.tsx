@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ErrorMessage from "../ui/ErrorMessage";
-import SubmitButton from "../ui/SubmitButton";
+import ErrorMessage from "../../layout/ErrorMessage";
+import SubmitButton from "../../layout/SubmitButton";
 import CustomeLink from "../ui/CustomeLink";
-import Heading from "../ui/Heading";
+import Heading from "../../layout/FormTitle";
 
 const VerificationForm: React.FC<{ signupMethod; destination }> = ({
   signupMethod,

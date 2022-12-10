@@ -22,17 +22,17 @@ const paymentItems = [
 const PaymentMethodDropdown = (props) => {
   const [showItems, setShowItems] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const LangSelectHandler = (): void => {
+  const paymentSelectHandler = (): void => {
     if (showItems) setShowItems(false);
   };
-  const openCloseLangSelect = () => {
+  const openClosePaymentSelect = () => {
     setShowItems((showItems) => !showItems);
   };
   return (
-    <OutsideLayout operator={LangSelectHandler} className={props.className}>
+    <OutsideLayout operator={paymentSelectHandler} className={props.className}>
       <Fragment>
         <button
-          onClick={openCloseLangSelect}
+          onClick={openClosePaymentSelect}
           className="w-full flex flex-row justify-start gap-2.5 lg:gap-3 xl:gap-[18px] items-center text-[11px] xl:text-lg text-[#888888] font-normal leading-[19px] xl:py-2 p-[9px] lg:p-[15px] xl:p-5  bg-white cursor-pointer focus:outline-none focus:border focus:border-[#4F96FF]  rounded-md border border-[#E3E1E3] xl:rounded-[10px]"
         >
           <svg
@@ -67,11 +67,10 @@ const PaymentMethodDropdown = (props) => {
                   setShowItems(false);
                 }}
               >
-                <span className="w-[34px] h-6">
+                <span className="w-[34px] h-6 relative">
                   <Image
                     src={paymentItems[index].file}
-                    width={34}
-                    height={24}
+                    layout="fill"
                     alt="bitcoin-icon"
                   />
                 </span>

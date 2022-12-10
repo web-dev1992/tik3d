@@ -315,3 +315,11 @@ clx .stroke-gr {
 .ProfileCheckBox {
   @apply appearance-none rounded-sm w-3 h-3 xl:w-4 xl:h-4 focus:outline-none border text-white focus:ring-[#2F80ED] focus:ring-1;
 }
+
+.PaymentInput {
+  @apply w-full h-8 lg:h-9 xl:h-14 border border-[#E3E1E3] rounded-md xl:rounded-[10px] px-1.5 py-3 xl:px-[11px] xl:py-5 text-xxs xl:text-lg leading-[16px] xl:leading-[28px] text-left font-normal text-[#888888] focus:outline-none focus:border focus:border-[#4F96FF];
+}
+
+.ProfileInput {
+  @apply w-full h-8 lg:h-9 xl:h-[58px] bg-white border  rounded-md xl:rounded-[10px]  p-[9px]  xl:p-4  text-xxs xl:text-lg leading-[16px] xl:leading-[28px] text-left font-normal text-[#888888] focus:outline-none focus:border focus:border-abiStroke;
+}

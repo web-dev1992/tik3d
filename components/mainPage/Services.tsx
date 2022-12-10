@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Services = () => {
   return (
-    <div className=" bg-white grid w-[317px] sm:w-9/12 lg:w-[870px] xl:w-[1400px] mx-8  h-max gap-3 m-auto mt-[42px] justify-center items-center ">
+    <div className=" bg-white grid w-[317px] sm:w-9/12 lg:w-[870px] xl:w-11/12 mx-8  h-max gap-3 m-auto mt-11 xl:mt-[71px] justify-center items-center ">
       <div className="col-start-1 col-end-2 row-start-1 row-end-2 ">
         <Link href="/images">
           <Image

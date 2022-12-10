@@ -3,7 +3,7 @@ import Image from "next/image";
 import ReturnArrowIcon from "@components/ui/ReturnArrowIcon";
 const SignupLoginHeader = () => {
   return (
-    <div className="w-[88%] lg:w-10/12 xl:w-[1350px] h-9 md:h-12 xl:h-14  flex flex-row flex-nowrap justify-between items-center my-8 xl:my-[34px] mx-6 m-auto">
+    <div className="w-[88%] lg:w-9/12 xl:w-11/12 h-9 md:h-12 xl:h-14  flex flex-row flex-nowrap justify-between items-center my-8 xl:my-[34px] mx-6 m-auto">
       <div className="w-4/12 flex md:hidden flex-row flex-nowrap justify-start items-center ">
         <Link href="/">
           <>
@@ -17,30 +17,16 @@ const SignupLoginHeader = () => {
           </>
         </Link>
       </div>
-      <div className=" w-1/2 hidden  md:flex xl:hidden flex-row flex-nowrap justify-start items-center ml-4">
+      <div className="w-1/2 h-14 hidden  md:flex  flex-row flex-nowrap justify-start items-center ml-4">
         <Link href="/">
-          <>
-            <Image
-              src="/images/tablet-logo.png"
-              alt="logo"
-              height={34}
-              width={109}
-              className="cursor-pointer"
-            />
-          </>
-        </Link>
-      </div>
-      <div className=" w-44 h-14 hidden xl:flex flex-row flex-nowrap justify-start items-center  ">
-        <Link href="/">
-          <>
+          <span className="relative h-[34px] w-[109px] xl:h-[55px] xl:w-[176px]">
             <Image
               src="/images/desktop-logo.png"
               alt="logo"
-              height={55}
-              width={176}
+              layout="fill"
               className="cursor-pointer"
             />
-          </>
+          </span>
         </Link>
       </div>
 

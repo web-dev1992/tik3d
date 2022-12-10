@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import ImageItem from "@components/products/images/ImageItem";
+
 const DUMMY_LIST = [
   {
     id: "i1",
@@ -114,34 +116,47 @@ const items = DUMMY_LIST.map((image) => (
   <ImageItem image={image} key={image.id} onDragStart={handleDragStart} />
 ));
 const Carousel = () => {
+  const [hasWindow, setHasWindow] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
+  }, []);
   return (
-    <div className="w-full h-max relative flex justify-end md:justify-center items-center ">
-      <div className="w-[80%] ">
-        <AliceCarousel
-          mouseTracking
-          items={items}
-          responsive={responsive}
-          controlsStrategy="responsive"
-          infinite={true}
-          disableDotsControls={true}
-          disableButtonsControls={false}
-          keyboardNavigation={true}
-          renderPrevButton={() => {
-            return (
-              <button className="absolute top-14 -left-6 lg:top-14 lg:-left-6 xl:top-20 xl:-left-8 ">
-                {buttons.nextButton}
-              </button>
-            );
-          }}
-          renderNextButton={() => {
-            return (
-              <button className="absolute top-14 -right-[10px] lg:top-14 lg:-right-6 xl:top-20 xl:-right-8 ">
-                {buttons.prevButton}
-              </button>
-            );
-          }}
-        />
-      </div>
+    <div className=" w-11/12   m-auto my-10 h-max flex flex-col flex-nowrap justify-center items-center font-IRANSans overflow-hidden ">
+      <h1 className="w-full my-5 flex justify-start md:justify-center text-navyBluee font-bold text-xl lg:text-2xl xl:text-4xl tracking-normal">
+        جدیدترین ها
+      </h1>
+      {hasWindow && (
+        <div className="w-full h-max relative flex justify-end md:justify-center items-center ">
+          <div className="w-[80%] ">
+            <AliceCarousel
+              mouseTracking
+              items={items}
+              responsive={responsive}
+              controlsStrategy="responsive"
+              infinite={true}
+              disableDotsControls={true}
+              disableButtonsControls={false}
+              keyboardNavigation={true}
+              renderPrevButton={() => {
+                return (
+                  <button className="absolute top-14 -left-6 lg:top-14 lg:-left-6 xl:top-20 xl:-left-8 ">
+                    {buttons.nextButton}
+                  </button>
+                );
+              }}
+              renderNextButton={() => {
+                return (
+                  <button className="absolute top-14 -right-[10px] lg:top-14 lg:-right-6 xl:top-20 xl:-right-8 ">
+                    {buttons.prevButton}
+                  </button>
+                );
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-const PhoneIcon = () => {
+const PhoneIcon = ({className="w-4 h-4 xl:w-6 xl:h-6"}) => {
   return (
     <svg
-     className="w-4 h-4 xl:w-6 xl:h-6"
+     className={className}
       viewBox="0 0 19 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

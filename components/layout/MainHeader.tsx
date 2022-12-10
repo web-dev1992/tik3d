@@ -64,7 +64,10 @@ const MainHeader = () => {
         {/* <!-- hamburgur menu --> */}
         <HamburgerMenu
           className="flex flex-row flex-wrap h-10 w-1/12  items-center justify-center  "
-          menuItems={menuItems}
+          menuItems={[
+            { label: "ورود/ ثبت نام", href: "/user-account/login" },
+            ...menuItems,
+          ]}
         />
       </div>
       {/*Desktop  Header */}
@@ -86,25 +89,15 @@ const MainHeader = () => {
               className="flex flex-row flex-nowrap justify-start items-center gap-4 "
               style={{ direction: "ltr" }}
             >
-              <button className="w-24 h-8 border rounded border-[#2F80ED] flex flex-row justify-center items-center py-[8px] px-[18px] bg-[#F9FBFD] text-xxs font-bold leading-4 text-[#2F80ED]">
-                ورود/ثبت نام
-              </button>
+              <Link href="/user-account/login">
+                <a className="w-24 h-8 border rounded border-[#2F80ED] flex flex-row justify-center items-center py-[8px] px-[18px] bg-[#F9FBFD] text-xxs font-bold leading-4 text-[#2F80ED]">
+                  ورود/ثبت نام
+                </a>
+              </Link>
               <LanguageDropDown
                 className="w-9 h-8 flex relative"
                 showLabel={false}
               />
-              {/* <ReactFlagsSelect
-                id="lang-select"
-                selected="IR"
-                onSelect={() => {}}
-                countries={["IR", "GB"]}
-                showSelectedLabel={false}
-                showOptionLabel={false}
-                selectedSize={10}
-                optionsSize={10}
-                selectButtonClassName="!justify-center !pl-1 !item-center !h-8 !w-10 !bg-white !border-none "
-                placeholder="Select Language"
-              /> */}
             </div>
             <div className="flex flex-wrap h-10 w-1/12 py-2 items-start justify-center">
               {/* <!-- hamburgur menu --> */}
@@ -154,7 +147,7 @@ const MainHeader = () => {
         </div>
       </div>
       {/* Xlarg Desktop Header */}
-      <div className=" hidden xl:flex flex-col flex-nowrap justify-center items-center w-[1350px] h-52 m-auto font-IRANSans ">
+      <div className="hidden xl:flex flex-col flex-nowrap justify-center items-center w-11/12 h-52 m-auto font-IRANSans ">
         <div className=" flex flex-row flex-nowrap justify-between items-start w-full h-16 gap-0 ">
           <div className=" w-44 h-14 flex flex-row flex-nowrap justify-start items-center  ">
             <Link href="/">
@@ -185,25 +178,15 @@ const MainHeader = () => {
               className="flex flex-row flex-nowrap justify-start items-center gap-4 "
               style={{ direction: "ltr" }}
             >
-              <button className="w-[150px] h-12 border-2 rounded-md border-[#2F80ED] flex flex-row justify-center items-center py-3 px-5 bg-[#F9FBFD] text-base font-bold text-[#2F80ED]">
-                ورود/ثبت نام
-              </button>
+              <Link href="/user-account/login">
+                <a className="w-[150px] h-12 border-2 rounded-md border-[#2F80ED] flex flex-row justify-center items-center py-3 px-5 bg-[#F9FBFD] text-base font-bold text-[#2F80ED]">
+                  ورود/ثبت نام
+                </a>
+              </Link>
               <LanguageDropDown
                 className="w-[60px] h-[50px] flex relative"
                 showLabel={false}
               />
-              {/* <ReactFlagsSelect
-                id="lang-select"
-                selected="IR"
-                onSelect={() => {}}
-                countries={["IR", "GB"]}
-                showSelectedLabel={false}
-                showOptionLabel={false}
-                selectedSize={11}
-                optionsSize={11}
-                selectButtonClassName="!justify-center !pl-1 !item-center !h-12 !w-14 !bg-white !border-none "
-                placeholder="Select Language"
-              />*/}
             </div>
           </div>
         </div>

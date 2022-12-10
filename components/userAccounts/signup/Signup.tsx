@@ -1,25 +1,25 @@
 import { FormEvent, useState } from "react";
 import SignupLoginLayout from "@components/layout/SignupLoginLayout";
-import TermsConditions from "./Terms&Conditions";
+import TermsConditions from "@components/layout/TermsAndConditions";
 import PhoneSignupForm from "./PhoneSignupForm";
 import VerificationForm from "./VerificationForm";
 import EmailSignupForm from "./EmailSignupForm";
 import SignupMethod from "./SignupMethod";
-import Heading from "../ui/Heading";
+import FormTitle from "@components/layout/FormTitle";
 let dest = "";
 const Signup = () => {
   const [signupMethod, setSignupMethod] = useState<string>("phone");
-  const [showConditions, setShowConditions] = useState<boolean>(false);
   const [phase, setPhase] = useState<string>("one");
+  const [showConditions, setShowConditions] = useState<boolean>(false);
 
   const openConditionsHandler = () => {
     setShowConditions(true);
   };
-  const changeSignupMethodhandler = (state: string) => {
-    setSignupMethod(state);
-  };
   const closeConditionsHandler = () => {
     setShowConditions(false);
+  };
+  const changeSignupMethodhandler = (state: string) => {
+    setSignupMethod(state);
   };
   const phaseHandler = (state: string, destination: string) => {
     setPhase(state);
@@ -32,7 +32,7 @@ const Signup = () => {
       )}
       {phase === "one" ? (
         <div className="w-[232px] lg:w-[249px] xl:w-[402px] flex flex-col flex-nowrap justify-center items-center gap-[18px] mt-[18px] mx-10 xl:mt-[30px] ">
-          <Heading>ایجاد حساب کاربری</Heading>
+          <FormTitle>ایجاد حساب کاربری</FormTitle>
           <SignupMethod
             signupMethod={signupMethod}
             changeSignupMethodhandler={changeSignupMethodhandler}

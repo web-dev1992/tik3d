@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import Comment from "./Comment";
@@ -136,6 +136,12 @@ const items = DummyComments.map((comment) => (
 ));
 
 const CommentList = () => {
+  const [hasWindow, setHasWindow] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
+  }, []);
   return (
     <Fragment>
       <h3 className="w-full flex flex-row mt-16 mb-11 justify-center text-navyBluee text-center text-xl lg:text-2xl font-bold xl:text-4xl -tracking-normal leading-8 md:leading-9 xl:leading-[60px]">
@@ -144,43 +150,45 @@ const CommentList = () => {
 
       <div className="w-full h-max relative flex justify-center items-center overflow-hidden mr-6 lg:mr-52  ">
         <div className="w-full h-max">
-          <AliceCarousel
-            mouseTracking
-            items={items}
-            responsive={{
-              0: { items: 1.5 },
-              568: { items: 2 },
-              640: { items: 2.5 },
-              768: { items: 3 },
-              1024: { items: 3.5 },
-              1280: { items: 3.5 },
-              // 1536:{ items:3.5}
-            }}
-            controlsStrategy="responsive"
-            // infinite={true}
-            disableDotsControls={true}
-            disableButtonsControls={false}
-            keyboardNavigation={true}
-            autoPlay
-            autoPlayControls={false}
-            autoPlayStrategy="all"
-            autoPlayInterval={1000}
-            autoPlayDirection={"rtl"}
-            renderPrevButton={() => {
-              return (
-                <button className="absolute top-52 left-48 sm:left-72 md:left-96 lg:bottom-2 lg:left-[600px] xl:top-80 xl:left-[850px]">
-                  {buttons.nextButton}
-                </button>
-              );
-            }}
-            renderNextButton={() => {
-              return (
-                <button className="absolute top-52 left-56 sm:left-[320px] md:left-[420px] lg:bottom-2 lg:left-[630px] xl:top-80 xl:left-[880px]">
-                  {buttons.prevButton}
-                </button>
-              );
-            }}
-          />
+          {hasWindow && (
+            <AliceCarousel
+              mouseTracking
+              items={items}
+              responsive={{
+                0: { items: 1.5 },
+                568: { items: 2 },
+                640: { items: 2.5 },
+                768: { items: 3 },
+                1024: { items: 3.5 },
+                1280: { items: 3.5 },
+                // 1536:{ items:3.5}
+              }}
+              controlsStrategy="responsive"
+              // infinite={true}
+              disableDotsControls={true}
+              disableButtonsControls={false}
+              keyboardNavigation={true}
+              autoPlay
+              autoPlayControls={false}
+              autoPlayStrategy="all"
+              autoPlayInterval={1000}
+              autoPlayDirection={"rtl"}
+              renderPrevButton={() => {
+                return (
+                  <button className="absolute top-52 left-48 sm:left-72 md:left-96 lg:bottom-2 lg:left-[600px] xl:top-80 xl:left-[850px]">
+                    {buttons.nextButton}
+                  </button>
+                );
+              }}
+              renderNextButton={() => {
+                return (
+                  <button className="absolute top-52 left-56 sm:left-[320px] md:left-[420px] lg:bottom-2 lg:left-[630px] xl:top-80 xl:left-[880px]">
+                    {buttons.prevButton}
+                  </button>
+                );
+              }}
+            />
+          )}
         </div>
       </div>
     </Fragment>

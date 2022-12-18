@@ -1,5 +1,4 @@
-import MainHeader from "@components/layout//MainHeader";
-import { Fragment } from "react";
+import MainHeader from "@components/layout/MainHeader";
 
 const MainLayout = (props) => {
   return (

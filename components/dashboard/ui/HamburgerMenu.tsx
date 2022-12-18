@@ -1,14 +1,17 @@
 import { useRef, useEffect, useState, ReactNode, Fragment } from "react";
 import { createPortal } from "react-dom";
 import React from "react";
-import ReactFlagsSelect from "react-flags-select";
 import Link from "next/link";
 import Image from "next/image";
+import LanguageDropDown from "../../layout/LanguageDropDown";
+
 type menuItem = { href: string; label: string };
 interface MenuProps {
   className: string;
   menuItems: menuItem[];
+  logOutHandler: () => void;
 }
+
 const Backdrop = (props) => {
   return (
     <div
@@ -35,16 +38,9 @@ const ModalOerlay = (props) => {
             height={34}
           />
           <div style={{ direction: "ltr" }}>
-            <ReactFlagsSelect
-              id="lang-select"
-              selected="IR"
-              onSelect={() => {}}
-              countries={["IR", "GB"]}
-              showSelectedLabel={false}
-              showOptionLabel={false}
-              selectedSize={8}
-              optionsSize={8}
-              selectButtonClassName="!justify-center !pl-1 !item-center !h-4 !w-8 !bg-white !border-none "
+            <LanguageDropDown
+              className="w-7 h-[18px] flex relative"
+              showLabel={false}
             />
           </div>
         </div>
@@ -65,38 +61,42 @@ const ModalOerlay = (props) => {
             دانلود رایگان
           </button>
           <div className="flex flex-row flex-nowrap justify-center items-center gap-2">
-            <button
-              className="w-9 h-9 rounded-xl flex flex-row justify-center items-center "
-              style={{
-                background:
-                  "linear-gradient(126deg, rgba(255, 255, 255, 0.12) 28%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            >
+            <MenuButton onClick={props.logOutHandler}>
               <Image src="/images/exit.png" alt="exit" width={15} height={15} />
-            </button>
-            <button
-              className="w-9 h-9 rounded-xl flex flex-row justify-center items-center "
-              style={{
-                background:
-                  "linear-gradient(126deg, rgba(255, 255, 255, 0.12) 28%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            >
+            </MenuButton>
+            <MenuButton>
               <Image
                 src="/images/setting.png"
                 alt="exit"
                 width={15}
                 height={15}
               />
-            </button>
+            </MenuButton>
           </div>
         </div>
       </div>
     </Fragment>
   );
 };
-
+const MenuButton: React.FC<{ children: ReactNode; onClick?: () => void }> = ({
+  children,
+  onClick,
+}) => {
+  return (
+    <button
+      className="w-9 h-9 rounded-xl flex flex-row justify-center items-center "
+      onClick={onClick}
+      style={{
+        background:
+          "linear-gradient(126deg, rgba(255, 255, 255, 0.12) 28%, rgba(255, 255, 255, 0) 100%)",
+      }}
+    >
+      {children}
+    </button>
+  );
+};
 const HamburgerMenu = (props: MenuProps) => {
-  const { menuItems, className } = props;
+  const { menuItems, className, logOutHandler } = props;
   const [showHambugerMenu, setShowHambergerMenu] = useState<boolean>(false);
   const backdropRef = useRef<Element | null>(null);
   const overlayRef = useRef<Element | null>(null);
@@ -142,7 +142,7 @@ const HamburgerMenu = (props: MenuProps) => {
             backdropRef.current
           )}
           {createPortal(
-            <ModalOerlay menuItems={menuItems} />,
+            <ModalOerlay menuItems={menuItems} logOutHandler={logOutHandler} />,
             overlayRef.current
           )}
         </Fragment>

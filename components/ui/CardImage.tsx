@@ -13,8 +13,10 @@ const CardImage: React.FC<{
         </div>
       )}
       <div className="relative rounded xl:rounded-lg overflow-hidden w-[80px] h-[80px] xl:w-[125px] xl:h-[125px]">
-        <Link href={link}>
-          <Image alt="image-poster" src={image} layout="fill" />
+        <Link href={link} passHref>
+          <a>
+            <Image alt="image-poster" src={image} layout="fill" />
+          </a>
         </Link>
       </div>
     </>

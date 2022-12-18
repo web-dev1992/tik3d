@@ -209,21 +209,21 @@ const LanguageDropDown: React.FC<{
         </svg>
       </button>
       {showLang && (
-        <div className="absolute z-20 w-full top-9 xl:top-14 left-15 rounded divide-y divide-gray-100 shadow  bg-white flex flex-row justify-end border border-stone-300">
-          <ul className="xl:py-1 text-sm p-[5px] xl:px-3  text-[10px] ">
+        <div className="absolute z-20 w-full top-5 lg:top-8 xl:top-9 left-15 rounded divide-y divide-gray-100 shadow  bg-white flex flex-row justify-start border border-stone-300">
+          <ul className="w-full">
             {langItems.map((lang, index) => (
-              <li key={index}>
+              <li key={index} className="flex justify-start ">
                 <button
                   type="button"
-                  className="inline-flex xl:py-1 text-sm p-[5px] xl:px-3  text-[10px] w-full  text-[#848484]  "
+                  className="inline-flex justify-start xl:py-1 text-sm p-[5px] xl:px-3 text-[10px] w-full text-[#848484]  "
                   onClick={() => {
                     setCurrentIndex(index);
                     setShowLang(false);
                   }}
                 >
                   <div className="inline-flex items-center gap-1 xl:text-sm">
-                    {showLabel && <span>{lang.label}</span>}
                     {lang.file}
+                    {showLabel && <span>{lang.label}</span>}
                   </div>
                 </button>
               </li>

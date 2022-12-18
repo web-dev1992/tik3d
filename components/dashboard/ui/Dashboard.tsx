@@ -1,15 +1,17 @@
-import { useState, Fragment, ReactNode, SVGProps } from "react";
+import { useState, Fragment, useCallback, useEffect } from "react";
+import axios from "axios";
+import { signOut } from "next-auth/react";
 import UserInfoBox from "./UserInfoBox";
-import HamburgerMenu from "@components/dashboard/HamburgerMenu";
-
-import DashboardContent from "./dashboards/DashboardContent";
+import HamburgerMenu from "@components/dashboard/ui/HamburgerMenu";
+import DashboardContent from "../dashboards/DashboardContent";
 import DashboardHeader from "@components/layout/DashboardHeader";
 import ExitIcon from "@components/ui/ExitIcon";
 import SettingIcon from "@components/ui/SettingIcon";
-import SubscriptionContent from "./subscriptions/SubscriptionContent";
-import PaymentContent from "./payments/PaymentContent";
-import ProfileContent from "./profile/ProfileContent";
+import SubscriptionContent from "../subscriptions/SubscriptionContent";
+import PaymentContent from "../payments/PaymentContent";
+import ProfileContent from "../profile/ProfileContent";
 import SelectContentBox from "./SelectContentBox";
+
 const menuItems = [
   { label: "صفحه نخست", href: "/" },
   { label: "دانلود رایگان", href: "/downloads" },
@@ -18,15 +20,48 @@ const menuItems = [
   { label: "درباره ما", href: "/about-us" },
 ];
 const Dummy_user_info = {
-  name: "احسان دلیخون",
-  email: "ehsandeli@gmail.com",
-  isSpecial: true,
+  name: "",
+  family: "",
+  email: "",
+  isSpecialUser: true,
+  image: "/images/dashboard-user-image.png",
 };
 const Dashboard = () => {
   const [content, setContent] = useState("dashboard");
+  const [loadedUser, setLoadedUser] = useState<{
+    email: string;
+    lastName: string;
+    image: string;
+    isActive: boolean;
+    isSpecialUser: boolean;
+    firstName: string;
+    password: string;
+    phone: number;
+    gender: boolean;
+    _id: string;
+  }>(null);
+
   const changeContentHandler = (state: string) => {
     setContent(state);
   };
+  const changeLodedUserHandler = (newUserInfo) => {
+    setLoadedUser({ ...loadedUser, ...newUserInfo });
+  };
+  const logOutHandler = () => {
+    signOut({ callbackUrl: "/" });
+  };
+  const getUserHandler = useCallback(async () => {
+    try {
+      const result = await axios("/api/user/get-user");
+      console.log(result.data.user);
+      setLoadedUser(result.data.user);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+  useEffect(() => {
+    getUserHandler();
+  }, [getUserHandler]);
   return (
     <Fragment>
       <div className="z-0 w-screen  h-max bg-abi  relative overflow-hidden flex justify-center ">
@@ -49,18 +84,31 @@ const Dashboard = () => {
             <HamburgerMenu
               className="h-full w-full flex flex-row justify-start "
               menuItems={menuItems}
+              logOutHandler={logOutHandler}
             />
           </div>
           <div className="flex flex-col flex-nowrap justify-center items-center w-full h-max lg:w-[300px] xl:w-[484px] lg:mx-5 lg:mt-14 xl:mt-[103px]">
             {/* user info box */}
-            <UserInfoBox userInfo={Dummy_user_info} />
+            <UserInfoBox
+              userInfo={
+                !loadedUser
+                  ? Dummy_user_info
+                  : {
+                      name: loadedUser.firstName,
+                      family: loadedUser.lastName,
+                      email: loadedUser.email,
+                      isSpecialUser: loadedUser.isSpecialUser,
+                      image: loadedUser.image,
+                    }
+              }
+            />
             {/* select content box */}
             <SelectContentBox
               changeContentHandler={changeContentHandler}
               content={content}
             />
             <div className="z-40 hidden lg:flex flex-row flex-nowrap justify-center items-center gap-2 lg:mt-[26px] lg:mb-[140px] xl:mt-[42px]  xl:mb-56">
-              <DashboardButton>
+              <DashboardButton logOutHandler={logOutHandler}>
                 <ExitIcon />
               </DashboardButton>
               <DashboardButton>
@@ -78,7 +126,12 @@ const Dashboard = () => {
               {content == "dashboard" && <DashboardContent />}
               {content == "subscription" && <SubscriptionContent />}
               {content == "payments" && <PaymentContent />}
-              {content == "profile" && <ProfileContent />}
+              {content == "profile" && (
+                <ProfileContent
+                  userInfo={loadedUser}
+                  changeLodedUserHandler={changeLodedUserHandler}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -94,6 +147,7 @@ const DashboardButton = (props) => {
         background:
           "linear-gradient(126deg, rgba(255, 255, 255, 0.12) 28%, rgba(255, 255, 255, 0) 100%)",
       }}
+      onClick={props.logOutHandler}
     >
       {props.children}
     </button>

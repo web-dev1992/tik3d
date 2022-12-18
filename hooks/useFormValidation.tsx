@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { omit } from "lodash";
 interface formValues {
   username?: string;
+  firstName?: string;
+  lastName?: string;
   phone?: number;
   password?: string;
   email?: string;
@@ -9,6 +11,8 @@ interface formValues {
 }
 interface formErrors {
   username?: string;
+  firstName?: string;
+  lastName?: string;
   phone?: string;
   password?: string;
   email?: string;
@@ -94,6 +98,29 @@ const useFormValidation = (submitFormHandler, itemCount) => {
           setErrors(newObj);
         }
         break;
+      case "firstName":
+        if (value.length <= 3 || value.length === 0 || value.length > 20) {
+          setErrors({
+            ...errors,
+            firstName: "نام حداقل باید 3 کاراکتر و حداکثر 20 کاراکتر باشد!",
+          });
+        } else {
+          let newObj = omit(errors, "firstName");
+          setErrors(newObj);
+        }
+        break;
+      case "lastName":
+        if (value.length <= 3 || value.length === 0 || value.length > 20) {
+          setErrors({
+            ...errors,
+            lastName:
+              "نام خانوادگی حداقل باید 3 کاراکتر و حداکثر 20 کاراکتر باشد!",
+          });
+        } else {
+          let newObj = omit(errors, "lastName");
+          setErrors(newObj);
+        }
+        break;
       case "email":
         if (
           !new RegExp(
@@ -165,7 +192,6 @@ const useFormValidation = (submitFormHandler, itemCount) => {
           setFlag(countryCode[code].flag);
         }
         break;
-       
     }
   };
 
@@ -176,6 +202,14 @@ const useFormValidation = (submitFormHandler, itemCount) => {
     switch (name) {
       case "username":
         newObj = omit(values, "username");
+        setValues(newObj);
+        break;
+      case "firstName":
+        newObj = omit(values, "firstName");
+        setValues(newObj);
+        break;
+      case "lastName":
+        newObj = omit(values, "lastName");
         setValues(newObj);
         break;
       case "password":
@@ -195,14 +229,11 @@ const useFormValidation = (submitFormHandler, itemCount) => {
         setValues(newObj);
         break;
     }
-    setTimeout(() => {
-      console.log(values);
-    }, 1000);
   };
 
   const handleChange = (event) => {
     event.persist();
-
+    console.log("handle change function was invoked!");
     let name = event.target.name;
     let val = event.target.value;
 
@@ -222,7 +253,11 @@ const useFormValidation = (submitFormHandler, itemCount) => {
     ) {
       submitFormHandler();
     } else {
-      alert("خطایی در اطلاعات وارد شده وجود دارد!");
+      let ErrorMessage = "";
+      for (let key in errors) {
+        ErrorMessage += `${errors[key]}\n`;
+      }
+      alert(`خطایی در اطلاعات وارد شده وجود دارد!\n ${ErrorMessage}`);
     }
   };
 

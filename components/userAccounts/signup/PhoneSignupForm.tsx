@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState, useRef } from "react";
+import axios from "axios";
 import useFormValidation from "hooks/useFormValidation";
 import PhoneInput from "../ui/PhoneInput";
 import ErrorMessage from "../../layout/ErrorMessage";
@@ -11,6 +12,8 @@ const PhoneSignupForm: React.FC<{
   phase;
   openConditionsHandler;
 }> = ({ openConditionsHandler, phase }) => {
+  const phoneInputRef = useRef<HTMLInputElement>();
+  const passwordInputRef = useRef<HTMLInputElement>();
   const [acceptLaw, setAcceptLaw] = useState<boolean>(false);
   const [acceptLawError, setAcceptLawError] = useState<string>(
     "لطفا با قوانین tik3d موافقت نمایید"
@@ -22,11 +25,21 @@ const PhoneSignupForm: React.FC<{
       : setAcceptLawError("لطفا با قوانین tik3d موافقت نمایید");
   };
 
-  const submitPhoneSignupHandler = (event: FormEvent) => {
-    if (acceptLaw && flag) {
-      //Send Request For Submiting Form
-      console.log("form was successfuly submmited");
-      phase("two", values.phone);
+  const submitPhoneSignupHandler = async () => {
+    if (acceptLaw) {
+      const phone = phoneInputRef.current.value;
+      const password = passwordInputRef.current.value;
+
+      try {
+        const response = await axios.post("/api/auth/phone-signup", {
+          phone,
+          password,
+        });
+        alert(response.data.message);
+        phase("two", values.phone);
+      } catch (error) {
+        alert(error.response.data.message || "خطایی بوجود آمده است!");
+      }
     }
   };
   const {
@@ -51,6 +64,7 @@ const PhoneSignupForm: React.FC<{
           removeValueHandler: removeValueHandler,
           flag: flag,
         }}
+        ref={phoneInputRef}
       />
       <PasswordInput
         props={{
@@ -60,6 +74,7 @@ const PhoneSignupForm: React.FC<{
           removeValueHandler: removeValueHandler,
           verify: verify,
         }}
+        ref={passwordInputRef}
       />
       <div className="w-full flex flex-col gap-1 xl:gap-1.5 flex-nowrap justify-center items-start">
         <TermsAndConditionsBox

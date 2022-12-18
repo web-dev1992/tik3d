@@ -1,13 +1,17 @@
-import { Fragment } from "react";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
-// import { StyledEngineProvider } from "@mui/material";
-export default function MyApp({ Component, pageProps }: AppProps) {
+
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{
+  session: Session;
+}>) {
   return (
-    <Fragment>
-      {/* <StyledEngineProvider injectFirst> */}
-        <Component {...pageProps} />
-      {/* </StyledEngineProvider> */}
-    </Fragment>
+    <SessionProvider session={pageProps.session}>
+      <Component {...pageProps} />
+    </SessionProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import React, { FormEvent, forwardRef, useState } from "react";
 import Label from "../ui/Label";
 import RemoveButton from "../ui/RemoveButton";
 import EyeButton from "../ui/EyeButton";
@@ -13,7 +13,10 @@ interface passwordInputProps {
   verify: { trueLength: boolean; hasNumber: boolean; hasSpecial: boolean };
 }
 
-const PasswordInput: React.FC<{ props: passwordInputProps }> = ({ props }) => {
+const PasswordInput: React.FC<{
+  props: passwordInputProps;
+  ref: React.Ref<HTMLInputElement>;
+}> = forwardRef(({ props }, ref) => {
   const [showTip, setShowTip] = useState<boolean>(false);
   const [passwordInputType, setPasswordInputType] = useState<boolean>(true);
   const PasswordInputTypeHandler = () => {
@@ -28,6 +31,7 @@ const PasswordInput: React.FC<{ props: passwordInputProps }> = ({ props }) => {
       <div className="w-full  flex flex-row justify-center items-center relative">
         <input
           type={passwordInputType ? "password" : "text"}
+          ref={ref}
           name="password"
           id="password"
           placeholder=""
@@ -65,6 +69,6 @@ const PasswordInput: React.FC<{ props: passwordInputProps }> = ({ props }) => {
       {props.error && <ErrorMessage message={props.error} />}
     </div>
   );
-};
+});
 
 export default PasswordInput;

@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import React, { FormEvent, forwardRef } from "react";
 import Label from "../ui/Label";
 import RemoveButton from "../ui/RemoveButton";
 import ErrorMessage from "../../layout/ErrorMessage";
@@ -8,14 +8,19 @@ interface EmailProps {
   handleChange: (event: FormEvent) => void;
   error: string;
   removeValueHandler: (inputName: string) => void;
+ 
 }
 
-const EmailInput: React.FC<{ props: EmailProps }> = ({ props }) => {
+const EmailInput: React.FC<{
+  props: EmailProps;
+  ref: React.Ref<HTMLInputElement>;
+}> = forwardRef(({ props }, ref) => {
   return (
     <div className="w-full flex flex-col gap-1 xl:gap-1.5 flex-nowrap justify-center items-start ">
       <Label htmlFor="email" id="emaillbl" label="ایمیل" />
       <div className="w-full flex flex-row justify-center items-center gap-1.5 relative">
         <input
+          ref={ref}
           type="email"
           name="email"
           id="email"
@@ -38,6 +43,6 @@ const EmailInput: React.FC<{ props: EmailProps }> = ({ props }) => {
       {props.error && <ErrorMessage message={props.error} />}
     </div>
   );
-};
+});
 
 export default EmailInput;

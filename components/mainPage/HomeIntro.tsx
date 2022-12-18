@@ -13,10 +13,11 @@ const HomeItro = () => {
       <Image alt="playButton" src="/images/play.png" layout="fill" />
     </button>
   );
+
   return (
     <div className="w-full bg-[#F6F8FB] lg:pt-[117px] pb-[60px] xl:pt-[189px] xl:pb-24">
       <div className="h-max flex flex-col lg:flex-row-reverse flex-nowrap  justift-start md:justify-center items-center w-[317px] sm:w-9/12 lg:w-[870px] xl:w-11/12 mr-[22px] ml-9 md:m-auto ">
-        <div className="flex justify-center items-start w-[317px] h-[29px] lg:w-[480px] lg:h-[500px] xl:w-[772px] xl:h-[723px]  py-8 mix-blend-darken ">
+        <div className="aspect-square flex justify-center items-center w-[317px] h-[297px] lg:w-[480px] lg:h-[500px] xl:w-[772px] xl:h-[723px] mt-12 lg:mt-0 mix-blend-darken ">
           {hasWindow && (
             <ReactPlayer
               url="/videos/webpack.mp4"

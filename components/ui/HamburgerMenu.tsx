@@ -14,12 +14,12 @@ const HamburgerMenu = (props: MenuProps) => {
   const hamburgerMenuHandler = (): void => {
     if (showHambugerMenu) setShowHambergerMenu(false);
   };
-  const openCloseHaburgerMenu = () => {
+  const openCloseHamburgerMenu = () => {
     setShowHambergerMenu((showHambugerMenu) => !showHambugerMenu);
   };
   return (
     <OutsideLayout operator={hamburgerMenuHandler} className={className}>
-      <button onClick={openCloseHaburgerMenu} type="button">
+      <button onClick={openCloseHamburgerMenu} type="button">
         <svg
           className="h-4 w-5"
           viewBox="0 0 18 16"
@@ -49,7 +49,7 @@ const HamburgerMenu = (props: MenuProps) => {
             key={item.label}
             className="text-black hover:bg-abiStroke hover:text-white pr-8"
           >
-            <Link href={item.href}>
+            <Link href={item.href} passHref>
               <a className="text-current hover:text-white hover:font-medium">
                 {item.label}
               </a>

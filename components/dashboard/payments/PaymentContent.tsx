@@ -1,7 +1,13 @@
 import SortIcon from "@components/ui/SortIcon";
 import { Fragment } from "react";
-import ContentTitle from "../ContentTitle";
+import ContentTitle from "../ui/ContentTitle";
 const PaymentContent = () => {
+  let lastId = 0;
+
+  const uniquIdGenerator = (prefix = "id") => {
+    lastId++;
+    return `${prefix}${lastId}`;
+  };
   return (
     <Fragment>
       <div className="w-full flex flex-col flex-nowrap justify-center items-center lg:gap-2 ">
@@ -25,7 +31,7 @@ const PaymentContent = () => {
           {/* other rows */}
           {[...Array(10)].map((index) => (
             <div
-              key={index}
+              key={uniquIdGenerator()}
               className="w-full h-6 lg:h-8 xl:h-[50px] flex flex-row flex-nowrap justify-center items-center   text-gray-500 text-[8px] lg:text-xxs xl:text-base font-normal rounded-[5px] lg:rounded-[7px] xl:rounded-[10px] border border-[#E2E2E2]"
             >
               <span className="w-3/12 lg:w-2/12 h-full flex flex-row item-center justify-center leading-[26px] lg:leading-[34px] xl:leading-[55px] border-l border-[#E2E2E2] "></span>

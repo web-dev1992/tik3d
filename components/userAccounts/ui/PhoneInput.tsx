@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode } from "react";
+import { FormEvent, forwardRef, ReactNode } from "react";
 import CountryCodeInput from "./CountryCodeInput";
 import Label from "../ui/Label";
 import ErrorMessage from "../../layout/ErrorMessage";
@@ -11,12 +11,16 @@ interface PhoneProps {
   flag: ReactNode;
 }
 
-const PhoneInput: React.FC<{ props: PhoneProps }> = ({ props }) => {
+const PhoneInput: React.FC<{
+  props: PhoneProps;
+  ref: React.Ref<HTMLInputElement>;
+}> = forwardRef(({ props }, ref) => {
   return (
     <div className="w-full flex flex-col gap-1 xl:gap-1.5 flex-nowrap justify-center items-start ">
       <Label label="شماره تلفن" htmlFor="phone" id="phone" />
       <div className="w-full flex flex-row justify-center items-center gap-1.5 relative">
         <input
+          ref={ref}
           type="text"
           name="phone"
           id="phone"
@@ -51,6 +55,6 @@ const PhoneInput: React.FC<{ props: PhoneProps }> = ({ props }) => {
       {props.errors.phone && <ErrorMessage message={props.errors.phone} />}
     </div>
   );
-};
+});
 
 export default PhoneInput;

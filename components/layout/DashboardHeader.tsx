@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import DesktopDashboardHamburgerMenu from "@components/dashboard/DesktopDashboardHamburgerMenu";
+import DesktopDashboardHamburgerMenu from "@components/dashboard/ui/DesktopDashboardHamburgerMenu";
 import ReactFlagsSelect from "react-flags-select";
-import LanguageDropDown from "@components/dashboard/LanguageDropDown";
+import LanguageDropDown from "@components/layout/LanguageDropDown";
 const DashboardHeader = () => {
   const menuItems = [
     { label: "صفحه نخست", href: "/" },
@@ -30,19 +30,10 @@ const DashboardHeader = () => {
           <button className="w-24 h-9 border rounded border-[#2F80ED] flex flex-row justify-center items-center py-[8px] px-[18px] bg-[#F9FBFD] text-xxs font-bold leading-4 text-[#2F80ED]">
             دانلود رایگان
           </button>
-          <LanguageDropDown className=" " />
-          {/* <ReactFlagsSelect
-            id="lang-select"
-            selected="IR"
-            onSelect={() => {}}
-            countries={["IR", "GB"]}
-            showSelectedLabel={true}
-            showOptionLabel={true}
-            customLabels={{ IR: "Fa", GB: "EN" }}
-            selectedSize={9}
-            optionsSize={9}
-            selectButtonClassName="!justify-center !pl-1 !item-center !h-4 !w-14 !bg-white text-gray-200 !border-none  "
-          /> */}
+          <LanguageDropDown
+            className="w-[47px] h-[18px] flex relative"
+            showLabel={true}
+          />
         </div>
       </div>
       {/* Xlarg Desktop Header */}
@@ -67,20 +58,10 @@ const DashboardHeader = () => {
             <button className="w-[150px] h-14 border-2 rounded-md border-[#2F80ED] flex flex-row justify-center items-center py-3 px-5 bg-[#F9FBFD] text-base font-bold text-[#2F80ED]">
               دانلود رایگان
             </button>
-            <LanguageDropDown className=" relative" />
-            {/* <ReactFlagsSelect
-              id="lang-select"
-              selected="IR"
-              onSelect={() => {}}
-              countries={["IR", "GB"]}
-              customLabels={{ IR: "Fa", GB: "EN" }}
-              showSelectedLabel={true}
-              showOptionLabel={true}
-              selectedSize={15}
-              optionsSize={15}
-              selectButtonClassName="!justify-center !pl-1 !item-center !h-8 !w-20 !bg-white !border-none "
-              placeholder="Select Language"
-            /> */}
+            <LanguageDropDown
+              className="w-[73px] h-8 flex relative"
+              showLabel={true}
+            />
           </div>
         </div>
       </div>

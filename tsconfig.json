@@ -27,7 +27,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/ui/VideoPlayerComponent/VideoPlayer.js", "components/ui/VideoPlayerComponent/Controls/PlayIcon.js", "components/ui/VideoPlayerComponent/Controls/PauseIcon.js", "components/ui/VideoPlayerComponent/Controls/Controls.js", "components/ui/VideoPlayerComponent/VideoPlayer.js"  ],
+, "components/ui/VideoPlayerComponent/VideoPlayer.js", "components/ui/VideoPlayerComponent/Controls/PlayIcon.js", "components/ui/VideoPlayerComponent/Controls/PauseIcon.js", "components/ui/VideoPlayerComponent/Controls/Controls.js", "components/ui/VideoPlayerComponent/VideoPlayer.js", "helper/db.ts"  ],
   "exclude": [
     "node_modules"
   ]

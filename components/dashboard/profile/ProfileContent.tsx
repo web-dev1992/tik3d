@@ -1,186 +1,131 @@
-import { useState } from "react";
-import ContentTitle from "../ContentTitle";
+import { useState, useRef, FormEvent } from "react";
+import axios from "axios";
+import ContentTitle from "../ui/ContentTitle";
 import TikSvg from "@components/dashboard/profile/TikSvg";
 import Row from "@components/dashboard/profile/Row";
 import InputLayout from "@components/dashboard/profile/InputLayout";
-import ProfileLabel from "./ProfileLabel";
-const userInfo = {
-  id: "u1",
-  name: "احسان",
-  family: "دلیخون",
-  mobile: "09198564724",
-  email: "elsandeli@gmail.com",
-  password: "1234567",
-  sex: 1,
-};
+import useFormValidation from "hooks/useFormValidation";
+import EmailInput from "../ui/EmailInput";
+import PasswordInput from "../ui/PasswordInput";
+import PhoneInput from "../ui/PhoneInput";
+import FirstNameInput from "../ui/FirstNameInput";
+import LastNameInput from "../ui/LastNameInput";
 
-const ProfileContent = () => {
+interface userInfoProps {
+  email: string;
+  lastName: string;
+  image: string;
+  isActive: boolean;
+  isSpecialUser: boolean;
+  firstName: string;
+  password: string;
+  phone: number;
+  gender: boolean;
+  _id: string;
+}
+
+const ProfileContent: React.FC<{
+  userInfo: userInfoProps;
+  changeLodedUserHandler: (newUserInfo) => void;
+}> = ({ userInfo, changeLodedUserHandler }) => {
+  console.log(userInfo);
   const [editMode, setEditMode] = useState(false);
-  const [isMale, setIsMale] = useState<boolean>(!!userInfo.sex);
-
+  const [isMale, setIsMale] = useState<boolean>(!!userInfo.gender);
+  const firstNameRef = useRef<HTMLInputElement>();
+  const lastNameRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>();
+  const phoneRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
   const editModeHandler = () => {
     setEditMode((prev) => !prev);
   };
-  const sexHandler = () => {
+  const genderHandler = () => {
     setIsMale((prev) => !prev);
   };
-  const changeInfoHandler = () => {};
+  const changeInfoHandler = async () => {
+    // event.preventDefault();
+    const newUserInfo = {
+      firstName: firstNameRef.current?.value ?? "",
+      lastName: lastNameRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneRef.current.value,
+      password: passwordRef.current.value,
+      gender: isMale,
+    };
+
+    try {
+      const response = await axios.post("/api/user/edit-user", newUserInfo);
+      alert(response.data.message);
+      setEditMode((prev) => !prev);
+      changeLodedUserHandler(newUserInfo);
+    } catch (error) {
+      alert(error.response.data.message || "خطایی بوجود آمده است!");
+    }
+  };
+  const { values, errors, verify, handleChange, handleSubmit } =
+    useFormValidation(changeInfoHandler, 5);
   return (
     <div className="w-full  flex flex-col flex-nowrap justify-center items-center  ">
       <ContentTitle title="اطلاعات کاربری" />
       <form
-        onSubmit={changeInfoHandler}
+        noValidate
+        onSubmit={handleSubmit}
         className="w-full flex flex-col flex-nowrap justify-center items-center gap-5 xl:gap-[30px]"
       >
         {/* name and family */}
         <Row>
-          {/* name */}
-          <InputLayout>
-            <ProfileLabel
-              props={{
-                labelText: "نام",
-                htmlFor: "uname",
-                id: "namelbl",
-                editMode: editMode,
-                editModeHandler: editModeHandler,
-              }}
-            />
-            <input
-              type="text"
-              name="uname"
-              id="uname"
-              disabled={!editMode}
-              className={` ${
-                editMode
-                  ? "ProfileContentInputEditMode"
-                  : "ProfileContentInputNotEditMode"
-              }`}
-              defaultValue={userInfo.name}
-              required
-              minLength={3}
-              maxLength={20}
-            />
-          </InputLayout>
-          {/* family */}
-          <InputLayout>
-            <ProfileLabel
-              props={{
-                labelText: "نام خانوادگی",
-                id: "familylbl",
-                htmlFor: "family",
-                editMode: editMode,
-                editModeHandler: editModeHandler,
-              }}
-            />
-            <input
-              type="text"
-              name="family"
-              id="family"
-              disabled={!editMode}
-              className={` ${
-                editMode
-                  ? "ProfileContentInputEditMode"
-                  : "ProfileContentInputNotEditMode"
-              }`}
-              defaultValue={userInfo.family}
-              required
-              minLength={3}
-              maxLength={20}
-            />
-          </InputLayout>
+          <FirstNameInput
+            editMode={editMode}
+            handleChange={handleChange}
+            error={errors.firstName}
+            firstName={values.firstName ?? userInfo.firstName}
+            editModeHandler={editModeHandler}
+            ref={firstNameRef}
+          />
+          <LastNameInput
+            editMode={editMode}
+            handleChange={handleChange}
+            error={errors.lastName}
+            lastName={values.lastName ?? userInfo.lastName}
+            editModeHandler={editModeHandler}
+            ref={lastNameRef}
+          />
         </Row>
         {/* mobile and email */}
         <Row>
-          {/* mobile */}
-          <InputLayout>
-            <ProfileLabel
-              props={{
-                labelText: "شماره موبایل",
-                htmlFor: "mobile",
-                id: "mobilelbl",
-                editMode: editMode,
-                editModeHandler: editModeHandler,
-              }}
-            />
-            <input
-              type="tel"
-              name="mobile"
-              id="mobile"
-              pattern="+98[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              disabled={!editMode}
-              className={` ${
-                editMode
-                  ? "ProfileContentInputEditMode"
-                  : "ProfileContentInputNotEditMode"
-              }`}
-              defaultValue={userInfo.mobile}
-              required
-              minLength={11}
-              maxLength={11}
-            />
-          </InputLayout>
-          {/* email */}
-          <InputLayout>
-            <ProfileLabel
-              props={{
-                labelText: "آدرس ایمیل",
-                htmlFor: "email",
-                id: "emaillbl",
-                editMode: editMode,
-                editModeHandler: editModeHandler,
-              }}
-            />
-            <input
-              type="email"
-              name="email"
-              id="email"
-              pattern=".+@globex\.com"
-              disabled={!editMode}
-              className={` ${
-                editMode
-                  ? "ProfileContentInputEditMode"
-                  : "ProfileContentInputNotEditMode"
-              }`}
-              defaultValue={userInfo.email}
-              required
-              minLength={15}
-              maxLength={50}
-            />
-          </InputLayout>
+          <PhoneInput
+            editMode={editMode}
+            handleChange={handleChange}
+            error={errors.phone}
+            phone={values.phone ?? userInfo.phone}
+            editModeHandler={editModeHandler}
+            ref={phoneRef}
+            disabled={!(editMode && userInfo.phone === null)}
+          />
+          <EmailInput
+            editMode={editMode}
+            handleChange={handleChange}
+            error={errors.email}
+            email={values.email ?? userInfo.email}
+            editModeHandler={editModeHandler}
+            disabled={!(editMode && userInfo.email === "")}
+            ref={emailRef}
+          />
         </Row>
         {/* password and sex */}
         <Row>
-          {/* password */}
-          <InputLayout>
-            <ProfileLabel
-              props={{
-                labelText: "رمز عبور",
-                htmlFor: "password",
-                id: "passwordlbl",
-                editMode: editMode,
-                editModeHandler: editModeHandler,
-              }}
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              disabled={!editMode}
-              className={` ${
-                editMode
-                  ? "ProfileContentInputEditMode"
-                  : "ProfileContentInputNotEditMode"
-              }`}
-              value={userInfo.password}
-              required
-              minLength={8}
-              maxLength={30}
-            />
-          </InputLayout>
-          {/* sex */}
+          <PasswordInput
+            editMode={editMode}
+            handleChange={handleChange}
+            error={errors.password}
+            password={values.password ?? userInfo.password}
+            editModeHandler={editModeHandler}
+            ref={passwordRef}
+          />
+          {/* gender */}
           <InputLayout>
             <div className="w-full flex flex-row justify-between items-center ">
-              <label htmlFor="" id="sexlbl" className="ProfileContentLabel">
+              <label htmlFor="" id="genderlbl" className="ProfileContentLabel">
                 تعیین جنسیت
               </label>
             </div>
@@ -193,11 +138,11 @@ const ProfileContent = () => {
                 <input
                   type="radio"
                   id="male"
-                  name="sex"
+                  name="gender"
                   disabled={!editMode}
                   value="male"
                   checked={isMale}
-                  onClick={sexHandler}
+                  onClick={genderHandler}
                   className={`ProfileCheckBox ${
                     isMale
                       ? "bg-[#2F80ED] border-[#2F80ED]"
@@ -217,11 +162,11 @@ const ProfileContent = () => {
                 <input
                   type="radio"
                   id="female"
-                  name="sex"
+                  name="gender"
                   disabled={!editMode}
                   checked={!isMale}
                   value="female"
-                  onClick={sexHandler}
+                  onClick={genderHandler}
                   className={`ProfileCheckBox ${
                     !isMale
                       ? "bg-[#2F80ED] border-[#2F80ED]"

@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import ContentTitle from "@components/dashboard/ContentTitle";
+import ContentTitle from "@components/dashboard/ui/ContentTitle";
 import SubscriptionPanel from "@components/dashboard/subscriptions/SubscriptionPanel";
 import DiscountBox from "@components/dashboard/subscriptions/DiscountBox";
 const subscriptions = [

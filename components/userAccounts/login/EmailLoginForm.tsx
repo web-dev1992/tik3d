@@ -1,15 +1,40 @@
-import { FormEvent } from "react";
+import { useRef } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 import useFormValidation from "hooks/useFormValidation";
 import EmailInput from "../ui/EmailInput";
 import PasswordInput from "../ui/PasswordInput";
 import SubmitButton from "../../layout/SubmitButton";
 import CustomeLink from "../ui/CustomeLink";
 
-
 const EmailLoginForm: React.FC<{}> = () => {
-  const submitEmailLoginHandler = (event: FormEvent) => {
-    //Send Request For Submiting Form
-    console.log("form was successfuly submmited");
+  const router = useRouter();
+  const emailInputRef = useRef<HTMLInputElement>();
+  const passwordInputRef = useRef<HTMLInputElement>();
+  const submitEmailLoginHandler = async () => {
+    const email = emailInputRef.current!.value;
+    const password = passwordInputRef.current!.value;
+
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      alert("فیلدهای نام کاربری و رمزعبور اجباری هستند");
+      return;
+    }
+
+    if (password.trim().length < 8) {
+      alert("رمز وارد شده حداقل باید ۸ کاراکتر باشد!");
+      return;
+    }
+
+    const result = await signIn("credential_email_password", {
+      redirect: false,
+      email: email,
+      password: password,
+    });
+    if (result.error) alert(result.error);
+    else {
+      //set some auth state
+      router.replace("/");
+    }
   };
   const {
     values,
@@ -32,6 +57,7 @@ const EmailLoginForm: React.FC<{}> = () => {
           error: errors.email,
           removeValueHandler: removeValueHandler,
         }}
+        ref={emailInputRef}
       />
       <PasswordInput
         props={{
@@ -41,6 +67,7 @@ const EmailLoginForm: React.FC<{}> = () => {
           removeValueHandler: removeValueHandler,
           verify: verify,
         }}
+        ref={passwordInputRef}
       />
 
       <SubmitButton text="ورود" />

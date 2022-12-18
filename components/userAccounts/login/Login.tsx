@@ -3,7 +3,7 @@ import SignupLoginLayout from "@components/layout/SignupLoginLayout";
 import PhoneLoginForm from "./PhoneLoginForm";
 import EmailLoginForm from "./EmailLoginForm";
 import LoginMethod from "./LoginMethod";
-import Heading from "../../layout/FormTitle";
+import FormTitle from "../../layout/FormTitle";
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState<string>("phone");
   const changeLoginMethodhandler = (state: string) => {
@@ -13,7 +13,7 @@ const Login = () => {
   return (
     <SignupLoginLayout>
       <div className="w-[232px] lg:w-[249px] xl:w-[402px] flex flex-col flex-nowrap justify-center items-center gap-[18px] mt-[18px] mx-10 xl:mt-[30px] ">
-        <Heading>ورود به حساب کاربری</Heading>
+        <FormTitle>ورود به حساب کاربری</FormTitle>
         <LoginMethod
           loginMethod={loginMethod}
           changeLoginMethodhandler={changeLoginMethodhandler}

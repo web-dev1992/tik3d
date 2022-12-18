@@ -1,15 +1,19 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
+import axios from "axios";
 import useFormValidation from "hooks/useFormValidation";
-import ErrorMessage from "../../layout/ErrorMessage";
+import EmailInput from "../ui/EmailInput";
 import PasswordInput from "../ui/PasswordInput";
-import TermsAndConditionsBox from "../ui/TermsAndConditionsBox";
 import SubmitButton from "../../layout/SubmitButton";
 import CustomeLink from "../ui/CustomeLink";
-import EmailInput from "../ui/EmailInput";
+import ErrorMessage from "../../layout/ErrorMessage";
+import TermsAndConditionsBox from "../ui/TermsAndConditionsBox";
+
 const EmailSignupForm: React.FC<{
   phase;
   openConditionsHandler;
 }> = ({ phase, openConditionsHandler }) => {
+  const emailInputRef = useRef<HTMLInputElement>();
+  const passwordInputRef = useRef<HTMLInputElement>();
   const [acceptLaw, setAcceptLaw] = useState<boolean>(false);
   const [acceptLawError, setAcceptLawError] = useState<string>(
     "لطفا با قوانین tik3d موافقت نمایید"
@@ -21,11 +25,21 @@ const EmailSignupForm: React.FC<{
       : setAcceptLawError("لطفا با قوانین tik3d موافقت نمایید");
   };
 
-  const submitEmailSignupHandler = (event: FormEvent) => {
+  const submitEmailSignupHandler = async () => {
     if (acceptLaw) {
-      //Send Request For Submiting Form
-      console.log("form was successfuly submmited");
-      phase("two", values.email);
+      const email = emailInputRef.current.value;
+      const password = passwordInputRef.current.value;
+
+      try {
+        const response = await axios.post("/api/auth/email-signup", {
+          email,
+          password,
+        });
+        alert(response.data.message);
+        phase("two", values.email);
+      } catch (error) {
+        alert(error.response.data.message || "خطایی بوجود آمده است!");
+      }
     }
   };
   const {
@@ -40,7 +54,7 @@ const EmailSignupForm: React.FC<{
     <form
       className="w-full flex flex-col flex-nowrap justify-center items-center gap-3 xl:gap-5 mx-12 mb-14 xl:mt-10 xl:mb-28"
       onSubmit={handleSubmit}
-    >   
+    >
       <EmailInput
         props={{
           email: values.email,
@@ -48,6 +62,7 @@ const EmailSignupForm: React.FC<{
           error: errors.email,
           removeValueHandler: removeValueHandler,
         }}
+        ref={emailInputRef}
       />
       <PasswordInput
         props={{
@@ -57,6 +72,7 @@ const EmailSignupForm: React.FC<{
           removeValueHandler: removeValueHandler,
           verify: verify,
         }}
+        ref={passwordInputRef}
       />
       <div className="w-full flex flex-col gap-1 xl:gap-1.5 flex-nowrap justify-center items-start">
         <TermsAndConditionsBox

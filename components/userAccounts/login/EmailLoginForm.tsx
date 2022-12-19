@@ -43,7 +43,7 @@ const EmailLoginForm: React.FC<{}> = () => {
     handleChange,
     handleSubmit,
     removeValueHandler,
-  } = useFormValidation(submitEmailLoginHandler, 2);
+  } = useFormValidation(submitEmailLoginHandler);
 
   return (
     <form

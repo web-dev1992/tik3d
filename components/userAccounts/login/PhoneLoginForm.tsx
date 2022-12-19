@@ -44,7 +44,7 @@ const PhoneLoginForm: React.FC<{}> = () => {
     handleChange,
     handleSubmit,
     removeValueHandler,
-  } = useFormValidation(submitPhoneLoginHandler, 3);
+  } = useFormValidation(submitPhoneLoginHandler);
 
   return (
     <form

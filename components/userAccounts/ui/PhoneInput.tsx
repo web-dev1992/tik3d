@@ -39,7 +39,7 @@ const PhoneInput: React.FC<{
           <RemoveButton
             removeValueHandler={props.removeValueHandler}
             name="phone"
-            className="absolute top-3 right-1.5 xl:top-5 xl:right-3"
+            className="absolute top-3 right-1.5 xl:top-5 xl:right-3 w-2.5 h-2.5 xl:w-5 xl:h-5"
           />
         )}
 

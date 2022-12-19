@@ -29,6 +29,15 @@ const PhoneSignupForm: React.FC<{
     if (acceptLaw) {
       const phone = phoneInputRef.current.value;
       const password = passwordInputRef.current.value;
+      if (phone.trim().length === 0 || password.trim().length === 0) {
+        alert("فیلدهای نام کاربری و رمزعبور اجباری هستند");
+        return;
+      }
+
+      if (password.trim().length < 8) {
+        alert("رمز وارد شده حداقل باید ۸ کاراکتر باشد!");
+        return;
+      }
 
       try {
         const response = await axios.post("/api/auth/phone-signup", {
@@ -50,9 +59,10 @@ const PhoneSignupForm: React.FC<{
     handleChange,
     handleSubmit,
     removeValueHandler,
-  } = useFormValidation(submitPhoneSignupHandler, 3);
+  } = useFormValidation(submitPhoneSignupHandler);
   return (
     <form
+      noValidate
       className="w-full flex flex-col flex-nowrap justify-center items-center gap-3 xl:gap-5 mx-12 mb-14 xl:mt-10 xl:mb-28"
       onSubmit={handleSubmit}
     >

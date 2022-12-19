@@ -28,7 +28,7 @@ const PasswordInput: React.FC<{
   return (
     <div className="relative w-full flex flex-col gap-1 xl:gap-1.5 flex-nowrap justify-center items-start ">
       <Label label="کلمه عبور" htmlFor="password" id="password" />
-      <div className="w-full  flex flex-row justify-center items-center relative">
+      <div className="w-full flex flex-row justify-center items-center relative">
         <input
           type={passwordInputType ? "password" : "text"}
           ref={ref}
@@ -51,7 +51,7 @@ const PasswordInput: React.FC<{
           <RemoveButton
             removeValueHandler={props.removeValueHandler}
             name="password"
-            className="absolute top-3 right-5 xl:top-5 xl:right-8"
+            className="absolute top-3 right-5 xl:top-5 xl:right-8 w-2.5 h-2.5 xl:w-5 xl:h-5"
           />
         )}
         {showTip && (

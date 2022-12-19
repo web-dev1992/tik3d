@@ -1,7 +1,7 @@
 const RemoveIcon = () => {
   return (
     <svg
-      className="w-2.5 h-2.5 xl:w-5 xl:h-5"
+      className="w-full h-full"
       viewBox="0 0 10 11"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

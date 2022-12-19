@@ -43,7 +43,6 @@ const ProfileContent: React.FC<{
     setIsMale((prev) => !prev);
   };
   const changeInfoHandler = async () => {
-    // event.preventDefault();
     const newUserInfo = {
       firstName: firstNameRef.current?.value ?? "",
       lastName: lastNameRef.current.value,
@@ -63,7 +62,7 @@ const ProfileContent: React.FC<{
     }
   };
   const { values, errors, verify, handleChange, handleSubmit } =
-    useFormValidation(changeInfoHandler, 5);
+    useFormValidation(changeInfoHandler);
   return (
     <div className="w-full  flex flex-col flex-nowrap justify-center items-center  ">
       <ContentTitle title="اطلاعات کاربری" />
@@ -100,7 +99,8 @@ const ProfileContent: React.FC<{
             phone={values.phone ?? userInfo.phone}
             editModeHandler={editModeHandler}
             ref={phoneRef}
-            disabled={!(editMode && userInfo.phone === null)}
+            disabled={!(editMode && !userInfo.phone)}
+            // disabled={!editMode}
           />
           <EmailInput
             editMode={editMode}
@@ -108,7 +108,8 @@ const ProfileContent: React.FC<{
             error={errors.email}
             email={values.email ?? userInfo.email}
             editModeHandler={editModeHandler}
-            disabled={!(editMode && userInfo.email === "")}
+            disabled={!(editMode && !userInfo.email)}
+            // disabled={!editMode}
             ref={emailRef}
           />
         </Row>

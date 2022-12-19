@@ -1,7 +1,7 @@
 const PasswordEyeIcon = () => {
   return (
     <svg
-      className="absolute top-3 right-2 xl:top-[22px] xl:right-[11px]  w-[9px] h-[9px] xl:w-4 xl:h-4"
+      className=" w-full h-full "
       viewBox="0 0 9 9"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

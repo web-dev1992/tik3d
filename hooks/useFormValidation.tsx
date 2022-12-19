@@ -76,7 +76,7 @@ const countryCode = [
     ),
   },
 ];
-const useFormValidation = (submitFormHandler, itemCount) => {
+const useFormValidation = (submitFormHandler) => {
   const [values, setValues] = useState<formValues>({});
   const [errors, setErrors] = useState<formErrors>({});
   const [flag, setFlag] = useState(null);
@@ -99,7 +99,7 @@ const useFormValidation = (submitFormHandler, itemCount) => {
         }
         break;
       case "firstName":
-        if (value.length <= 3 || value.length === 0 || value.length > 20) {
+        if (value.length < 3 || value.length === 0 || value.length > 20) {
           setErrors({
             ...errors,
             firstName: "نام حداقل باید 3 کاراکتر و حداکثر 20 کاراکتر باشد!",
@@ -110,7 +110,7 @@ const useFormValidation = (submitFormHandler, itemCount) => {
         }
         break;
       case "lastName":
-        if (value.length <= 3 || value.length === 0 || value.length > 20) {
+        if (value.length < 3 || value.length === 0 || value.length > 20) {
           setErrors({
             ...errors,
             lastName:
@@ -233,7 +233,7 @@ const useFormValidation = (submitFormHandler, itemCount) => {
 
   const handleChange = (event) => {
     event.persist();
-    console.log("handle change function was invoked!");
+
     let name = event.target.name;
     let val = event.target.value;
 
@@ -248,11 +248,13 @@ const useFormValidation = (submitFormHandler, itemCount) => {
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
     if (
-      Object.keys(errors).length === 0 &&
-      Object.keys(values).length === itemCount
+      Object.keys(errors).length === 0
+      // || Object.keys(values).length === itemCount
     ) {
       submitFormHandler();
     } else {
+      console.log("errors", errors);
+      console.log("values", values);
       let ErrorMessage = "";
       for (let key in errors) {
         ErrorMessage += `${errors[key]}\n`;

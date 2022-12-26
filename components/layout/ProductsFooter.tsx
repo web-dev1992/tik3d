@@ -11,22 +11,11 @@ const ProductsFooter = () => {
       <div className="flex flex-col md:flex-row justify-center items-center flex-nowrap gap-4">
         <Link href="/">
           <div className="flex flex-row flex-nowrap justify-center items-center gap-1 cursor-pointer ">
-            <div className="xl:hidden border flex items-center ">
+            <div className=" w-[34px] h-[34px] xl:h-[55px] xl:w-[55px] relative border flex items-center ">
               <Image
                 alt="Tik3d"
                 src="/images/dolphine-logo.png"
-                height={34}
-                width={34}
-                objectFit="contain"
-              />
-            </div>
-            <div className="hidden xl:flex items-center ">
-              <Image
-                alt="Tik3d"
-                src="/images/dolphine-logo.png"
-                height={55}
-                width={55}
-                objectFit="contain"
+                layout="fill"
               />
             </div>
             <div className="md:hidden ">
@@ -45,34 +34,33 @@ const ProductsFooter = () => {
         </p>
       </div>
       <div className="flex flex-row flex-nowrap justify-center items-center gap-4">
-        <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)] w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11 ">
-          <Link href="#">
-            <InstaIcon />
-          </Link>
-        </button>
-        <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)]  w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11">
-          <Link href="#">
-            <TelegramIcon />
-          </Link>
-        </button>
-        <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)]  w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11">
-          <Link href="#">
-            <FacebookIcon />
-          </Link>
-        </button>
-        <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)]  w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11">
-          <Link href="#">
-            <TwitterIcon />
-          </Link>
-        </button>
-        <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)]  w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11">
-          <Link href="#">
-            <LinkedinIcon />
-          </Link>
-        </button>
+        <FooterButton link="#">
+          <InstaIcon />
+        </FooterButton>
+        <FooterButton link="#">
+          <TelegramIcon />
+        </FooterButton>
+        <FooterButton link="#">
+          <FacebookIcon />
+        </FooterButton>
+        <FooterButton link="#">
+          <TwitterIcon />
+        </FooterButton>
+        <FooterButton link="#">
+          <LinkedinIcon />
+        </FooterButton>
       </div>
     </div>
   );
 };
 
+const FooterButton = (props) => {
+  return (
+    <button className="shadow-[0_0_11px_rgba(0,0,0,0.1)] w-8 h-7 flex flex-row justify-center items-center xl:rounded xl:w-14 xl:h-11">
+      <Link href={props.link} passHref>
+        <a>{props.children}</a>
+      </Link>
+    </button>
+  );
+};
 export default ProductsFooter;

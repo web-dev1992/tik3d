@@ -3,9 +3,10 @@ import ReactPlayer from "react-player";
 import CardVideoControls from "./Controls/CardVideoControls";
 
 let count = 0;
-const CardVideoPlayer: React.FC<{ fileAddress: string }> = ({
-  fileAddress,
-}) => {
+const CardVideoPlayer: React.FC<{
+  fileAddress: string;
+  ligthImage: string;
+}> = ({ fileAddress, ligthImage }) => {
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -78,6 +79,7 @@ const CardVideoPlayer: React.FC<{ fileAddress: string }> = ({
       <div
         ref={playerContainerRef}
         className="bg-gray-900 overflow-hidden h-auto w-auto relative pt-[56.25%] "
+        style={{ backgroundImage: `url(${ligthImage})` }}
         onMouseMove={handleMouseMove}
         onMouseLeave={hanldeMouseLeave}
       >
@@ -86,6 +88,7 @@ const CardVideoPlayer: React.FC<{ fileAddress: string }> = ({
             <ReactPlayer
               className="absolute top-0 left-0"
               ref={playerRef}
+              // ligthImage={ligthImage}
               url={fileAddress}
               width="100%"
               height="100%"

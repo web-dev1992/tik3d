@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useRouter } from "next/router";
 import ProductLayout from "@components/layout/ProductLayout";
 import VideoPlayer from "@components/ui/PlayerComponents/VideoPlayer";
 import Downloads from "../Downloads";
@@ -6,117 +7,39 @@ import Description from "../Description";
 import InsertComment from "../InsertComment";
 import CommentsList from "@components/products/Comment";
 import Introduction from "../Introduction";
-const Dummy_Video_Item = {
-  id: "a1",
-  name: "نام آیتم 25 کاراکتری",
-  fileAddress: "/videos/ElephantsDream.mp4",
-  renderMotorName: "Vray",
-  version: "Autodesk 3ds Max 2012",
-  style: "Modern",
-  ManufacturerSite: "exaple.ir",
-  tags: [
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-    "تگ نمونه",
-  ],
-  ligthImage: "/images/audio-larg-poster.png",
-  description:
-    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-  isSpecial: true,
-};
-const Dummy_Comments = [
-  {
-    id: "c1",
-    commenter: "لورم ایپسوم",
-    userName: "@dennyhill",
-    commentText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است",
-    rate: 4,
-    image: "/images/denny.png",
-  },
-  {
-    id: "c2",
-    commenter: "لورم ایپسوم",
-    userName: "@dennyhill",
-    commentText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است",
-    rate: 5,
-    image: "/images/denny.png",
-  },
-  {
-    id: "c3",
-    commenter: "لورم ایپسوم",
-    userName: "@dennyhill",
-    commentText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است",
-    rate: 3,
-    image: "/images/denny.png",
-  },
-];
-const downloads = [
-  {
-    id: "d1",
-    fileName: "دانلود مدل تری دی مکس(عادی)",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d2",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d3",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d4",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d5",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d6",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-  {
-    id: "d7",
-    fileName: "دانلود مدل تری دی مکس",
-    size: 7.67,
-    link: "/musics/Earth.mp3",
-  },
-];
+import { ObjectId } from "mongodb";
 
-const Video = () => {
-  const [hasWindow, setHasWindow] = useState(false);
+interface videoProps {
+  _id: ObjectId;
+  name: string;
+  ligthImage: string;
+  link: string;
+  address: string;
+  isSpecial: boolean;
+  renderMotor: string;
+  version: string;
+  style: string;
+  owner: string;
+  description: string;
+  tags: string[];
+  downloads: { name: string; address: string; size: string }[];
+}
+interface CommentsProps {
+  _id: ObjectId;
+  productId: ObjectId;
+  name: string;
+  email: string;
+  star: number;
+  image?: string;
+  comment: string;
+}
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
+const Video: React.FC<{
+  video: videoProps;
+  comments: CommentsProps[];
+}> = (props) => {
+  const router = useRouter();
+  const productId = router.query.videoId;
 
   return (
     <ProductLayout>
@@ -128,18 +51,18 @@ const Video = () => {
         <div className="w-11/12 sm:w-9/12 xl:w-[1350px] m-auto  flex flex-col flex-nowrap lg:flex-row justify-center items-center lg:items-start gap-4 lg:gap-2 mt-4">
           <div className="w-full md:w-1/2 flex justify-center items-center">
             {/* video player component */}
-            <VideoPlayer fileAddress={Dummy_Video_Item.fileAddress} />
+            <VideoPlayer fileAddress={props.video.address} />
           </div>
           {/* introduction */}
-          <Introduction introProps={Dummy_Video_Item} />
+          <Introduction introProps={props.video} />
         </div>
       </div>
       <div className="bg-[#F6F8FB] w-full m-auto flex flex-col flex-nowrap pt-8">
         <div className="w-11/12 sm:w-9/12 xl:w-[1350px] m-auto  flex flex-col flex-nowrap lg:flex-row justify-center items-center lg:items-start xl:gap-4 lg:gap-1  mt-4">
           {/* description */}
-          <Description text={Dummy_Video_Item.description} />
+          <Description text={props.video.description} />
           {/* downloads */}
-          <Downloads downloads={downloads} />
+          <Downloads downloads={props.video.downloads} />
         </div>
       </div>
       <div className="bg-[#F6F8FB] w-full m-auto pt-8">
@@ -149,9 +72,9 @@ const Video = () => {
           </h2>
           <div className="w-full  flex flex-col flex-nowrap justify-center items-start lg:flex-row lg:justify-start font-IRANSans xl:gap-4 lg:gap-1  ">
             {/* comments */}
-            <CommentsList commentsList={Dummy_Comments} />
+            <CommentsList commentsList={props.comments.slice(0, 3)} />
             {/* insert comment */}
-            <InsertComment />
+            <InsertComment productId={productId} />
           </div>
         </div>
       </div>

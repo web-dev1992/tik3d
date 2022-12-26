@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect, Fragment } from "react";
 import ReactPlayer from "react-player";
 import CardAudioControls from "./Controls/CardAudioControls";
 
-const CardAudioPlayer: React.FC<{ fileAddress: string }> = ({
-  fileAddress,
-}) => {
+const CardAudioPlayer: React.FC<{
+  fileAddress: string;
+  ligthImage: string;
+}> = ({ fileAddress, ligthImage }) => {
   const playerRef = useRef(null);
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
@@ -60,7 +61,8 @@ const CardAudioPlayer: React.FC<{ fileAddress: string }> = ({
   return (
     <div
       ref={playerContainerRef}
-      className=" w-[80px] h-[80px]  xl:w-[128px] xl:h-[128px] bg-[url('/images/Cover.png')] bg-cover  relative  rounded xl:rounded-lg "
+      className="w-[80px] h-[80px] xl:w-[128px] xl:h-[128px] bg-cover relative rounded xl:rounded-lg"
+      style={{ backgroundImage: `url(${ligthImage})` }}
     >
       {hasWindow && (
         <Fragment>
@@ -91,7 +93,6 @@ const CardAudioPlayer: React.FC<{ fileAddress: string }> = ({
               playing: playing,
               muted: muted,
             }}
-            
           />
         </Fragment>
       )}

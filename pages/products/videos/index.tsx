@@ -1,16 +1,52 @@
 import Videos from "@components/products/videos/Videos";
 import { NextPage } from "next";
 import Head from "next/head";
-const VideosPage: NextPage = () => {
+import axios from "axios";
+import config from "../../../next.config";
+import { GetServerSideProps } from "next/types";
+import { ObjectId } from "mongodb";
+
+interface VideoPageProps {
+  videos?: {
+    _id: ObjectId;
+    link: string;
+    address: string;
+    name: string;
+    ligthImage: string;
+    isSpecial: boolean;
+  }[];
+}
+const VideosPage: NextPage = (props: VideoPageProps) => {
   return (
     <div>
       <Head>
         <title>Tik3d</title>
         <meta name="description" content="tik3d" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>     
-      <Videos/>
+      </Head>
+      <Videos videos={props.videos ?? null} />
     </div>
   );
+};
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let apiVideosRes;
+  let homeProps;
+  try {
+    apiVideosRes = await axios(`${config.server}/api/products/videos`);
+    homeProps = {
+      videos:
+        apiVideosRes.data.videos.length !== 0 ? apiVideosRes.data.videos : null,
+    };
+  } catch (err) {
+    console.error("err.response.data=======>", err.response.data);
+    console.error("err.response.status=====>", err.response.status);
+    homeProps = { videos: null };
+  }
+
+  return {
+    props: {
+      ...homeProps,
+    },
+  };
 };
 export default VideosPage;

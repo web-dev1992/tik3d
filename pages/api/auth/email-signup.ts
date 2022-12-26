@@ -45,6 +45,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       image: "",
       isSpecialUser: false,
       isActive: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
     client.close();
     res.status(201).json({

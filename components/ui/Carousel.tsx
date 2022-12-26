@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import ImageItem from "@components/products/images/ImageItem";
+import { ObjectID } from "bson";
 
 const DUMMY_LIST = [
   {
@@ -111,17 +112,19 @@ const responsive = {
   1024: { items: 6 },
 };
 
-const handleDragStart = (e) => e.preventDefault();
-const items = DUMMY_LIST.map((image) => (
-  <ImageItem image={image} key={image.id} onDragStart={handleDragStart} />
-));
-const Carousel = () => {
+
+const Carousel:React.FC<{images:{_id:ObjectID, name:string, link:string, address:string, isSpecial:boolean}[]}> = (props) => {
+  const { images } = props;
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHasWindow(true);
     }
   }, []);
+  const handleDragStart = (e) => e.preventDefault();
+const items = images.map((image) => (
+  <ImageItem image={image} key={image._id.toString()} onDragStart={handleDragStart} />
+));
   return (
     <div className=" w-11/12   m-auto my-10 h-max flex flex-col flex-nowrap justify-center items-center font-IRANSans overflow-hidden ">
       <h1 className="w-full my-5 flex justify-start md:justify-center text-navyBluee font-bold text-xl lg:text-2xl xl:text-4xl tracking-normal">

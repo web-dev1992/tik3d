@@ -19,7 +19,10 @@ let count = 0;
 type SourceProps = {
   address: string;
 };
-const AudioPlayer: React.FC<{ fileAddress: string }> = ({ fileAddress }) => {
+const AudioPlayer: React.FC<{ fileAddress: string; ligthImage: string }> = ({
+  fileAddress,
+  ligthImage,
+}) => {
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -125,7 +128,8 @@ const AudioPlayer: React.FC<{ fileAddress: string }> = ({ fileAddress }) => {
   return (
     <div
       ref={playerContainerRef}
-      className="w-[327px] h-[327px] lg:w-[373px] lg:h-[373px] xl:w-[600px] xl:h-[600px] bg-[url('/images/Cover.png')] bg-cover overflow-hidden  relative  rounded-[10px] xl:rounded-2xl "
+      className="w-[327px] h-[327px] lg:w-[373px] lg:h-[373px] xl:w-[600px] xl:h-[600px] bg-cover overflow-hidden relative rounded-[10px] xl:rounded-2xl "
+      style={{ backgroundImage: `url(${ligthImage})` }}
       onMouseMove={handleMouseMove}
       onMouseLeave={hanldeMouseLeave}
     >

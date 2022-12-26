@@ -37,6 +37,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       phone: req.body.phone,
       gender: req.body.gender,
       password: hashedPassword,
+      updatedAt: new Date(),
     };
     console.log("newUserInfo=>", newUserInfo);
     if (email) {

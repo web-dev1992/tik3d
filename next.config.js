@@ -22,10 +22,14 @@ const nextConfig = {
 //     ignoreBuildErrors: true,
 //   },
 // };
-
+const dev = process.env.NODE_ENV !== "production";
+const server = dev
+  ? "http://localhost:3000"
+  : "https://your_deployment.server.com";
 module.exports = {
   // TypescriptConfig,
   nextConfig,
+  server,
   i18n: {
     locales: ["fa"],
     defaultLocale: "fa",
@@ -41,7 +45,12 @@ module.exports = {
 //         //   "e8f904d204ade9ff64c6f662df2041149c4176d8efd3c06d93b4ca9f974d9f74",
 //         domain: "http://localhost:3000/",
 //       },
+//       // server,
 //       nextConfig,
+//       i18n: {
+//         locales: ["fa"],
+//         defaultLocale: "fa",
+//       },
 //       // myImageLoader,
 //     };
 //   }

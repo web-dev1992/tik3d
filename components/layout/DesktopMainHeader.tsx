@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
@@ -6,6 +7,7 @@ import LanguageDropDown from "@components/layout/LanguageDropDown";
 import HamburgerMenu from "@components/ui/HamburgerMenu";
 import DropDown from "@components/ui/Dropdown";
 import SearchIcon from "@components/ui/SearchIcon";
+
 type item = {
   label: string;
   href: string;
@@ -14,14 +16,22 @@ const DesktopMainHeader: React.FC<{
   Items: item[];
   session: Session;
   isLoading: boolean;
+  searchHandler: (searchKey: string) => void;
   logOutHandler: () => void;
-}> = ({ Items, session, isLoading, logOutHandler }) => {
+  // searchHandler:(searchKey)=>void;
+}> = ({ Items, session, isLoading, logOutHandler, searchHandler }) => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const searchKey = searchRef.current.value;
+    searchHandler(searchKey);
+  };
   return (
     <div className=" hidden md:flex xl:hidden flex-col flex-nowrap justify-center items-center w-9/12 h-32 m-auto gap-4 font-IRANSans ">
       <div className=" flex flex-row flex-nowrap justify-between items-center w-full h-10">
         <div className=" w-1/2 flex flex-row flex-nowrap justify-start items-center ml-4">
           <Link href="/" passHref>
-            <a>
+            <a className="flex items-center">
               <Image
                 src="/images/tablet-logo.png"
                 alt="logo"
@@ -65,22 +75,26 @@ const DesktopMainHeader: React.FC<{
       </div>
       <div className=" flex flex-row flex-nowrap justify-center items-center w-full h-8 gap-0">
         <div className="w-24 h-8 bg-[#F2F2F2] relative ">
-          <DropDown
-            className="w-full h-full text-[9px] font-semibold relative"
-            selectItems={["همه آیتم ها", "ویدئوها", "موزیک ها"]}
-          />
+          <DropDown className="w-full h-full text-[9px] font-semibold relative" />
         </div>
-        <div className="w-full h-full relative  rounded-l-md overflow-hidden ">
+        <form
+          onSubmit={submitHandler}
+          className="w-full h-full relative  rounded-l-md overflow-hidden "
+        >
           <input
+            ref={searchRef}
             type="text"
             name="searchBox"
             placeholder="جستجو..."
             className="w-full h-full text-[11px] leading-4 border rounded-l-md pr-2 pl-12 border-stone-200 text-[#888888]"
           />
-          <button className="bg-[#2F80ED] absolute top-0 left-0 w-[34px] h-8 flex justify-center items-center">
+          <button
+            type="submit"
+            className="bg-[#2F80ED] absolute top-0 left-0 w-[34px] h-8 flex justify-center items-center"
+          >
             <SearchIcon className="h-5 w-5" />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

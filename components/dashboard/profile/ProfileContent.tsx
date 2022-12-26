@@ -28,7 +28,6 @@ const ProfileContent: React.FC<{
   userInfo: userInfoProps;
   changeLodedUserHandler: (newUserInfo) => void;
 }> = ({ userInfo, changeLodedUserHandler }) => {
-  console.log(userInfo);
   const [editMode, setEditMode] = useState(false);
   const [isMale, setIsMale] = useState<boolean>(!!userInfo.gender);
   const firstNameRef = useRef<HTMLInputElement>();

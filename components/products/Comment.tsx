@@ -1,31 +1,38 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ObjectId } from "mongodb";
+import { uniqueIdGenerator } from "helper/UniqueIdGenerator";
 
 interface commentProp {
-  id: string;
-  commenter: string;
-  userName: string;
-  image: string;
-  rate: number;
-  commentText: string;
+  _id: ObjectId;
+  productId: ObjectId;
+  name: string;
+  email: string;
+  star: number;
+  image?: string;
+  comment: string;
 }
+
 const CommentsList: React.FC<{ commentsList: commentProp[] }> = ({
   commentsList,
 }) => {
   return (
     <div className="px-3 w-full lg:w-[55%] flex flex-col flex-nowrap justify-center items-start gap-4 lg:gap-6 xl:gap-9">
       {commentsList.map((comment) => (
-        <Comment comment={comment} key={comment.id} />
+        <Comment comment={comment} key={comment._id.toString()} />
       ))}
     </div>
   );
 };
 const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
+  const indexOfAt = comment.email.indexOf("@");
+  const userName = comment.email.slice(0, indexOfAt + 1);
   const stars = [];
-  for (let i = 0; i < comment.rate; i++) {
+  for (let i = 0; i < comment.star; i++) {
     stars.push(
       <svg
+        key={i + 10}
         xmlns="http://www.w3.org/2000/svg"
         fill="#56CCF2"
         viewBox="0 0 24 24"
@@ -41,9 +48,10 @@ const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
       </svg>
     );
   }
-  for (let i = 0; i < 5 - comment.rate; i++) {
+  for (let i = 0; i < 5 - comment.star; i++) {
     stars.push(
       <svg
+        key={i + 20}
         xmlns="http://www.w3.org/2000/svg"
         fill="#E4E4E4"
         viewBox="0 0 24 24"
@@ -64,19 +72,21 @@ const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
       <div className="w-full flex flex-row flex-nowrap justify-between items-center  ">
         <div className="flex flex-row flex-nowrap justify-start w-full h-max  gap-2 xl:gap-4 ">
           <div className="flex justify-center items-center aspect-square w-6 h-6 lg:w-[34px] lg:h-[34px] xl:w-[55px] xl:h-[55px] relative">
-            <Image src={comment.image} alt="user-image" layout="fill" />
+            {comment.image && (
+              <Image src={comment.image} alt="user-image" layout="fill" />
+            )}
           </div>
 
           <div className="flex flex-col flex-nowrap justify-center items-start w-full h-max gap-0  ">
             <span className="text-[7px] lg:text-[10px] xl:text-base lg:leading-6 xl:leading-6 font-bold  text-[#0F2137]   ">
-              {comment.commenter}
+              {comment.name}
             </span>
             <Link href="#">
               <a
                 className="text-abiStroke leading-normal lg:leading-6 xl:leading-6 text-right text-[7px] lg:text-[9px] xl:text-sm font-medium tracking-tight "
                 style={{ direction: "ltr" }}
               >
-                {comment.userName}
+                {userName}
               </a>
             </Link>
           </div>
@@ -86,7 +96,7 @@ const Comment: React.FC<{ comment: commentProp }> = ({ comment }) => {
         </div>
       </div>
       <p className="text-[7px] lg:text-[10px]  xl:text-base text-right font-normal text-[#343D48] leading-[11px] lg:leading-4 xl:leading-6 tracking-wider pl-8 my-3">
-        {comment.commentText}
+        {comment.comment}
       </p>
     </div>
   );

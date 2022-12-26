@@ -1,7 +1,116 @@
 import ProductDropdown from "@components/ui/ProductDropdown";
 import RightPanelItem from "@components/ui/RightPanelItem";
-
-const ProductsSidebar: React.FC<{ panelList }> = ({ panelList }) => {
+const ThreeDimension_DummyList = [
+  {
+    id: "t1",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+  {
+    id: "t2",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+  {
+    id: "t3",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+  {
+    id: "t4",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+  {
+    id: "t5",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+  {
+    id: "t6",
+    name: "تصاویر پس زمینه",
+    items: [
+      {
+        id: "i1",
+        name: "هود",
+      },
+      {
+        id: "i2",
+        name: "کابینت",
+      },
+      {
+        id: "i3",
+        name: "لوازم آشپزخانه",
+      },
+    ],
+  },
+];
+const ProductsSidebar: React.FC = (props) => {
   return (
     <div className="hidden lg:flex flex-col  flex-nowrap w-4/10 font-IRANSans gap-5 xl:gap-10 ">
       <div className="w-full flex flex-row flex-nowrap  justify-center items-start gap-2 ">
@@ -34,7 +143,7 @@ const ProductsSidebar: React.FC<{ panelList }> = ({ panelList }) => {
             زیر مجموعه های این دسته:
           </p>
           <div className="overflow-scroll scrollbar-thin  scrollbar-thumb-white scrollbar-track-[#2D9CDB] w-full">
-            {panelList.map((item) => (
+            {ThreeDimension_DummyList.map((item) => (
               <RightPanelItem item={item} key={item.id} />
             ))}
           </div>

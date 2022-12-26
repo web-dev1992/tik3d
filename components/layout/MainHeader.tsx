@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MobileMainHeader from "./MobileMainHeader";
 import DesktopMainHeader from "./DesktopMainHeader";
 import XlargMainHeader from "./XlargMainHeader";
+import { useRouter } from "next/router";
 import { Session } from "next-auth";
 const menuItems = [
   { label: "صفحه نخست", href: "/" },
@@ -13,6 +14,7 @@ const menuItems = [
 ];
 
 const MainHeader = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadedSession, setLoadedSession] = useState<Session>(null);
   useEffect(() => {
@@ -30,7 +32,9 @@ const MainHeader = () => {
   function logOutHandler() {
     signOut();
   }
-
+  function SearchHandler(searchKey: string) {
+    router.push(`/products/search/${searchKey}`);
+  }
   const firstItem =
     !isLoading && loadedSession
       ? { label: "داشبورد", href: `/dashboard/${"u1"} ` }
@@ -38,13 +42,17 @@ const MainHeader = () => {
   return (
     <div className="w-full bg-[#F6F8FB]">
       {/* Mobile Header */}
-      <MobileMainHeader Items={[firstItem, ...menuItems]} />
+      <MobileMainHeader
+        Items={[firstItem, ...menuItems]}
+        searchHandler={SearchHandler}
+      />
       {/*Desktop  Header */}
       <DesktopMainHeader
         Items={[firstItem, ...menuItems]}
         session={loadedSession}
         isLoading={isLoading}
         logOutHandler={logOutHandler}
+        searchHandler={SearchHandler}
       />
       {/* Xlarg Desktop Header */}
       <XlargMainHeader
@@ -52,6 +60,7 @@ const MainHeader = () => {
         session={loadedSession}
         isLoading={isLoading}
         logOutHandler={logOutHandler}
+        searchHandler={SearchHandler}
       />
     </div>
   );

@@ -2,19 +2,18 @@ import CardButton from "@components/ui/CardButton";
 import CardImage from "@components/ui/CardImage";
 import CardItemName from "@components/ui/CardItemName";
 import CardLayout from "@components/ui/CardLayout";
-
+import { ObjectId } from "mongodb";
 interface image {
-  id: string;
+  _id: ObjectId;
   name: string;
   link: string;
   address: string;
   isSpecial: boolean;
- 
 }
 const ImageItem: React.FC<{
   image: image;
   onDragStart?: (FromEvent) => void;
-}> = ({ image , onDragStart}) => {
+}> = ({ image, onDragStart }) => {
   return (
     <CardLayout>
       <CardImage

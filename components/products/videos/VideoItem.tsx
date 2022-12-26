@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import CardItemName from "@components/ui/CardItemName";
 import CardVideoPlayer from "@components/ui/PlayerComponents/CardVideoPlayer";
+import { ObjectId } from "mongodb";
 interface Video {
-  id: string;
+  _id: ObjectId;
   name: string;
   ligthImage: string;
   address: string;
@@ -13,12 +14,7 @@ interface Video {
 }
 const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   const router = useRouter();
-  const [hasWindow, setHasWindow] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
+
   return (
     <div className="bg-white font-IRANSans rounded-lg shadow-[0_4px_7px_rgba(0,0,0,0.1)] p-2 lg:pt-2.5 xl:p-3 xl:pt-4 w-[156px] lg:w-44  xl:w-[270px] h-max md:h-[139px] xl:h-56 flex flex-col flex-nowrap justify-center items-center gap-2 relative ">
       {video.isSpecial && (
@@ -29,7 +25,10 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
         </>
       )}
 
-      <CardVideoPlayer fileAddress={video.address} />
+      <CardVideoPlayer
+        fileAddress={video.address}
+        ligthImage={video.ligthImage}
+      />
       <CardItemName itemName={video.name} />
       <div className="w-full flex flex-row justify-center items-center">
         <button

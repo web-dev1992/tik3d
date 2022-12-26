@@ -5,14 +5,14 @@ import CardLayout from "@components/ui/CardLayout";
 import CardItemName from "@components/ui/CardItemName";
 import CardButton from "@components/ui/CardButton";
 import CardAudioPlayer from "@components/ui/PlayerComponents/CardAudioPlayer";
-
+import { ObjectId } from "mongodb";
 interface audio {
-  id: string;
+  _id: ObjectId;
   name: string;
-  ligthImage: string;
+  link: string;
   address: string;
   isSpecial: boolean;
-  link: string;
+  ligthImage: string;
 }
 const AudioItem: React.FC<{ audio: audio }> = ({ audio }) => {
   const [hasWindow, setHasWindow] = useState(false);
@@ -30,7 +30,10 @@ const AudioItem: React.FC<{ audio: audio }> = ({ audio }) => {
           </div>
         </>
       )}
-      <CardAudioPlayer fileAddress={audio.address} />
+      <CardAudioPlayer
+        fileAddress={audio.address}
+        ligthImage={audio.ligthImage}
+      />
       <CardItemName itemName={audio.name} />
       <CardButton link={audio.link} />
     </CardLayout>

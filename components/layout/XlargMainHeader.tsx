@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+
 import LanguageDropDown from "@components/layout/LanguageDropDown";
 import DropDown from "@components/ui/Dropdown";
 import SearchIcon from "@components/ui/SearchIcon";
@@ -15,9 +17,16 @@ const XlargMainHeader: React.FC<{
   session: Session;
   isLoading: boolean;
   logOutHandler: () => void;
-}> = ({ Items, session, isLoading, logOutHandler }) => {
+  searchHandler: (searchKey: string) => void;
+}> = ({ Items, session, isLoading, logOutHandler, searchHandler }) => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const searchKey = searchRef.current.value;
+    searchHandler(searchKey);
+  };
   return (
-    <div className="hidden xl:flex flex-col flex-nowrap justify-center items-center w-11/12 h-52 m-auto font-IRANSans ">
+    <div className="hidden xl:flex flex-col flex-nowrap justify-center items-center w-full h-52 m-auto font-IRANSans ">
       <div className=" flex flex-row flex-nowrap justify-between items-start w-full h-16 gap-0 ">
         <div className=" w-44 h-14 flex flex-row flex-nowrap justify-start items-center  ">
           <Link href="/" passHref>
@@ -73,22 +82,26 @@ const XlargMainHeader: React.FC<{
       </div>
       <div className=" flex flex-row flex-nowrap justify-center items-center w-full h-12 gap-0 my-4">
         <div className="w-40 relative h-full font-bold text-[14px] ">
-          <DropDown
-            className="w-full h-full text-sm font-bold relative"
-            selectItems={["همه آیتم ها", "ویدئوها", "موزیک ها"]}
-          />
+          <DropDown className="w-full h-full text-sm font-bold relative" />
         </div>
-        <div className="w-full h-full relative  rounded-l-md overflow-hidden ">
+        <form
+          onSubmit={submitHandler}
+          className="w-full h-full relative  rounded-l-md overflow-hidden "
+        >
           <input
+            ref={searchRef}
             type="text"
             name="searchBox"
             placeholder="جستجو..."
             className="w-full h-12 text-lg  border rounded-l-md pr-2 pl-12 border-stone-300 "
           />
-          <button className="bg-[#2F80ED] absolute top-0 left-0 w-12 h-full flex justify-center items-center">
+          <button
+            type="submit"
+            className="bg-[#2F80ED] absolute top-0 left-0 w-12 h-full flex justify-center items-center"
+          >
             <SearchIcon className="h-8 w-8" />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

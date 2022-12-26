@@ -1,5 +1,7 @@
 import { useState } from "react";
-const StarRating = () => {
+const StarRating: React.FC<{ evluateRating: (ratingValue: number) => void }> = (
+  props
+) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   return (
@@ -15,6 +17,7 @@ const StarRating = () => {
               value={ratingValue}
               onClick={() => {
                 setRating(ratingValue);
+                props.evluateRating(ratingValue);
               }}
             />
             <svg
@@ -29,6 +32,7 @@ const StarRating = () => {
               }}
               onMouseLeave={() => {
                 setHover(ratingValue);
+                props.evluateRating(ratingValue);
               }}
             >
               <path

@@ -13,9 +13,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .find({
         $or: [
           {
-            name: new RegExp(".*" + key + ".*"),
-            tags: { $elemMatch: { $ne: key } },
+            name: new RegExp(".*" + key + ".*", "i"),
           },
+          { tags: { $elemMatch: { $regex: new RegExp(key, "i") } } },
         ],
       })
       .project({
@@ -35,9 +35,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .find({
         $or: [
           {
-            name: new RegExp(".*" + key + ".*"),
-            tags: { $elemMatch: { $ne: key } },
+            name: new RegExp(".*" + key + ".*", "i"),
           },
+          { tags: { $elemMatch: { $regex: new RegExp(key, "i") } } },
         ],
       })
       .project({
@@ -58,9 +58,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .find({
         $or: [
           {
-            name: new RegExp(".*" + key + ".*"),
-            tags: { $elemMatch: { $ne: key } },
+            name: new RegExp(".*" + key + ".*", "i"),
           },
+          { tags: { $elemMatch: { $regex: new RegExp(key, "i") } } },
         ],
       })
       .project({
@@ -80,8 +80,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(404).json({ message: "محصولی یافت نشد!" });
       return;
     }
-    // console.log("audios====>", audios);
-    // console.log("images====>", images);
+    console.log("audios====>", audios);
+    console.log("images====>", images);
     // console.log("videos====>", videos);
 
     res.status(201).json({

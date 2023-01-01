@@ -1,18 +1,26 @@
-import { Fragment, useState } from "react";
+import { useState, Fragment } from "react";
+import { ObjectId } from "mongodb";
 import ContentTitle from "@components/dashboard/ui/ContentTitle";
 import SubscriptionPanel from "@components/dashboard/subscriptions/SubscriptionPanel";
 import DiscountBox from "@components/dashboard/subscriptions/DiscountBox";
-const subscriptions = [
-  { id: "s1", month: "1", price: "49,000", basePrice: "99,000" },
-  { id: "s2", month: "2", price: "49,000", basePrice: "99,000" },
-  { id: "s3", month: "3", price: "49,000", basePrice: "99,000" },
-];
 
-const SubscriptionContent = () => {
+const SubscriptionContent: React.FC<{
+  subscriptions: {
+    _id: ObjectId;
+    month: number;
+    price: number;
+    discountedPrice?: number;
+    description: string;
+    isActive: boolean;
+  }[];
+  discountHandler: (code: string) => void;
+}> = ({ subscriptions, discountHandler }) => {
   const [showDiscount, setShowDiscount] = useState(false);
+
   const openCloseDiscount = () => {
     setShowDiscount((prev) => !prev);
   };
+
   return (
     <Fragment>
       <div className="w-full h-max flex flex-col flex-nowrap justify-center items-center ">
@@ -20,20 +28,22 @@ const SubscriptionContent = () => {
         <div className="w-full flex flex-col flex-nowrap justify-center items-start gap-[7px] lg:gap-2.5 xl:gap-4 ">
           {subscriptions.map((subscription, index) => (
             <SubscriptionPanel
-              key={index}
+              key={subscription._id.toString()}
               props={{
                 index,
+                _id: subscription._id,
                 month: subscription.month,
-                basePrice: subscription.basePrice,
                 price: subscription.price,
+                discountedPrice: subscription.discountedPrice,
               }}
             />
           ))}
         </div>
         <DiscountBox
-          props={{
+          discountProps={{
             showDiscount: showDiscount,
             openCloseDiscount: openCloseDiscount,
+            discountHandler: discountHandler,
           }}
         />
       </div>

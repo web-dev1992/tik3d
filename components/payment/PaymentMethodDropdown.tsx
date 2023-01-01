@@ -7,19 +7,22 @@ const paymentItems = [
     id: "p1",
     label: "پرداخت آنلاین",
     file: "/images/online-payment.png",
+    method: "online",
   },
   {
     id: "p2",
     label: "ارز دیجیتال",
     file: "/images/bitcoin-payment.png",
+    method: "crypto currency",
   },
   {
     id: "p3",
     label: "پی پال",
     file: "/images/paypal-payment.png",
+    method: "paypal",
   },
 ];
-const PaymentMethodDropdown = (props) => {
+const PaymentMethodDropdown = ({ className, setPaymentMethod }) => {
   const [showItems, setShowItems] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const paymentSelectHandler = (): void => {
@@ -29,7 +32,7 @@ const PaymentMethodDropdown = (props) => {
     setShowItems((showItems) => !showItems);
   };
   return (
-    <OutsideLayout operator={paymentSelectHandler} className={props.className}>
+    <OutsideLayout operator={paymentSelectHandler} className={className}>
       <Fragment>
         <button
           onClick={openClosePaymentSelect}
@@ -65,6 +68,7 @@ const PaymentMethodDropdown = (props) => {
                 onClick={() => {
                   setCurrentIndex(index);
                   setShowItems(false);
+                  setPaymentMethod(payment.method);
                 }}
               >
                 <span className="w-[34px] h-6 relative">

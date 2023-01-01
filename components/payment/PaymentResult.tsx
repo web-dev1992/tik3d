@@ -1,12 +1,26 @@
 import Link from "next/link";
 import SuccessTikIcon from "@components/ui/SuccessTikIcon";
 import UnsuccessIcon from "@components/ui/UnsuccessIcon";
+import { FormEvent } from "react";
+import { useRouter } from "next/dist/client/router";
 
-const PaymentResult: React.FC<{ isPaymentSuccessful: boolean }> = ({
-  isPaymentSuccessful,
-}) => {
+const PaymentResult: React.FC<{
+  isPaymentSuccessful: boolean;
+  setIsPaymentDone;
+}> = ({ isPaymentSuccessful, setIsPaymentDone }) => {
+  const router = useRouter();
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+    if (isPaymentSuccessful) router.replace("/dashboard");
+    else {
+      setIsPaymentDone(false);
+    }
+  };
   return (
-    <form className="w-[232px] lg:w-[249px] xl:w-[402px] flex flex-col flex-nowrap justify-center items-center gap-8 xl:gap-14  py-24 xl:py-[164px] ">
+    <form
+      onSubmit={submitHandler}
+      className="w-[232px] lg:w-[249px] xl:w-[402px] flex flex-col flex-nowrap justify-center items-center gap-8 xl:gap-14  py-24 xl:py-[164px] "
+    >
       <span>
         {isPaymentSuccessful ? (
           <SuccessTikIcon className="w-14 h-[42px] lg:w-[60px] lg:h-11 xl:w-24 xl:h-[72px]" />
@@ -25,7 +39,7 @@ const PaymentResult: React.FC<{ isPaymentSuccessful: boolean }> = ({
           ادامه
         </button>
         {!isPaymentSuccessful && (
-          <Link href="#">
+          <Link href="/dashboard">
             <a className="w-full text-[#2D9CDB] text-[7px] xl:text-sm text-right font-light leading-[10px] xl:leading-[18px]">
               بازگشت به داشبورد
             </a>

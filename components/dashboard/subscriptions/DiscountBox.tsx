@@ -1,22 +1,34 @@
 import PercentIcon from "@components/ui/PercentIcon";
-
+import { FormEvent, useRef } from "react";
 interface discountBoxProps {
   showDiscount: boolean;
   openCloseDiscount: () => void;
+  discountHandler: (code: string) => void;
 }
-const DiscountBox: React.FC<{ props: discountBoxProps }> = ({ props }) => {
+const DiscountBox: React.FC<{ discountProps: discountBoxProps }> = ({
+  discountProps,
+}) => {
+  const discountRef = useRef<HTMLInputElement>(null);
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+    const code = discountRef.current.value;
+    if (code === "") {
+      alert("یک کد معتبر وارد نمایید!");
+      return;
+    } else discountProps.discountHandler(code);
+  };
   return (
     <div className="h-max w-full rounded lg:rounded-md xl:rounded-[10px] overflow-hidden mt-3 lg:mt-4">
       <div
         className={` w-full h-10 lg:h-14 xl:h-[90px]  py-[3px] px-3 lg:px-4 xl:px-[30px] flex flex-row flex-nowrap justify-start items-center border border-[#E2E2E2]  bg-white  group hover:bg-[#F5F5F5] focus:bg-[#F5F5F5] ${
-          props.showDiscount && "bg-[#F5F5F5]"
+          discountProps.showDiscount && "bg-[#F5F5F5]"
         }`}
       >
         <button
           className={`w-full h-full py-1 flex flex-row items-center justify-between  pl-1 bg-white group-hover:bg-[#F5F5F5] font-IRANSans font-medium text-[7px] lg:text-[10px] xl:text-base text-right leading-[14px] text-black ${
-            props.showDiscount && "bg-[#F5F5F5]"
+            discountProps.showDiscount && "bg-[#F5F5F5]"
           }`}
-          onClick={props.openCloseDiscount}
+          onClick={discountProps.openCloseDiscount}
           type="button"
         >
           <span className="flex flex-row flex-nowrap items-center justify-start">
@@ -29,7 +41,7 @@ const DiscountBox: React.FC<{ props: discountBoxProps }> = ({ props }) => {
           </span>
           <svg
             className={` w-1.5 h-4 lg:w-2.5 lg:h-5 xl:w-3.5 xl:h-6 transform transition  ${
-              props.showDiscount && "rotate-180"
+              discountProps.showDiscount && "rotate-180"
             }`}
             viewBox="0 0 16 9"
             fill="none"
@@ -42,9 +54,12 @@ const DiscountBox: React.FC<{ props: discountBoxProps }> = ({ props }) => {
           </svg>
         </button>
       </div>
-      {props.showDiscount && (
+      {discountProps.showDiscount && (
         <div className="  w-full h-10 lg:h-14 xl:h-[90px] xl:rounded-b-[10px] py-[3px] px-3 lg:px-4 xl:px-[30px] flex flex-row flex-nowrap justify-center lg:justify-start items-center border border-[#E2E2E2] rounded-b lg:rounded-b-md bg-white ">
-          <form className="w-full h-full flex flex-row flex-nowrap justify-between items-center">
+          <form
+            onSubmit={submitHandler}
+            className="w-full h-full flex flex-row flex-nowrap justify-between items-center"
+          >
             <label
               htmlFor="discount_code"
               id="discountlbl"
@@ -54,9 +69,10 @@ const DiscountBox: React.FC<{ props: discountBoxProps }> = ({ props }) => {
             </label>
             <div className="flex flex-row flex-nowrap justify-center lg:justify-end items-center gap-1 w-2/3 ">
               <input
+                ref={discountRef}
                 type="text"
                 name="discount_code"
-                className="w-24 lg:w-[137px] xl:w-56 h-5 lg:h-7 xl:h-12 rounded-sm lg:rounded border border-[#DADADA] focus:border-blue-400 focus:outline-none px-4"
+                className="w-24 lg:w-[137px] xl:w-56 h-5 lg:h-7 xl:h-12 rounded-sm lg:rounded border border-[#DADADA] focus:border-blue-400 focus:outline-none px-4 text-xs xl:text-lg text-[#888888]  text-right leading-[18px] font-normal"
               />
               <button
                 type="submit"

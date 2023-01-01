@@ -47,6 +47,7 @@ export default NextAuth({
         return {
           name: user.firstName!,
           email: user.email!,
+          id: user._id,
         } as any;
       },
     }),
@@ -77,6 +78,7 @@ export default NextAuth({
         return {
           name: user.firstName,
           phone: user.phone,
+          id: user._id,
         } as any;
       },
     }),

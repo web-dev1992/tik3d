@@ -10,7 +10,7 @@ import PasswordInput from "../ui/PasswordInput";
 import PhoneInput from "../ui/PhoneInput";
 import FirstNameInput from "../ui/FirstNameInput";
 import LastNameInput from "../ui/LastNameInput";
-
+import { ObjectId } from "mongodb";
 interface userInfoProps {
   email: string;
   lastName: string;
@@ -21,7 +21,7 @@ interface userInfoProps {
   password: string;
   phone: number;
   gender: boolean;
-  _id: string;
+  _id: ObjectId;
 }
 
 const ProfileContent: React.FC<{

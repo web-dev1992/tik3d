@@ -12,7 +12,7 @@ const ProductHeader = () => {
   const menuItems = [
     { label: "صفحه نخست", href: "/" },
     { label: "دانلود رایگان", href: "/downloads" },
-    { label: "محصولات", href: "/products" },
+    { label: "محصولات", href: "/products/images" },
     { label: "تماس با ما", href: "/contact-us" },
     { label: "درباره ما", href: "/about-us" },
   ];
@@ -38,20 +38,23 @@ const ProductHeader = () => {
   }
   const firstItem =
     !isLoading && loadedSession
-      ? { label: "داشبورد", href: `/dashboard/${"u1"} ` }
+      ? { label: "داشبورد", href: "/dashboard" }
       : { label: "ورود/ ثبت نام", href: "/user-account/login" };
   return (
     <Fragment>
       <div className="w-full bg-[#F6F8FB] ">
         {/* Mobile Header */}
-        <ProductMobileMainHeader Items={[firstItem, ...menuItems]}  searchHandler={SearchHandler} />
+        <ProductMobileMainHeader
+          Items={[firstItem, ...menuItems]}
+          searchHandler={SearchHandler}
+        />
         {/*Desktop  Header */}
         <DesktopMainHeader
           Items={[firstItem, ...menuItems]}
           session={loadedSession}
           isLoading={isLoading}
           logOutHandler={logOutHandler}
-          searchHandler={SearchHandler} 
+          searchHandler={SearchHandler}
         />
         {/* Xlarg Desktop Header */}
         <XlargMainHeader
@@ -59,7 +62,7 @@ const ProductHeader = () => {
           session={loadedSession}
           isLoading={isLoading}
           logOutHandler={logOutHandler}
-          searchHandler={SearchHandler} 
+          searchHandler={SearchHandler}
         />
       </div>
     </Fragment>

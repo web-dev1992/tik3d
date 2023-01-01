@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-
 import LanguageDropDown from "@components/layout/LanguageDropDown";
 import DropDown from "@components/ui/Dropdown";
 import SearchIcon from "@components/ui/SearchIcon";
@@ -60,7 +59,7 @@ const XlargMainHeader: React.FC<{
             style={{ direction: "ltr" }}
           >
             {session && !isLoading ? (
-              <Link href="/dashboard/u1" passHref>
+              <Link href="/dashboard/" passHref>
                 <a className="w-[150px] h-12 border-2 rounded-md border-[#2F80ED] flex flex-row justify-center items-center py-3 px-5 bg-[#F9FBFD] text-base font-bold text-[#2F80ED] cursor-pointer">
                   داشبورد
                 </a>

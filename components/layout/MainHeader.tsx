@@ -37,7 +37,7 @@ const MainHeader = () => {
   }
   const firstItem =
     !isLoading && loadedSession
-      ? { label: "داشبورد", href: `/dashboard/${"u1"} ` }
+      ? { label: "داشبورد", href: `/dashboard` }
       : { label: "ورود/ ثبت نام", href: "/user-account/login" };
   return (
     <div className="w-full bg-[#F6F8FB]">

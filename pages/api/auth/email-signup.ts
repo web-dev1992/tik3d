@@ -32,18 +32,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
     const hashedPassword = await hashPassword(password);
-    // const indexOfAt = email.indexOf("@");
-    // const username = email.slice(0, indexOfAt);
     const result = await db.collection("users").insertOne({
       firstName: "",
       lastName: "",
-      // userName: username,
       gender: true,
       email: email,
       phone: "",
       password: hashedPassword,
       image: "",
-      isSpecialUser: false,
       isActive: false,
       createdAt: new Date(),
       updatedAt: new Date(),

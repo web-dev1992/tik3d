@@ -1,9 +1,9 @@
 import Dashboard from "@components/dashboard/ui/Dashboard";
 import { GetServerSideProps, NextPage } from "next";
+import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-const DashboardPage: NextPage = () => {
-  
+const DashboardPage: NextPage = (session: Session) => {
   return (
     <div>
       <Head>
@@ -11,7 +11,7 @@ const DashboardPage: NextPage = () => {
         <meta name="description" content="tik3d" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Dashboard />
+      <Dashboard session={session} />
     </div>
   );
 };

@@ -11,6 +11,9 @@ import SubscriptionContent from "../subscriptions/SubscriptionContent";
 import PaymentContent from "../payments/PaymentContent";
 import ProfileContent from "../profile/ProfileContent";
 import SelectContentBox from "./SelectContentBox";
+import { ObjectId } from "mongodb";
+import persianDate from "helper/persianDate";
+import { Session } from "next-auth";
 
 const menuItems = [
   { label: "صفحه نخست", href: "/" },
@@ -19,27 +22,58 @@ const menuItems = [
   { label: "تماس با ما", href: "/contact-us" },
   { label: "درباره ما", href: "/about-us" },
 ];
-const Dummy_user_info = {
-  name: "",
-  family: "",
-  email: "",
-  isSpecialUser: true,
-  image: "/images/dashboard-user-image.png",
-};
-const Dashboard = () => {
+
+const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
+  const userId = session.user.id.toString();
+  const Dummy_user_info = {
+    id: userId,
+    name: "",
+    family: "",
+    email: "",
+    isSpecialUser: true,
+    image: "/images/dashboard-user-image.png",
+  };
   const [content, setContent] = useState("dashboard");
   const [loadedUser, setLoadedUser] = useState<{
-    email: string;
+    _id: ObjectId;
+    firstName: string;
     lastName: string;
+    gender: boolean;
+    email: string;
+    phone: number;
     image: string;
+    password: string;
     isActive: boolean;
     isSpecialUser: boolean;
-    firstName: string;
-    password: string;
-    phone: number;
-    gender: boolean;
-    _id: string;
   }>(null);
+  const [payments, setPayments] = useState<
+    {
+      _id: ObjectId;
+      subId: string;
+      userId: string;
+      amount: number;
+      paid: number;
+      discount: number;
+      description: string;
+      active: boolean;
+      payStatus: string;
+      startAt: Date;
+      endAt: Date;
+    }[]
+  >([]);
+  const [faExpireDate, setFaExpireDate] = useState<string[]>([]);
+  const [expireDate, setExpireDate] = useState<Date>(null);
+
+  const [subscriptions, setSubscriptions] = useState<
+    {
+      _id: ObjectId;
+      month: number;
+      price: number;
+      discountedPrice?: number;
+      description: string;
+      isActive: boolean;
+    }[]
+  >(null);
 
   const changeContentHandler = (state: string) => {
     setContent(state);
@@ -50,18 +84,88 @@ const Dashboard = () => {
   const logOutHandler = () => {
     signOut({ callbackUrl: "/" });
   };
+  const discountHandler = async (code: string) => {
+    try {
+      const userDiscount = await axios(
+        `/api/discounts/userDiscounts/${userId}/${code}`
+      );
+      if (
+        userDiscount.status === 201 &&
+        userDiscount.data.hasDiscountUsed === true
+      ) {
+        alert("شما قبلا از این کد تخفیف استفاده کرده اید!");
+        return;
+      } else if (
+        userDiscount.status === 201 &&
+        userDiscount.data.hasDiscountUsed === false
+      ) {
+        const result = await axios(`/api/discounts/${code}`);
+        if (result.status === 201) {
+          setSubscriptions((prevSubs) => {
+            return prevSubs.map((sub) => {
+              return {
+                ...sub,
+                discountedPrice:
+                  sub.price - (result.data.discount.percent * sub.price) / 100,
+              };
+            });
+          });
+        }
+      }
+    } catch (err) {
+      if (err.response.status === 404) {
+        alert(err.response.data.message);
+      } else alert(err.message || "خطایی بوجود آمده است.");
+    }
+  };
+  const getPaymentsHandler = useCallback(async () => {
+    try {
+      const result = await axios(`/api/payments/${userId}`);
+      setPayments(result.data.payments);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   const getUserHandler = useCallback(async () => {
     try {
       const result = await axios("/api/user/get-user");
-      console.log(result.data.user);
       setLoadedUser(result.data.user);
     } catch (err) {
       console.log(err);
     }
   }, []);
+  const getSubscriptionsHandler = useCallback(async () => {
+    try {
+      const result = await axios("/api/subscriptions");
+      setSubscriptions(result.data.subscriptions);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+  const getUserSubscriptionHandler = useCallback(async () => {
+    try {
+      let result = await axios(`/api/payments/get-active-payment/${userId}`);
+      setExpireDate(result.data.payment.endAt);
+      setFaExpireDate(
+        persianDate(result.data.payment.endAt).toString().split("/")
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   useEffect(() => {
+    // async () => {
     getUserHandler();
-  }, [getUserHandler]);
+    getUserSubscriptionHandler();
+    getSubscriptionsHandler();
+    getPaymentsHandler();
+    // };
+  }, [
+    getUserHandler,
+    getSubscriptionsHandler,
+    getPaymentsHandler,
+    getUserSubscriptionHandler,
+  ]);
   return (
     <Fragment>
       <div className="z-0 w-screen  h-max bg-abi  relative overflow-hidden flex justify-center ">
@@ -94,6 +198,7 @@ const Dashboard = () => {
                 !loadedUser
                   ? Dummy_user_info
                   : {
+                      id: loadedUser._id,
                       name: loadedUser.firstName,
                       family: loadedUser.lastName,
                       email: loadedUser.email,
@@ -118,14 +223,26 @@ const Dashboard = () => {
           </div>
 
           {/* main content box */}
-          <div className="w-11/12 lg:w-10/12   h-full lg:h-[755px] xl:h-[1215px] px-5 lg:pb-[90px] lg:ml-4 lg:mr-0  py-[22px]  xl:pb-36 xl:my-[18px] bg-[#F6F8FB] rounded-2xl xl:rounded-3xl">
+          {/* lg:h-[755px] xl:h-[1215px] */}
+          <div className="w-11/12 lg:w-10/12 h-full px-5 lg:pb-[90px] lg:ml-4 lg:mr-0  py-[22px]  xl:pb-36 xl:my-[18px] bg-[#F6F8FB] rounded-2xl xl:rounded-3xl">
             <div className="w-full hidden lg:flex mb-8 mt-6 xl:mt-10 xl:mb-16 ">
               <DashboardHeader />
             </div>
             <div className=" relative bg-white rounded-lg xl:rounded-2xl lg:mx-6 xl:mx-12 m-auto h-max  px-6 py-[22px] lg:px-[68px] xl:py-9 xl:px-28 flex flex-col flex-nowrap justify-center items-center gap-5 lg:gap-8 shadow-[0_6px_29px_rgba(38,78,118,0.08)]">
-              {content == "dashboard" && <DashboardContent />}
-              {content == "subscription" && <SubscriptionContent />}
-              {content == "payments" && <PaymentContent />}
+              {content == "dashboard" && (
+                <DashboardContent
+                  faExpireDate={faExpireDate}
+                  expireDate={expireDate}
+                  changeContentHandler={changeContentHandler}
+                />
+              )}
+              {content == "subscription" && (
+                <SubscriptionContent
+                  subscriptions={subscriptions}
+                  discountHandler={discountHandler}
+                />
+              )}
+              {content == "payments" && <PaymentContent payments={payments} />}
               {content == "profile" && (
                 <ProfileContent
                   userInfo={loadedUser}

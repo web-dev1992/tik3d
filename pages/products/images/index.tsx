@@ -30,23 +30,22 @@ const ImagesPage: NextPage = (props: ImagePageProps) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiImagesRes;
-
-  let homeProps;
+  let ImagePageProps;
   try {
     apiImagesRes = await axios(`${config.server}/api/products/images`);
-    homeProps = {
+    ImagePageProps = {
       images:
         apiImagesRes.data.images.length !== 0 ? apiImagesRes.data.images : null,
     };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { images: null };
+    ImagePageProps = { images: null };
   }
 
   return {
     props: {
-      ...homeProps,
+      ...ImagePageProps,
     },
   };
 };

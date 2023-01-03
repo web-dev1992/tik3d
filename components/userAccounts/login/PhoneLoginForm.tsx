@@ -1,13 +1,15 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import useFormValidation from "hooks/useFormValidation";
 import PasswordInput from "../ui/PasswordInput";
 import SubmitButton from "../../layout/SubmitButton";
 import CustomeLink from "../ui/CustomeLink";
 import PhoneInput from "../ui/PhoneInput";
-
+import axios from "axios";
+import { useSubContext } from "store/subContext";
 const PhoneLoginForm: React.FC<{}> = () => {
+  const subCtx = useSubContext();
   const router = useRouter();
   const phoneInputRef = useRef<HTMLInputElement>();
   const passwordInputRef = useRef<HTMLInputElement>();
@@ -32,8 +34,28 @@ const PhoneLoginForm: React.FC<{}> = () => {
     });
     if (result.error) alert(result.error);
     else {
-      //set some auth state
-      router.replace("/");
+      try {
+        const session = await getSession();
+        const result = await axios(
+          `/api/payments/get-active-payment/${session.user.id}`
+        );
+        if (result.status === 201) {
+          if (
+            new Date(result.data.payment.endAt).getTime() -
+              new Date().getTime() >
+            0
+          ) {
+            subCtx.setSubHandler(new Date(result.data.payment.endAt).getTime());
+          } else {
+            subCtx.removeSubHandler();
+          }
+        }
+        router.replace("/");
+      } catch (err) {
+        if (err.response.status === 404) {
+          alert(err.response.data.message);
+        } else alert(err.message || "خطایی بوجود آمده است.");
+      }
     }
   };
   const {

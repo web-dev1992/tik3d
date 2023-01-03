@@ -14,7 +14,7 @@ import SelectContentBox from "./SelectContentBox";
 import { ObjectId } from "mongodb";
 import persianDate from "helper/persianDate";
 import { Session } from "next-auth";
-
+import { useSubContext } from "store/subContext";
 const menuItems = [
   { label: "صفحه نخست", href: "/" },
   { label: "دانلود رایگان", href: "/downloads" },
@@ -24,13 +24,14 @@ const menuItems = [
 ];
 
 const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
+  const subCtx = useSubContext();
   const userId = session.user.id.toString();
   const Dummy_user_info = {
     id: userId,
     name: "",
     family: "",
     email: "",
-    isSpecialUser: true,
+    isSpecialUser: subCtx.hasSub,
     image: "/images/dashboard-user-image.png",
   };
   const [content, setContent] = useState("dashboard");
@@ -83,6 +84,7 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
   };
   const logOutHandler = () => {
     signOut({ callbackUrl: "/" });
+    subCtx.removeSubHandler();
   };
   const discountHandler = async (code: string) => {
     try {
@@ -129,7 +131,7 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
   const getUserHandler = useCallback(async () => {
     try {
       const result = await axios("/api/user/get-user");
-      setLoadedUser(result.data.user);
+      setLoadedUser({ ...result.data.user, isSpecialUser: subCtx.hasSub });
     } catch (err) {
       console.log(err);
     }

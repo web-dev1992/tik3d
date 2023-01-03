@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import config from "../../../next.config";
 import axios from "axios";
+import { parseCookies } from "../../../helper/parseCookie";
 import { GetServerSideProps } from "next/types";
 import { ObjectId } from "mongodb";
 interface ImagePageProps {
@@ -48,22 +49,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.imageId;
   let apiImageRes;
   let apiCommentsRes;
-  let homeProps;
+  let ImagePageProps;
   try {
     apiImageRes = await axios(`${config.server}/api/products/images/${id}`);
-    homeProps = {
-      image:
-        apiImageRes.data.image.length !== 0 ? apiImageRes.data.image : null,
-    };
+    if (apiImageRes.data.image.isSpecial === true) {
+      const cookies = parseCookies(context.req);
+      if (Object.keys(cookies).length > 0 && cookies.sub) {
+        ImagePageProps = {
+          image:
+            apiImageRes.data.image.length !== 0 ? apiImageRes.data.image : null,
+        };
+      } else {
+        return {
+          redirect: {
+            destination: "/user-account/login",
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      ImagePageProps = {
+        image:
+          apiImageRes.data.image.length !== 0 ? apiImageRes.data.image : null,
+      };
+    }
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { image: null };
+    ImagePageProps = { image: null };
   }
   try {
     apiCommentsRes = await axios(`${config.server}/api/comments`);
-    homeProps = {
-      ...homeProps,
+    ImagePageProps = {
+      ...ImagePageProps,
       comments:
         apiCommentsRes.data.comments.length !== 0
           ? apiCommentsRes.data.comments
@@ -72,11 +90,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { ...homeProps, comments: null };
+    ImagePageProps = { ...ImagePageProps, comments: null };
   }
   return {
     props: {
-      ...homeProps,
+      ...ImagePageProps,
     },
   };
 };

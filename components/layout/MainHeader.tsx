@@ -5,6 +5,7 @@ import DesktopMainHeader from "./DesktopMainHeader";
 import XlargMainHeader from "./XlargMainHeader";
 import { useRouter } from "next/router";
 import { Session } from "next-auth";
+import { useSubContext } from "store/subContext";
 const menuItems = [
   { label: "صفحه نخست", href: "/" },
   { label: "دانلود رایگان", href: "/downloads" },
@@ -14,6 +15,7 @@ const menuItems = [
 ];
 
 const MainHeader = () => {
+  const subCtx=useSubContext();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadedSession, setLoadedSession] = useState<Session>(null);
@@ -30,6 +32,7 @@ const MainHeader = () => {
     });
   }, []);
   function logOutHandler() {
+    subCtx.removeSubHandler();
     signOut();
   }
   function SearchHandler(searchKey: string) {

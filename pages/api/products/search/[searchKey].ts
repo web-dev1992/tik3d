@@ -80,9 +80,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(404).json({ message: "محصولی یافت نشد!" });
       return;
     }
-    console.log("audios====>", audios);
-    console.log("images====>", images);
-    // console.log("videos====>", videos);
 
     res.status(201).json({
       videos: videos,

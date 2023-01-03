@@ -32,7 +32,7 @@ interface SearchPageProps {
 }
 const SearchPage: NextPage = (props: SearchPageProps) => {
   const { videos, images, audios } = props;
- 
+
   return (
     <div>
       <Head>
@@ -52,12 +52,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchKey = context.query.searchKey;
   let apiSearchRes;
 
-  let homeProps;
+  let SearchPageProps;
   try {
     apiSearchRes = await axios(
       `${config.server}/api/products/search/${searchKey}`
     );
-    homeProps = {
+    SearchPageProps = {
       videos:
         apiSearchRes.data.videos.length !== 0 ? apiSearchRes.data.videos : null,
       images:
@@ -65,16 +65,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       audios:
         apiSearchRes.data.audios.length !== 0 ? apiSearchRes.data.audios : null,
     };
-    // console.log("homeProps===>", homeProps);
+    // console.log("SearchPageProps===>", SearchPageProps);
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { audios: null, videos: null, images: null };
+    SearchPageProps = { audios: null, videos: null, images: null };
   }
 
   return {
     props: {
-      ...homeProps,
+      ...SearchPageProps,
     },
   };
 };

@@ -4,6 +4,7 @@ import Head from "next/head";
 import config from "../../../next.config";
 import axios from "axios";
 import { GetServerSideProps } from "next/types";
+import { parseCookies } from "../../../helper/parseCookie";
 import { ObjectId } from "mongodb";
 interface VideoPageProps {
   video?: {
@@ -49,22 +50,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.videoId;
   let apiVideoRes;
   let apiCommentsRes;
-  let homeProps;
+  let VideoPageProps;
   try {
     apiVideoRes = await axios(`${config.server}/api/products/videos/${id}`);
-    homeProps = {
-      video:
-        apiVideoRes.data.video.length !== 0 ? apiVideoRes.data.video : null,
-    };
+    if (apiVideoRes.data.video.isSpecial === true) {
+      const cookies = parseCookies(context.req);
+      if (Object.keys(cookies).length > 0 && cookies.sub) {
+        VideoPageProps = {
+          video:
+            apiVideoRes.data.video.length !== 0 ? apiVideoRes.data.video : null,
+        };
+      } else {
+        return {
+          redirect: {
+            destination: "/user-account/login",
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      VideoPageProps = {
+        video:
+          apiVideoRes.data.video.length !== 0 ? apiVideoRes.data.video : null,
+      };
+    }
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { video: null };
+    VideoPageProps = { video: null };
   }
   try {
     apiCommentsRes = await axios(`${config.server}/api/comments`);
-    homeProps = {
-      ...homeProps,
+    VideoPageProps = {
+      ...VideoPageProps,
       comments:
         apiCommentsRes.data.comments.length !== 0
           ? apiCommentsRes.data.comments
@@ -73,11 +91,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { ...homeProps, comments: null };
+    VideoPageProps = { ...VideoPageProps, comments: null };
   }
   return {
     props: {
-      ...homeProps,
+      ...VideoPageProps,
     },
   };
 };

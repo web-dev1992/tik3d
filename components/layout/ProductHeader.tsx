@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import DesktopMainHeader from "./DesktopMainHeader";
 import XlargMainHeader from "./XlargMainHeader";
 import { useRouter } from "next/router";
-
+import { useSubContext } from "store/subContext";
 import ProductMobileMainHeader from "./ProductMobileMainHeader";
 const ProductHeader = () => {
+  const subCtx = useSubContext();
   const router = useRouter();
   const menuItems = [
     { label: "صفحه نخست", href: "/" },
@@ -31,6 +32,7 @@ const ProductHeader = () => {
     });
   }, []);
   function logOutHandler() {
+    subCtx.removeSubHandler();
     signOut();
   }
   function SearchHandler(searchKey: string) {

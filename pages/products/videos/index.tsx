@@ -30,22 +30,22 @@ const VideosPage: NextPage = (props: VideoPageProps) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiVideosRes;
-  let homeProps;
+  let VideoPageProps;
   try {
     apiVideosRes = await axios(`${config.server}/api/products/videos`);
-    homeProps = {
+    VideoPageProps = {
       videos:
         apiVideosRes.data.videos.length !== 0 ? apiVideosRes.data.videos : null,
     };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { videos: null };
+    VideoPageProps = { videos: null };
   }
 
   return {
     props: {
-      ...homeProps,
+      ...VideoPageProps,
     },
   };
 };

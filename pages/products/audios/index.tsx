@@ -29,22 +29,22 @@ const AudiosPage: NextPage = (props: AudioPageProps) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiAudiosRes;
-  let homeProps;
+  let AudioPageProps;
   try {
     apiAudiosRes = await axios(`${config.server}/api/products/audios`);
-    homeProps = {
+    AudioPageProps = {
       audios:
         apiAudiosRes.data.audios.length !== 0 ? apiAudiosRes.data.audios : null,
     };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { audios: null };
+    AudioPageProps = { audios: null };
   }
 
   return {
     props: {
-      ...homeProps,
+      ...AudioPageProps,
     },
   };
 };

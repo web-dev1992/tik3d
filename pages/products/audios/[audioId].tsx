@@ -2,6 +2,7 @@ import Audio from "@components/products/audios/Audio";
 import { NextPage } from "next";
 import Head from "next/head";
 import config from "../../../next.config";
+import { parseCookies } from "../../../helper/parseCookie";
 import axios from "axios";
 import { GetServerSideProps } from "next/types";
 import { ObjectId } from "mongodb";
@@ -49,22 +50,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.audioId;
   let apiAudioRes;
   let apiCommentsRes;
-  let homeProps;
+  let AudioPageProps;
   try {
     apiAudioRes = await axios(`${config.server}/api/products/audios/${id}`);
-    homeProps = {
-      audio:
-        apiAudioRes.data.audio.length !== 0 ? apiAudioRes.data.audio : null,
-    };
+    if (apiAudioRes.data.audio.isSpecial === true) {
+      const cookies = parseCookies(context.req);
+      if (Object.keys(cookies).length > 0 && cookies.sub) {
+        AudioPageProps = {
+          audio:
+            apiAudioRes.data.audio.length !== 0 ? apiAudioRes.data.audio : null,
+        };
+      } else {
+        return {
+          redirect: {
+            destination: "/user-account/login",
+            permanent: false,
+          },
+        };
+      }
+    } else {
+      AudioPageProps = {
+        audio:
+          apiAudioRes.data.audio.length !== 0 ? apiAudioRes.data.audio : null,
+      };
+    }
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { audio: null };
+    AudioPageProps = { audio: null };
   }
   try {
     apiCommentsRes = await axios(`${config.server}/api/comments`);
-    homeProps = {
-      ...homeProps,
+    AudioPageProps = {
+      ...AudioPageProps,
       comments:
         apiCommentsRes.data.comments.length !== 0
           ? apiCommentsRes.data.comments
@@ -73,11 +91,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
-    homeProps = { ...homeProps, comments: null };
+    AudioPageProps = { ...AudioPageProps, comments: null };
   }
   return {
     props: {
-      ...homeProps,
+      ...AudioPageProps,
     },
   };
 };

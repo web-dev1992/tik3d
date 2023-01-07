@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ChangeEvent } from "react";
+import Swal from "sweetalert2";
 import CameraIcon from "@components/ui/CameraIcon";
 import toBase64 from "helper/toBase64";
 import { ObjectId } from "mongodb";
@@ -20,7 +21,13 @@ const UserInfoBox: React.FC<{ userInfo: userInfoProps }> = ({ userInfo }) => {
     var filesize = e.target.files[0].size / 1024; // KB
     console.log(filesize);
     if (filesize > 1000) {
-      alert("اندازه فایل بزرگ است، فایل بزرگتر از 1 مگا بایت معتبر نیست.");
+      Swal.fire({
+        title: "خطا",
+        text: "اندازه فایل بزرگ است، فایل بزرگتر از 1 مگا بایت معتبر نیست.",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
+      
       return;
     }
     console.log(filesize);

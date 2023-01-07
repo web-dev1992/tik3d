@@ -1,10 +1,11 @@
 import { FormEvent, useRef, useState } from "react";
-
+import Swal from "sweetalert2";
 import StarRating from "@components/ui/StarRating";
 import axios from "axios";
 
-const InsertComment: React.FC<{productId:string | string[]}> = ({productId}) => {
-  
+const InsertComment: React.FC<{ productId: string | string[] }> = ({
+  productId,
+}) => {
   const [ratingValue, setRatingValue] = useState<number>(0);
   const nameRef = useRef<HTMLInputElement>();
   const emailRef = useRef<HTMLInputElement>();
@@ -17,22 +18,37 @@ const InsertComment: React.FC<{productId:string | string[]}> = ({productId}) => 
     const name = nameRef.current.value;
     const email = emailRef.current.value;
     const comment = commentRef.current.value;
-    
+
     console.log(name, email, comment, productId, ratingValue);
     if (
       email.trim().length === 0 ||
       name.trim().length === 0 ||
       comment.trim().length === 0
     ) {
-      alert("لطفا فیلد های خالی را با مقدار صحیح و نمایید");
+      Swal.fire({
+        title: "اخطار",
+        text: "لطفا فیلد های خالی را با مقدار صحیح و نمایید",
+        icon: "warning",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     }
     if (!ratingValue) {
-      alert("لطفا ستاره دهید!!");
+      Swal.fire({
+        title: "اخطار",
+        text: "لطفا ستاره دهید!!",
+        icon: "warning",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     }
     if (!email.trim().includes("@")) {
-      alert("لطفا یک ایمیل صحیح وارد نمایید!");
+      Swal.fire({
+        title: "خطا",
+        text: "لطفا یک ایمیل صحیح وارد نمایید!",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     }
     try {
@@ -44,9 +60,19 @@ const InsertComment: React.FC<{productId:string | string[]}> = ({productId}) => 
         star: ratingValue,
         image: "",
       });
-      alert(result.data.message);
+      Swal.fire({
+        title: "اطلاعات",
+        text: result.data.message,
+        icon: "info",
+        confirmButtonText: "فهمیدم!",
+      });
     } catch (error) {
-      alert(error.response.data.message || "خطایی بوجود آمده است!");
+      Swal.fire({
+        title: "خطا",
+        text: error.response.data.message || "خطایی بوجود آمده است!",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
     }
   };
   return (

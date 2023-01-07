@@ -1,4 +1,5 @@
 import Video from "@components/products/videos/Video";
+import { getSession } from "next-auth/react";
 import { NextPage } from "next";
 import Head from "next/head";
 import config from "../../../next.config";
@@ -48,6 +49,8 @@ const VideoPage: NextPage = (props: VideoPageProps) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.videoId;
+  const session = await getSession({ req: context.req });
+
   let apiVideoRes;
   let apiCommentsRes;
   let VideoPageProps;
@@ -55,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     apiVideoRes = await axios(`${config.server}/api/products/videos/${id}`);
     if (apiVideoRes.data.video.isSpecial === true) {
       const cookies = parseCookies(context.req);
-      if (Object.keys(cookies).length > 0 && cookies.sub) {
+      if (Object.keys(cookies).length > 0 && cookies.sub && session) {
         VideoPageProps = {
           video:
             apiVideoRes.data.video.length !== 0 ? apiVideoRes.data.video : null,

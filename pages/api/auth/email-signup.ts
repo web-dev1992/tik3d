@@ -43,6 +43,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       isActive: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      deletedAt: null,
     });
     client.close();
     res.status(201).json({

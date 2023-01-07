@@ -34,6 +34,12 @@ export default NextAuth({
           client.close();
           throw new Error("کاربری با این ایمیل یافت نشد!");
         }
+        if (user.isActive !== true) {
+          client.close();
+          throw new Error(
+            "اکانت شما فعال نشده است، بعد از فعال سازی می توانید وارد سایت شوید!"
+          );
+        }
         const isValid = await verifyPassword(
           credentials!.password,
           user.password
@@ -64,6 +70,12 @@ export default NextAuth({
         if (!user) {
           client.close();
           throw new Error("کاربری با این شماره تلفن یافت نشد!");
+        }
+        if (user.isActive !== true) {
+          client.close();
+          throw new Error(
+            "اکانت شما فعال نشده است، بعد از فعال سازی می توانید وارد سایت شوید!"
+          );
         }
         const isValid = await verifyPassword(
           credentials!.password,

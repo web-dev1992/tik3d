@@ -1,5 +1,6 @@
 import Audio from "@components/products/audios/Audio";
 import { NextPage } from "next";
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 import config from "../../../next.config";
 import { parseCookies } from "../../../helper/parseCookie";
@@ -48,6 +49,7 @@ const AudioPage: NextPage = (props: AudioPageProps) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.query.audioId;
+  const session = await getSession({ req: context.req });
   let apiAudioRes;
   let apiCommentsRes;
   let AudioPageProps;
@@ -55,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     apiAudioRes = await axios(`${config.server}/api/products/audios/${id}`);
     if (apiAudioRes.data.audio.isSpecial === true) {
       const cookies = parseCookies(context.req);
-      if (Object.keys(cookies).length > 0 && cookies.sub) {
+      if (Object.keys(cookies).length > 0 && cookies.sub && session) {
         AudioPageProps = {
           audio:
             apiAudioRes.data.audio.length !== 0 ? apiAudioRes.data.audio : null,

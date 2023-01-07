@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import DownloadIcon from "@components/ui/DownloadIcon";
 import ReportIcon from "@components/ui/ReportIcon";
-import { report } from "process";
+import Swal from "sweetalert2";
 interface downloadsProps {
   name: string;
   size: string;
@@ -25,10 +25,21 @@ const Downloads: React.FC<{ downloads: downloadsProps[] }> = ({
     const reportText = reportRef.current.value;
     try {
       const response = await axios.post("/api/products/report", { reportText });
-      alert(response.data.message);
+      Swal.fire({
+        title: "اطلاعات",
+        text: response.data.message,
+        icon: "info",
+        confirmButtonText: "باشه!",
+      });
+
       reportRef.current.value = "";
     } catch (error) {
-      alert(error.response.data.message || "خطایی بوجود آمده است!");
+      Swal.fire({
+        title: "خطا",
+        text: error.response.data.message || "خطایی بوجود آمده است!",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
     }
   };
   return (

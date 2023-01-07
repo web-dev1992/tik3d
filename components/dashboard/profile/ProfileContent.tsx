@@ -1,5 +1,6 @@
 import { useState, useRef, FormEvent } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import ContentTitle from "../ui/ContentTitle";
 import TikSvg from "@components/dashboard/profile/TikSvg";
 import Row from "@components/dashboard/profile/Row";
@@ -53,11 +54,22 @@ const ProfileContent: React.FC<{
 
     try {
       const response = await axios.post("/api/user/edit-user", newUserInfo);
-      alert(response.data.message);
+      Swal.fire({
+        title: "تبریک",
+        text: response.data.message,
+        icon: "success",
+        confirmButtonText: "فهمیدم!",
+      });
+
       setEditMode((prev) => !prev);
       changeLodedUserHandler(newUserInfo);
     } catch (error) {
-      alert(error.response.data.message || "خطایی بوجود آمده است!");
+      Swal.fire({
+        title: "خطا",
+        text: error.response.data.message || "خطایی بوجود آمده است!",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
     }
   };
   const { values, errors, verify, handleChange, handleSubmit } =

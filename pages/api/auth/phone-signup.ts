@@ -40,10 +40,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       email: "",
       phone: phone,
       password: hashedPassword,
-      image: "",      
+      image: "",
       isActive: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      deletedAt: null,
     });
     client.close();
     res.status(201).json({

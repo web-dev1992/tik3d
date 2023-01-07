@@ -1,5 +1,6 @@
 import { useState, Fragment, useCallback, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { signOut } from "next-auth/react";
 import UserInfoBox from "./UserInfoBox";
 import HamburgerMenu from "@components/dashboard/ui/HamburgerMenu";
@@ -95,7 +96,13 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
         userDiscount.status === 201 &&
         userDiscount.data.hasDiscountUsed === true
       ) {
-        alert("شما قبلا از این کد تخفیف استفاده کرده اید!");
+        Swal.fire({
+          title: "خطا",
+          text: "شما قبلا از این کد تخفیف استفاده کرده اید!",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
+
         return;
       } else if (
         userDiscount.status === 201 &&
@@ -116,8 +123,19 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
       }
     } catch (err) {
       if (err.response.status === 404) {
-        alert(err.response.data.message);
-      } else alert(err.message || "خطایی بوجود آمده است.");
+        Swal.fire({
+          title: "خطا",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
+      } else
+        Swal.fire({
+          title: "خطا",
+          text: err.message || "خطایی بوجود آمده است.",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
     }
   };
   const getPaymentsHandler = useCallback(async () => {

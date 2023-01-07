@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import useFormValidation from "hooks/useFormValidation";
 import PhoneInput from "../ui/PhoneInput";
 import ErrorMessage from "../../layout/ErrorMessage";
@@ -7,11 +8,12 @@ import TermsAndConditionsBox from "../ui/TermsAndConditionsBox";
 import SubmitButton from "../../layout/SubmitButton";
 import CustomeLink from "../ui/CustomeLink";
 import PasswordInput from "../ui/PasswordInput";
+import Swal from "sweetalert2";
 
 const PhoneSignupForm: React.FC<{
-  phase;
   openConditionsHandler;
-}> = ({ openConditionsHandler, phase }) => {
+}> = ({ openConditionsHandler }) => {
+  const router = useRouter();
   const phoneInputRef = useRef<HTMLInputElement>();
   const passwordInputRef = useRef<HTMLInputElement>();
   const [acceptLaw, setAcceptLaw] = useState<boolean>(false);
@@ -30,12 +32,22 @@ const PhoneSignupForm: React.FC<{
       const phone = phoneInputRef.current.value;
       const password = passwordInputRef.current.value;
       if (phone.trim().length === 0 || password.trim().length === 0) {
-        alert("فیلدهای نام کاربری و رمزعبور اجباری هستند");
+        Swal.fire({
+          title: "اخطار",
+          text: "فیلدهای نام کاربری و رمزعبور اجباری هستند",
+          icon: "warning",
+          confirmButtonText: "فهمیدم!",
+        });
         return;
       }
 
       if (password.trim().length < 8) {
-        alert("رمز وارد شده حداقل باید ۸ کاراکتر باشد!");
+        Swal.fire({
+          title: "اخطار",
+          text: "رمز وارد شده حداقل باید ۸ کاراکتر باشد!",
+          icon: "warning",
+          confirmButtonText: "فهمیدم!",
+        });
         return;
       }
 
@@ -44,10 +56,21 @@ const PhoneSignupForm: React.FC<{
           phone,
           password,
         });
-        alert(response.data.message);
-        phase("two", values.phone);
+        Swal.fire({
+          title: "تبریک",
+          text: response.data.message,
+          icon: "success",
+          confirmButtonText: "فهمیدم!",
+        });
+        router.push(`/user-account/user-verification/${phone}`);
       } catch (error) {
-        alert(error.response.data.message || "خطایی بوجود آمده است!");
+        Swal.fire({
+          title: "خطا",
+          text:
+            error.response?.data?.message || error || "خطایی بوجود آمده است!",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
       }
     }
   };

@@ -1,4 +1,5 @@
 import ImageComponent from "@components/products/images/Image";
+import { getSession } from "next-auth/react";
 import { NextPage } from "next";
 import Head from "next/head";
 import config from "../../../next.config";
@@ -46,6 +47,7 @@ const ImagePage: NextPage = (props: ImagePageProps) => {
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
   const id = context.query.imageId;
   let apiImageRes;
   let apiCommentsRes;
@@ -54,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     apiImageRes = await axios(`${config.server}/api/products/images/${id}`);
     if (apiImageRes.data.image.isSpecial === true) {
       const cookies = parseCookies(context.req);
-      if (Object.keys(cookies).length > 0 && cookies.sub) {
+      if (Object.keys(cookies).length > 0 && cookies.sub && session) {
         ImagePageProps = {
           image:
             apiImageRes.data.image.length !== 0 ? apiImageRes.data.image : null,

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Swal from "sweetalert2";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useFormValidation from "hooks/useFormValidation";
@@ -18,12 +19,22 @@ const EmailLoginForm: React.FC<{}> = () => {
     const password = passwordInputRef.current!.value;
 
     if (email.trim().length === 0 || password.trim().length === 0) {
-      alert("فیلدهای نام کاربری و رمزعبور اجباری هستند");
+      Swal.fire({
+        title: "اخطار",
+        text: "فیلدهای نام کاربری و رمزعبور اجباری هستند",
+        icon: "warning",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     }
 
     if (password.trim().length < 8) {
-      alert("رمز وارد شده حداقل باید ۸ کاراکتر باشد!");
+      Swal.fire({
+        title: "اخطار",
+        text: "رمز وارد شده حداقل باید ۸ کاراکتر باشد!",
+        icon: "warning",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     }
 
@@ -33,7 +44,12 @@ const EmailLoginForm: React.FC<{}> = () => {
       password: password,
     });
     if (result.error) {
-      alert(result.error);
+      Swal.fire({
+        title: "خطا",
+        text: result.error,
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
       return;
     } else {
       try {
@@ -55,8 +71,19 @@ const EmailLoginForm: React.FC<{}> = () => {
         router.replace("/");
       } catch (err) {
         if (err.response.status === 404) {
-          alert(err.response.data.message);
-        } else alert(err.message || "خطایی بوجود آمده است.");
+          Swal.fire({
+            title: "خطا",
+            text: err.response.data.message,
+            icon: "error",
+            confirmButtonText: "فهمیدم!",
+          });
+        } else
+          Swal.fire({
+            title: "خطا",
+            text: err.message || "خطایی بوجود آمده است.",
+            icon: "error",
+            confirmButtonText: "فهمیدم!",
+          });
       }
     }
   };

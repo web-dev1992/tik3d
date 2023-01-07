@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { omit } from "lodash";
 interface formValues {
   username?: string;
@@ -259,7 +260,12 @@ const useFormValidation = (submitFormHandler) => {
       for (let key in errors) {
         ErrorMessage += `${errors[key]}\n`;
       }
-      alert(`خطایی در اطلاعات وارد شده وجود دارد!\n ${ErrorMessage}`);
+      Swal.fire({
+        title: "خطا",
+        text: `خطایی در اطلاعات وارد شده وجود دارد!\n ${ErrorMessage}`,
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
     }
   };
 

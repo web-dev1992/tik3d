@@ -1,5 +1,6 @@
 import PercentIcon from "@components/ui/PercentIcon";
 import { FormEvent, useRef } from "react";
+import Swal from "sweetalert2";
 interface discountBoxProps {
   showDiscount: boolean;
   openCloseDiscount: () => void;
@@ -13,7 +14,13 @@ const DiscountBox: React.FC<{ discountProps: discountBoxProps }> = ({
     event.preventDefault();
     const code = discountRef.current.value;
     if (code === "") {
-      alert("یک کد معتبر وارد نمایید!");
+      Swal.fire({
+        title: "خطا",
+        text: "یک کد معتبر وارد نمایید!",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
+
       return;
     } else discountProps.discountHandler(code);
   };

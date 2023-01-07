@@ -1,4 +1,5 @@
 import { FormEvent, Fragment, useState, useRef } from "react";
+import Swal from "sweetalert2";
 import TermsAndConditionsBox from "@components/userAccounts/ui/TermsAndConditionsBox";
 import TermsConditions from "@components/layout/TermsAndConditions";
 import CustomeLink from "@components/userAccounts/ui/CustomeLink";
@@ -72,14 +73,19 @@ const Payment = (props: PaymentProps) => {
 
       setIsPaymentDone(true);
       setIsPaymentSuccessful(true);
-      alert(result.data.message);
+      Swal.fire({
+        title: "تبریک",
+        text: result.data.message,
+        icon: "error",
+        confirmButtonText: "ممنون!",
+      });
     } catch (err) {
-      // if (err.response.status === 422) {
-      //   console.log(err.response.data.message);
-      //   setDiscountError(false);
-      //   setDiscount(null);
-      // }else
-      alert(err.message || "خطایی بوجود آمده است.");
+      Swal.fire({
+        title: "خطا",
+        text: err.message || "خطایی بوجود آمده است.",
+        icon: "error",
+        confirmButtonText: "فهمیدم!",
+      });
     }
   };
   const discountHandler = async () => {
@@ -93,7 +99,12 @@ const Payment = (props: PaymentProps) => {
         `/api/discounts/userDiscounts/${props.userId}/${code}`
       );
       if (userDiscount.data.hasDiscountUsed === true) {
-        alert("شما قبلا از این کد تخفیف استفاده کرده اید!");
+        Swal.fire({
+          title: "خطا",
+          text: "شما قبلا از این کد تخفیف استفاده کرده اید!",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
         return;
       }
       const result = await axios(`/api/discounts/${code}`);
@@ -109,10 +120,21 @@ const Payment = (props: PaymentProps) => {
       }
     } catch (err) {
       if (err.response.status === 404) {
-        console.log(err.response.data.message);
+        Swal.fire({
+          title: "خطا",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
         setDiscountError(true);
         setDiscount(null);
-      } else alert(err.message || "خطایی بوجود آمده است.");
+      } else
+        Swal.fire({
+          title: "خطا",
+          text: err.message || "خطایی بوجود آمده است.",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
+        });
     }
   };
   return (

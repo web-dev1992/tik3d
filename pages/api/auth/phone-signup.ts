@@ -27,7 +27,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       client.close();
       res
         .status(422)
-        .json({ message: "قبلا کاربری یا این شماره تلفن ثبت شده است!" });
+        .json({ message: "قبلا کاربری با این شماره تلفن ثبت شده است!" });
 
       return;
     }

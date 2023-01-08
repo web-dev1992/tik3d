@@ -3,16 +3,24 @@ import twilio from "twilio";
 
 export default function sendMessage(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") return;
+  const { destination, code } = req.body;
+  console.log(destination, code);
+  if (!destination || !code) {
+    return res
+      .status(422)
+      .json({
+        message: "لطفا اطلاعات مورد نیاز برای انجام عملیات را ارسال نمایید",
+      });
+  }
+
   const accountSid = <string>process.env.TWILIO_ACCOUNT_SID;
   const token = <string>process.env.TWILIO_AUTH_TOKEN;
   const client = twilio(accountSid, token);
-  const { destination, code } = req.body;
-  console.log(destination, code);
   client.messages
     .create({
       body: `your verification code is ${code.toString()}, Good luck!`,
       from: "+13149882410",
-      to: destination.toString(),
+      to: `+98${destination.toString()}`,
     })
     .then((message) =>
       res.status(201).json({

@@ -9,6 +9,7 @@ import FormTitle from "@components/layout/FormTitle";
 import PaymentLayout from "./PaymentLayout";
 import ErrorMessage from "@components/layout/ErrorMessage";
 import SubmitButton from "@components/layout/SubmitButton";
+import { useSubContext } from "store/subContext";
 import { ObjectId } from "mongodb";
 import axios from "axios";
 import numbersWithCommas from "helper/numbersWithCommas";
@@ -23,6 +24,7 @@ interface PaymentProps {
   userId: string;
 }
 const Payment = (props: PaymentProps) => {
+  const subCtx = useSubContext();
   const discountRef = useRef<HTMLInputElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<string>("online");
   const [discount, setDiscount] = useState<{
@@ -73,6 +75,7 @@ const Payment = (props: PaymentProps) => {
 
       setIsPaymentDone(true);
       setIsPaymentSuccessful(true);
+      subCtx.setSubHandler(new Date(result.data.payment.endAt).getTime());
       Swal.fire({
         title: "تبریک",
         text: result.data.message,
@@ -82,7 +85,8 @@ const Payment = (props: PaymentProps) => {
     } catch (err) {
       Swal.fire({
         title: "خطا",
-        text: err.message || "خطایی بوجود آمده است.",
+        text:
+          err.response?.data?.message || err.message || "خطایی بوجود آمده است.",
         icon: "error",
         confirmButtonText: "فهمیدم!",
       });

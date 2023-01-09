@@ -14,7 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       .collection("payments")
       .findOne({ $and: [{ userId: userId }, { active: true }] });
 
-    if (payment.length === 0) {
+    if (!payment || payment.length === 0) {
       res.status(404).json({ message: "پرداختی یافت نشد!" });
       return;
     }

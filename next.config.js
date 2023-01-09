@@ -28,8 +28,8 @@ const server = dev
   : "https://your_deployment.server.com";
 module.exports = {
   // TypescriptConfig,
-  nextConfig,
-  server,
+  ...nextConfig,
+  // server,
   i18n: {
     locales: ["fa"],
     defaultLocale: "fa",

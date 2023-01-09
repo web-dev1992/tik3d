@@ -27,7 +27,7 @@ const UserInfoBox: React.FC<{ userInfo: userInfoProps }> = ({ userInfo }) => {
         icon: "error",
         confirmButtonText: "فهمیدم!",
       });
-      
+
       return;
     }
     console.log(filesize);
@@ -59,7 +59,7 @@ const UserInfoBox: React.FC<{ userInfo: userInfoProps }> = ({ userInfo }) => {
             src={
               userInfo.image !== ""
                 ? userInfo.image
-                : "/images/dashboard-user-image.png"
+                : "/images/user-no-picture.png"
             }
             alt="dashboard-user-image"
             width={221}

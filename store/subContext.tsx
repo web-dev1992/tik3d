@@ -4,12 +4,14 @@ import { useCookies, Cookies } from "react-cookie";
 
 type contextObj = {
   hasSub: boolean;
+  expirationTime: Date;
   setSubHandler: (expirationTime: number) => void;
   removeSubHandler: () => void;
 };
 
 const SubContext = React.createContext<contextObj>({
   hasSub: false,
+  expirationTime: new Date(0),
   setSubHandler: (expirationTime: number) => {},
   removeSubHandler: () => {},
 });
@@ -36,7 +38,7 @@ export default function SubProvider(props: { children: JSX.Element }) {
   const removeSubHandler = useCallback(() => {
     setHasSub(false);
     setExpirationTime(0);
-    
+
     removeCookie("sub", {
       path: "/",
       // maxAge: expirationTime - new Date().getTime(),
@@ -48,6 +50,7 @@ export default function SubProvider(props: { children: JSX.Element }) {
 
   let subContext = {
     hasSub: hasSub,
+    expirationTime: new Date(expirationTime),
     setSubHandler: setSubHandler,
     removeSubHandler: removeSubHandler,
   };

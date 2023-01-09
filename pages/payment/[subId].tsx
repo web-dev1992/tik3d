@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     apiSubscriptionRes = await axios(
-      `${config.server}/api/subscriptions/${subId}`
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/subscriptions/${subId}`
     );
     paymentProps = {
       subscription:

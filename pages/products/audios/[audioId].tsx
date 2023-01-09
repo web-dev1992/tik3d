@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let AudioPageProps;
   try {
-    apiAudioRes = await axios(`${config.server}/api/products/audios/${id}`);
+    apiAudioRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/products/audios/${id}`);
     if (apiAudioRes.data.audio.isSpecial === true) {
       const cookies = parseCookies(context.req);
       if (Object.keys(cookies).length > 0 && cookies.sub && session) {
@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     AudioPageProps = { audio: null };
   }
   try {
-    apiCommentsRes = await axios(`${config.server}/api/comments`);
+    apiCommentsRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/comments`);
     AudioPageProps = {
       ...AudioPageProps,
       comments:

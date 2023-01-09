@@ -53,36 +53,40 @@ const PhoneLoginForm: React.FC<{}> = () => {
     else {
       try {
         const session = await getSession();
+        // console.log("session.user.id==>", session.user.id);
         const result = await axios(
           `/api/payments/get-active-payment/${session.user.id}`
         );
         if (result.status === 201) {
           if (
-            new Date(result.data.payment.endAt).getTime() -
-              new Date().getTime() >
-            0
+            new Date().getTime() < new Date(result.data.payment.endAt).getTime()
           ) {
             subCtx.setSubHandler(new Date(result.data.payment.endAt).getTime());
+           
           } else {
             subCtx.removeSubHandler();
           }
         }
-        router.replace("/");
       } catch (err) {
-        if (err.response.status === 404) {
-          Swal.fire({
-            title: "خطا",
-            text: err.response.data.message,
-            icon: "error",
-            confirmButtonText: "فهمیدم!",
-          });
-        } else
-          Swal.fire({
-            title: "خطا",
-            text: err.message || "خطایی بوجود آمده است.",
-            icon: "error",
-            confirmButtonText: "فهمیدم!",
-          });
+        console.log(
+          err.response?.data?.message || err.message || "خطایی بوجود آمده است."
+        );
+        // if (err.response.status === 404) {
+        //   Swal.fire({
+        //     title: "خطا",
+        //     text: err.response.data.message,
+        //     icon: "error",
+        //     confirmButtonText: "فهمیدم!",
+        //   });
+        // } else
+        //   Swal.fire({
+        //     title: "خطا",
+        //     text: err.message || "خطایی بوجود آمده است.",
+        //     icon: "error",
+        //     confirmButtonText: "فهمیدم!",
+        //   });
+      } finally {
+        router.replace("/");
       }
     }
   };

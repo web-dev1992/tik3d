@@ -30,6 +30,7 @@ class ErrorBoundary extends React.Component<
             درخواست خود را امتحان کنید.
           </p>
           <button
+          className="text-xxs  lg:text-base xl:text-lg xl:leading-7 font-normal text-right leading-4 tracking-wide bg-white"
             type="button"
             onClick={() => this.setState({ hasError: false })}
           >

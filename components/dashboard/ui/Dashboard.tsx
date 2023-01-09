@@ -26,13 +26,13 @@ const menuItems = [
 
 const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
   const subCtx = useSubContext();
-  const userId = session.user.id.toString();
+  const userId = new ObjectId(session.user.id);
   const Dummy_user_info = {
     id: userId,
     name: "",
     family: "",
-    email: "",
-    isSpecialUser: subCtx.hasSub,
+    email: session.user.email,
+    isSpecialUser: false,
     image: "/images/dashboard-user-image.png",
   };
   const [content, setContent] = useState("dashboard");
@@ -174,12 +174,10 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
     }
   }, []);
   useEffect(() => {
-    // async () => {
     getUserHandler();
     getUserSubscriptionHandler();
     getSubscriptionsHandler();
     getPaymentsHandler();
-    // };
   }, [
     getUserHandler,
     getSubscriptionsHandler,

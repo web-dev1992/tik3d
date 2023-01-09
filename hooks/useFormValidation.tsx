@@ -254,8 +254,7 @@ const useFormValidation = (submitFormHandler) => {
     ) {
       submitFormHandler();
     } else {
-      console.log("errors", errors);
-      console.log("values", values);
+      
       let ErrorMessage = "";
       for (let key in errors) {
         ErrorMessage += `${errors[key]}\n`;

@@ -58,7 +58,7 @@ const VerificationForm: React.FC<{
         setError(false);
         setMessage(message);
       }
-      console.log("verification code has been sent!");
+     
     } catch (error) {
       Swal.fire({
         title: "خطا",

@@ -19,7 +19,7 @@ const InsertComment: React.FC<{ productId: string | string[] }> = ({
     const email = emailRef.current.value;
     const comment = commentRef.current.value;
 
-    console.log(name, email, comment, productId, ratingValue);
+    
     if (
       email.trim().length === 0 ||
       name.trim().length === 0 ||

@@ -52,9 +52,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           { payStatus: "successful" },
         ],
       });
-      console.log("active payments=====>", payment);
       let remindedTime = 0;
-
       if (payment !== null || payment.length > 0) {
         if (new Date().getTime() < new Date(payment.endAt).getTime()) {
           //calculate remindedd days from last active subscription

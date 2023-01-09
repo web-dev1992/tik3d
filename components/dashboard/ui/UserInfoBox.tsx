@@ -19,7 +19,7 @@ const UserInfoBox: React.FC<{ userInfo: userInfoProps }> = ({ userInfo }) => {
       return;
     }
     var filesize = e.target.files[0].size / 1024; // KB
-    console.log(filesize);
+
     if (filesize > 1000) {
       Swal.fire({
         title: "خطا",
@@ -30,7 +30,7 @@ const UserInfoBox: React.FC<{ userInfo: userInfoProps }> = ({ userInfo }) => {
 
       return;
     }
-    console.log(filesize);
+
     const base64: string = (await toBase64(e.target.files[0])) as string;
     const fileData = { base64, fileName: e.target.files[0].name };
 

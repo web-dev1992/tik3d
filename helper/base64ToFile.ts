@@ -1,8 +1,7 @@
 import fs from "fs";
 
 function base64ToFile(file: { base64: string; fileName: string }): string {
-  let extension = file.fileName.split(".").pop();
-  console.log(extension);
+  let extension = file.fileName.split(".").pop(); 
   let fileContents;
   if (extension === "png") {
     fileContents = file.base64.replace(/^data:image\/png;base64,/, "");

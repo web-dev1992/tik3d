@@ -53,7 +53,6 @@ const PhoneLoginForm: React.FC<{}> = () => {
     else {
       try {
         const session = await getSession();
-        // console.log("session.user.id==>", session.user.id);
         const result = await axios(
           `/api/payments/get-active-payment/${session.user.id}`
         );
@@ -62,7 +61,6 @@ const PhoneLoginForm: React.FC<{}> = () => {
             new Date().getTime() < new Date(result.data.payment.endAt).getTime()
           ) {
             subCtx.setSubHandler(new Date(result.data.payment.endAt).getTime());
-           
           } else {
             subCtx.removeSubHandler();
           }

@@ -21,7 +21,7 @@ const ProductHeader = () => {
   useEffect(() => {
     getSession().then((session) => {
       if (session) {
-        console.log(session);
+       
         setIsLoading(false);
         setLoadedSession(session);
       } else {

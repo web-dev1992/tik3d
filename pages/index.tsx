@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { Fragment } from "react";
 import { getSession } from "next-auth/react";
 import type { Session } from "next-auth";
-import config from "../next.config";
+
 import axios from "axios";
 import { GetServerSideProps } from "next/types";
 import { ObjectId } from "mongodb";
@@ -50,7 +50,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let homeProps;
   try {
-    apiImagesRes = await axios(`${config.server}/api/products/images`);
+    apiImagesRes = await axios(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/images`
+    );
     homeProps = { images: apiImagesRes.data.images };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
@@ -58,7 +60,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     homeProps = { images: null };
   }
   try {
-    apiCommentsRes = await axios(`${config.server}/api/comments`);
+    apiCommentsRes = await axios(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/api/comments`
+    );
     homeProps = { ...homeProps, comments: apiCommentsRes.data.comments };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);

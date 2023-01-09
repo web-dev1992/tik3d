@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiAudiosRes;
   let AudioPageProps;
   try {
-    apiAudiosRes = await axios(`${config.server}/api/products/audios`);
+    apiAudiosRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/products/audios`);
     AudioPageProps = {
       audios:
         apiAudiosRes.data.audios.length !== 0 ? apiAudiosRes.data.audios : null,

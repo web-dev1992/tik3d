@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiImagesRes;
   let ImagePageProps;
   try {
-    apiImagesRes = await axios(`${config.server}/api/products/images`);
+    apiImagesRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/products/images`);
     ImagePageProps = {
       images:
         apiImagesRes.data.images.length !== 0 ? apiImagesRes.data.images : null,

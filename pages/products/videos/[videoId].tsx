@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let VideoPageProps;
   try {
-    apiVideoRes = await axios(`${config.server}/api/products/videos/${id}`);
+    apiVideoRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/products/videos/${id}`);
     if (apiVideoRes.data.video.isSpecial === true) {
       const cookies = parseCookies(context.req);
       if (Object.keys(cookies).length > 0 && cookies.sub && session) {
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     VideoPageProps = { video: null };
   }
   try {
-    apiCommentsRes = await axios(`${config.server}/api/comments`);
+    apiCommentsRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/comments`);
     VideoPageProps = {
       ...VideoPageProps,
       comments:

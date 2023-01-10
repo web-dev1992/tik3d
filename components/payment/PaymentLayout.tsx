@@ -1,4 +1,3 @@
-import PaymentHeader from "@components/layout/PaymentHeader";
 import ProductHeader from "@components/layout/ProductHeader";
 const PaymentLayout = (props) => {
   return (

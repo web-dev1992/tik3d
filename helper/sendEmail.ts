@@ -6,15 +6,15 @@ async function sendEmail(email: string, code: number) {
 
   try {
     const result = await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID,
-      process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID,
+      process.env.email_service_id,
+      process.env.email_template_id,
       {
         from_name: "Tik3d",
         message: code,
         email: email,
         to_name: email,
       },
-      process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY
+      process.env.email_public_key
     );
     console.log("SUCCESS!", result.status, result.text);
   } catch (error) {

@@ -13,8 +13,8 @@ export default function sendMessage(req: NextApiRequest, res: NextApiResponse) {
       });
   }
 
-  const accountSid = <string>process.env.TWILIO_ACCOUNT_SID;
-  const token = <string>process.env.TWILIO_AUTH_TOKEN;
+  const accountSid = <string>process.env.twilio_account_sid;
+  const token = <string>process.env.twilio_auth_token;
   const client = twilio(accountSid, token);
   client.messages
     .create({

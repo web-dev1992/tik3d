@@ -1,8 +1,6 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import DesktopDashboardHamburgerMenu from "@components/dashboard/ui/DesktopDashboardHamburgerMenu";
-import ReactFlagsSelect from "react-flags-select";
 import LanguageDropDown from "@components/layout/LanguageDropDown";
 const DashboardHeader = () => {
   const menuItems = [

@@ -4,7 +4,7 @@ import { verifyPassword } from "../../../helper/auth";
 import { connectToDatabase } from "../../../helper/db";
 
 export default NextAuth({
-  secret: process.env.JWT_SECRET,
+  secret: process.env.jwt_secret,
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60, // 1 day

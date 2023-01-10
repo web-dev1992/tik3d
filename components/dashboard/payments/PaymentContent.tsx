@@ -17,7 +17,7 @@ interface paymentsProps {
   startAt: Date;
   endAt: Date;
 }
-const PaymentContent: React.FC<{ payments: paymentsProps[] }> = ({
+const PaymentContent: React.FC<{ payments: paymentsProps[] | null }> = ({
   payments,
 }) => {
   const [size, setSize] = useState<number>(10);
@@ -52,31 +52,32 @@ const PaymentContent: React.FC<{ payments: paymentsProps[] }> = ({
           </div>
           {/* other rows */}
           <div className="w-full h-80 overflow-y-auto ">
-            {payments.slice(0, size).map((payment) => (
-              <div
-                key={payment._id.toString()}
-                className="w-full lg:h-8 xl:h-[50px] flex flex-row flex-nowrap justify-center items-center text-gray-500 text-[8px] lg:text-xxs xl:text-xs leading-5 lg:leading-[34px] xl:leading-[55px] font-normal rounded-[5px] lg:rounded-[7px] xl:rounded-[10px] border border-[#E2E2E2] "
-              >
-                <span className="w-3/12 lg:w-2/12 h-full flex flex-row item-center justify-center  border-l border-[#E2E2E2] ">
-                  {persianDate(payment.startAt)}
-                </span>
-                <span className="w-4/12 lg:w-3/12 h-full flex flex-row item-center justify-center border-l border-[#E2E2E2]">
-                  {numbersWithCommas(payment.paid)}تومان
-                </span>
-                <span
-                  className={`w-2/12 h-full flex flex-row item-center justify-center border-l border-[#E2E2E2] ${
-                    payment.payStatus === "successful"
-                      ? "text-green-700"
-                      : "text-red-600"
-                  }`}
+            {payments &&
+              payments.slice(0, size).map((payment) => (
+                <div
+                  key={payment._id.toString()}
+                  className="w-full lg:h-8 xl:h-[50px] flex flex-row flex-nowrap justify-center items-center text-gray-500 text-[8px] lg:text-xxs xl:text-xs leading-5 lg:leading-[34px] xl:leading-[55px] font-normal rounded-[5px] lg:rounded-[7px] xl:rounded-[10px] border border-[#E2E2E2] "
                 >
-                  {payment.payStatus === "successful" ? "موفق" : "ناموفق"}
-                </span>
-                <span className="w-3/12 lg:w-5/12 h-full flex flex-row item-center justify-center">
-                  {payment.description}
-                </span>
-              </div>
-            ))}
+                  <span className="w-3/12 lg:w-2/12 h-full flex flex-row item-center justify-center  border-l border-[#E2E2E2] ">
+                    {persianDate(payment.startAt)}
+                  </span>
+                  <span className="w-4/12 lg:w-3/12 h-full flex flex-row item-center justify-center border-l border-[#E2E2E2]">
+                    {numbersWithCommas(payment.paid)}تومان
+                  </span>
+                  <span
+                    className={`w-2/12 h-full flex flex-row item-center justify-center border-l border-[#E2E2E2] ${
+                      payment.payStatus === "successful"
+                        ? "text-green-700"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {payment.payStatus === "successful" ? "موفق" : "ناموفق"}
+                  </span>
+                  <span className="w-3/12 lg:w-5/12 h-full flex flex-row item-center justify-center">
+                    {payment.description}
+                  </span>
+                </div>
+              ))}
           </div>
         </div>
         {isMore && (

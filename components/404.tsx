@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Fragment } from "react";
-import MainLayout from "@components/layout/MainLayout";
 import Image from "next/image";
 const FourOhFour: React.FC<{}> = () => {
   return (

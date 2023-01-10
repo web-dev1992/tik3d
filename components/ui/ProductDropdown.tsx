@@ -2,11 +2,7 @@ import { useState } from "react";
 import React from "react";
 import OutsideLayout from "@components/layout/OutsideLayout";
 
-interface InputProps {
-  showDropDown: boolean;
-  onClick: () => void;
-  selectItems: any[];
-}
+
 
 const ProductDropdown = (props) => {
   const { selectItems, className, label } = props;

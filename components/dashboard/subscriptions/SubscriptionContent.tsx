@@ -12,7 +12,7 @@ const SubscriptionContent: React.FC<{
     discountedPrice?: number;
     description: string;
     isActive: boolean;
-  }[];
+  }[] | null;
   discountHandler: (code: string) => void;
 }> = ({ subscriptions, discountHandler }) => {
   const [showDiscount, setShowDiscount] = useState(false);
@@ -26,7 +26,7 @@ const SubscriptionContent: React.FC<{
       <div className="w-full h-max flex flex-col flex-nowrap justify-center items-center ">
         <ContentTitle title="لیست اشتراک" />
         <div className="w-full flex flex-col flex-nowrap justify-center items-start gap-[7px] lg:gap-2.5 xl:gap-4 ">
-          {subscriptions.map((subscription, index) => (
+          {subscriptions && subscriptions.map((subscription, index) => (
             <SubscriptionPanel
               key={subscription._id.toString()}
               props={{

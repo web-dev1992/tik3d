@@ -256,11 +256,13 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
               )}
               {content == "subscription" && (
                 <SubscriptionContent
-                  subscriptions={subscriptions}
+                  subscriptions={subscriptions ?? subscriptions}
                   discountHandler={discountHandler}
                 />
               )}
-              {content == "payments" && <PaymentContent payments={payments} />}
+              {content == "payments" && (
+                <PaymentContent payments={payments ?? payments} />
+              )}
               {content == "profile" && (
                 <ProfileContent
                   userInfo={loadedUser}

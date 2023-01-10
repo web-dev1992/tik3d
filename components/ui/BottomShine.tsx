@@ -1,8 +1,6 @@
 const BottomShine = () => {
   return (
     <svg
-    //   width="74"
-    //   height="27"
     className="w-8 h-2.5 md:w-11 md:h-3.5 lg:w-[73] lg:h-6 xl:h-6 xl:w-[72px] opacity-50"
       viewBox="0 0 74 27"
       fill="none"

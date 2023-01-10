@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import {  useState } from "react";
 import SignupLoginLayout from "@components/layout/SignupLoginLayout";
 import PhoneLoginForm from "./PhoneLoginForm";
 import EmailLoginForm from "./EmailLoginForm";

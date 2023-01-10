@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let SearchPageProps;
   try {
     apiSearchRes = await axios(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/search/${searchKey}`
+      `${process.env.domain}/api/products/search/${searchKey}`
     );
     SearchPageProps = {
       videos:

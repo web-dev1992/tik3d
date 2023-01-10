@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ObjectId } from "mongodb";
-import { uniqueIdGenerator } from "helper/UniqueIdGenerator";
 
 interface commentProp {
   _id: ObjectId;

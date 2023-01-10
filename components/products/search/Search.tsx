@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ProductLayout from "@components/layout/ProductLayout";
 import VideoProductList from "@components/products/videos/VideoProductList";
-import Pagination from "@components/ui/Pagination";
 import ProductsSidebar from "@components/ui/ProductsSidebar";
 import { ObjectId } from "mongodb";
 import ImageProductList from "../images/ImageProductList";
 import AudioProductList from "../audios/AudioProductList";
-import AudioItem from "../audios/AudioItem";
-import VideoItem from "../videos/VideoItem";
-import ImageItem from "../images/ImageItem";
+
 interface SearchProps {
   videos?: {
     _id: ObjectId;

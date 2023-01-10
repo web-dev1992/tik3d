@@ -1,4 +1,4 @@
-import React, { forwardRef, FormEvent } from "react";
+import React from "react";
 import PlayButtonIcon from "@components/ui/PlayerComponents/Controls/PlayButtonIcon";
 import PauseButtonIcon from "@components/ui/PlayerComponents/Controls/PauseButtonIcon";
 

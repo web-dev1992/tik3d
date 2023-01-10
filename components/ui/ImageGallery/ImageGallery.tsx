@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import "swiper/css";
@@ -8,11 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-interface imageProps {
-  id: string;
-  address: string;
-  link: string;
-}
+
 const ImageGallery: React.FC<{ images: string[] }> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 

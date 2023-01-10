@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let ImagePageProps;
   try {
-    apiImageRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/products/images/${id}`);
+    apiImageRes = await axios(`${process.env.domain}/api/products/images/${id}`);
     if (apiImageRes.data.image.isSpecial === true) {
       const cookies = parseCookies(context.req);
       if (Object.keys(cookies).length > 0 && cookies.sub && session) {
@@ -81,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ImagePageProps = { image: null };
   }
   try {
-    apiCommentsRes = await axios(`${process.env.NEXT_PUBLIC_DOMAIN}/api/comments`);
+    apiCommentsRes = await axios(`${process.env.domain}/api/comments`);
     ImagePageProps = {
       ...ImagePageProps,
       comments:

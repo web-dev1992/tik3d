@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 const HomeItro = () => {
   const [hasWindow, setHasWindow] = useState(false);

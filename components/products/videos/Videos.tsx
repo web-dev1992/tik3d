@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductLayout from "@components/layout/ProductLayout";
 import VideoProductList from "@components/products/videos/VideoProductList";
 import Pagination from "@components/ui/Pagination";

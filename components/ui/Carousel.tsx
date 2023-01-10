@@ -4,78 +4,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import ImageItem from "@components/products/images/ImageItem";
 import { ObjectID } from "bson";
 
-const DUMMY_LIST = [
-  {
-    id: "i1",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: true,
-  },
-  {
-    id: "i2",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: false,
-  },
-  {
-    id: "i3",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: true,
-  },
-  {
-    id: "i4",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: false,
-  },
-  {
-    id: "i5",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: true,
-  },
-  {
-    id: "i6",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: false,
-  },
-  {
-    id: "i7",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: true,
-  },
-  {
-    id: "i8",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: false,
-  },
-  {
-    id: "i9",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: true,
-  },
-  {
-    id: "i10",
-    name: "نام آیتم 25 کاراکتری",
-    address: "/images/image-poster.png",
-    link: "/products/:productId",
-    isSpecial: false,
-  },
-];
+
 const buttons = {
   prevButton: (
     <svg

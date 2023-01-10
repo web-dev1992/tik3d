@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
-
 import LanguageDropDown from "@components/layout/LanguageDropDown";
 import HamburgerMenu from "@components/ui/HamburgerMenu";
 import DropDown from "@components/ui/Dropdown";

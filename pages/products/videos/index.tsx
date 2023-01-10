@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let VideoPageProps;
   try {
     apiVideosRes = await axios(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/videos`
+      `${process.env.domain}/api/products/videos`
     );
     VideoPageProps = {
       videos:

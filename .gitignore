@@ -37,7 +37,7 @@ next-env.d.ts
 
 
 #big files
-*.mp4
+ElephantsDream.mp4
 
 #next config file
 next.config.js

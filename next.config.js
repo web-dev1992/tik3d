@@ -15,7 +15,7 @@ module.exports = (phase) => {
         email_private_key: "r5akX87_8FJ9nDPIqmoy",
         _app_phone_provider:
           "phone://AC65dd8cd22b93da124f8135cbef42d19f:c0f0bff43f4a85d544bc528a3e2814af@twilio",
-        _app_phone_from: "+13149882410",
+        app_phone_from: "+13149882410",
         twilio_account_sid: "AC65dd8cd22b93da124f8135cbef42d19f",
         twilio_auth_token: "c0f0bff43f4a85d544bc528a3e2814af",
         supabase_key:

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { FormEvent, forwardRef } from "react";
 import InputLayout from "../profile/InputLayout";
 import ProfileLabel from "../profile/ProfileLabel";

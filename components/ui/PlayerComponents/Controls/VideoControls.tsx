@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { forwardRef, useState, FormEvent } from "react";
 import PlayArrowIcon from "@components/ui/PlayerComponents/Controls/PlayArrowIcon";
 import PlayButtonIcon from "@components/ui/PlayerComponents/Controls/PlayButtonIcon";

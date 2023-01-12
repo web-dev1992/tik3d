@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { FormEvent, forwardRef, ReactNode } from "react";
 import CountryCodeInput from "./CountryCodeInput";
 import Label from "../ui/Label";

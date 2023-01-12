@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { forwardRef } from "react";
 import CardVideoPauseButton from "@components/ui/PlayerComponents/Controls/CardVideoPauseButton";
 import CardVideoPlayButton from "@components/ui/PlayerComponents/Controls/CardVideoPlayButton";

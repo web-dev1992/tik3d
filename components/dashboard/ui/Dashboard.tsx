@@ -1,4 +1,4 @@
-import { useState, Fragment, useCallback, useEffect } from "react";
+import { useState, Fragment, useCallback, useEffect, useMemo } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { signOut } from "next-auth/react";
@@ -26,7 +26,10 @@ const menuItems = [
 
 const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
   const subCtx = useSubContext();
-  const userId = new ObjectId(session.user.id);
+  const userId = useMemo(
+    () => new ObjectId(session.user?.id),
+    [session.user.id]
+  );
   const Dummy_user_info = {
     id: userId,
     name: "",
@@ -145,7 +148,7 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [userId]);
   const getUserHandler = useCallback(async () => {
     try {
       const result = await axios("/api/user/get-user");
@@ -153,7 +156,7 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [subCtx.hasSub]);
   const getSubscriptionsHandler = useCallback(async () => {
     try {
       const result = await axios("/api/subscriptions");
@@ -172,7 +175,7 @@ const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [userId]);
   useEffect(() => {
     getUserHandler();
     getUserSubscriptionHandler();

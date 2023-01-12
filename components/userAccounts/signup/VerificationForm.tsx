@@ -1,4 +1,4 @@
-import { useState, useRef, FormEvent, useEffect } from "react";
+import { useState, useRef, FormEvent, useEffect, useCallback } from "react";
 import { useRouter } from "next/dist/client/router";
 import Swal from "sweetalert2";
 import SubmitButton from "../../layout/SubmitButton";
@@ -23,7 +23,7 @@ const VerificationForm: React.FC<{
   const [message, setMessage] = useState<string>("");
   useEffect(() => {
     sendCodeHandler("کد تایید ارسال شد");
-  }, []);
+  });
   const handleChange = (event) => {
     const { maxLength, value, name } = event.target;
     const [fieldName, fieldIndex] = name.split("-");
@@ -42,32 +42,35 @@ const VerificationForm: React.FC<{
       }
     }
   };
-  const sendCodeHandler = async (message: string) => {
-    const code = Math.floor(100000 + Math.random() * 900000);
-    setActivationCode(code);
-    try {
-      if (signupMethod === "email") {
-        const result = await sendEmail(destination, code);
-        setError(false);
-        setMessage(message);
-      } else {
-        const result = await axios.post("/api/auth/send-sms", {
-          destination,
-          code,
+  const sendCodeHandler = useCallback(
+    async (message: string) => {
+      const code = Math.floor(100000 + Math.random() * 900000);
+      setActivationCode(code);
+      try {
+        if (signupMethod === "email") {
+          const result = await sendEmail(destination, code);
+          setError(false);
+          setMessage(message);
+        } else {
+          const result = await axios.post("/api/auth/send-sms", {
+            destination,
+            code,
+          });
+          setError(false);
+          setMessage(message);
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "خطا",
+          text:
+            error.response?.data?.message || error || "خطایی بوجود آمده است!",
+          icon: "error",
+          confirmButtonText: "فهمیدم!",
         });
-        setError(false);
-        setMessage(message);
       }
-     
-    } catch (error) {
-      Swal.fire({
-        title: "خطا",
-        text: error.response?.data?.message || error || "خطایی بوجود آمده است!",
-        icon: "error",
-        confirmButtonText: "فهمیدم!",
-      });
-    }
-  };
+    },
+    [signupMethod, destination]
+  );
   const formSubmitHandler = async (event: FormEvent) => {
     event.preventDefault();
     const enteredCode =

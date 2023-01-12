@@ -10,7 +10,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
   const email = session.user.email;
-  const phone = session.user.phone;
+  const phone = session.user?.phone;
   let user;
   const client = await connectToDatabase();
   try {

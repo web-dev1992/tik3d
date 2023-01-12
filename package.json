@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
-    "@supabase/supabase-js": "^2.2.3",
     "axios": "^1.2.1",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.5.0",
@@ -46,6 +45,13 @@
   "browser": {
     "net": false,
     "tls": false,
-    "fs": false
+    "fs": false,
+    "mongodb-client-encryption": false,
+    "bson-ext": false,
+    "kerberos": false,
+    "@mongodb-js/zstd": false,
+    "snappy": false,
+    "snappy/package.json": false,
+    "aws4": false
   }
 }

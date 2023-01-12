@@ -39,8 +39,8 @@ next-env.d.ts
 #big files
 *.mp4
 
-#next config file
-next.config.js
-
 #env files
 .env.local
+
+#next config file
+next.config.js

@@ -1,6 +1,5 @@
 import Payment from "@components/payment/Payment";
 import { GetServerSideProps, NextPage } from "next";
-import config from "../../next.config";
 import { getSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import axios from "axios";

@@ -19,6 +19,7 @@ const VerificationForm: React.FC<{
   const code4Ref = useRef<HTMLInputElement>(null);
   const code5Ref = useRef<HTMLInputElement>(null);
   const [activationCode, setActivationCode] = useState<number>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   useEffect(() => {
@@ -93,6 +94,7 @@ const VerificationForm: React.FC<{
       return;
     }
     try {
+      setIsLoading(true);
       const result = await axios.post("/api/auth/active-user", { destination });
       Swal.fire({
         title: "تبریک",
@@ -100,7 +102,6 @@ const VerificationForm: React.FC<{
         icon: "success",
         confirmButtonText: "ممنون!",
       });
-
       router.push("/user-account/login");
     } catch (error) {
       Swal.fire({
@@ -109,6 +110,8 @@ const VerificationForm: React.FC<{
         icon: "error",
         confirmButtonText: "فهمیدم!",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
   return (

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn, getSession } from "next-auth/react";
 import Swal from "sweetalert2";
@@ -14,7 +14,9 @@ const PhoneLoginForm: React.FC<{}> = () => {
   const router = useRouter();
   const phoneInputRef = useRef<HTMLInputElement>();
   const passwordInputRef = useRef<HTMLInputElement>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const submitPhoneLoginHandler = async () => {
+    setIsLoading(true);
     const phone = phoneInputRef.current!.value;
     const password = passwordInputRef.current!.value;
 
@@ -43,14 +45,16 @@ const PhoneLoginForm: React.FC<{}> = () => {
       phone: phone,
       password: password,
     });
-    if (result.error)
+    if (result.error) {
       Swal.fire({
         title: "خطا",
         text: result.error,
         icon: "error",
         confirmButtonText: "فهمیدم!",
       });
-    else {
+      setIsLoading(false);
+      return;
+    } else {
       try {
         const session = await getSession();
         const result = await axios(
@@ -85,6 +89,7 @@ const PhoneLoginForm: React.FC<{}> = () => {
         //   });
       } finally {
         router.replace("/");
+        setIsLoading(false);
       }
     }
   };
@@ -123,7 +128,7 @@ const PhoneLoginForm: React.FC<{}> = () => {
         }}
         ref={passwordInputRef}
       />
-      <SubmitButton text="ورود" />
+      <SubmitButton text="ورود" disabled={isLoading} />
       <div className="flex flex-row justify-between flex-nowrap items-center w-full text-[7px] xl:text-sm text-right font-light leading-[10px] xl:leading-[18px]">
         <CustomeLink
           text="رمز خود را فراموش کرده اید؟"

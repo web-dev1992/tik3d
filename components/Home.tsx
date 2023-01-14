@@ -12,22 +12,26 @@ import { ObjectId } from "mongodb";
 import type { Session } from "next-auth";
 
 interface HomeProps {
-  images?: {
-    _id: ObjectId;
-    link: string;
-    address: string;
-    name: string;
-    isSpecial: boolean;
-  }[];
-  comments?: {
-    _id: ObjectId;
-    productId: ObjectId;
-    name: string;
-    email: string;
-    star: number;
-    image: string;
-    comment: string;
-  }[];
+  images:
+    | {
+        _id: ObjectId;
+        link: string;
+        address: string;
+        name: string;
+        isSpecial: boolean;
+      }[]
+    | null;
+  comments:
+    | {
+        _id: ObjectId;
+        productId: ObjectId;
+        name: string;
+        email: string;
+        star: number;
+        image: string;
+        comment: string;
+      }[]
+    | null;
   session?: Session;
 }
 const HomeContent = (props: HomeProps) => {

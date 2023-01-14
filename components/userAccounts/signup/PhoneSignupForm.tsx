@@ -15,6 +15,7 @@ const PhoneSignupForm: React.FC<{
 }> = ({ openConditionsHandler }) => {
   const router = useRouter();
   const phoneInputRef = useRef<HTMLInputElement>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const passwordInputRef = useRef<HTMLInputElement>();
   const [acceptLaw, setAcceptLaw] = useState<boolean>(false);
   const [acceptLawError, setAcceptLawError] = useState<string>(
@@ -52,6 +53,7 @@ const PhoneSignupForm: React.FC<{
       }
 
       try {
+        setIsLoading(true);
         const response = await axios.post("/api/auth/phone-signup", {
           phone,
           password,
@@ -63,7 +65,9 @@ const PhoneSignupForm: React.FC<{
           confirmButtonText: "فهمیدم!",
         });
         router.push(`/user-account/user-verification/${phone}`);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         Swal.fire({
           title: "خطا",
           text:
@@ -118,7 +122,7 @@ const PhoneSignupForm: React.FC<{
         />
         {acceptLawError && <ErrorMessage message={acceptLawError} />}
       </div>
-      <SubmitButton text="ثبت نام" />
+      <SubmitButton text="ثبت نام" disabled={isLoading} />
       <div className="flex flex-row justify-between flex-nowrap items-center w-full text-[7px] xl:text-sm text-right font-light leading-[10px] xl:leading-[18px]">
         <CustomeLink text="به کمک نیاز دارید؟" href="/contact-us" />
         <span className="xl:text-xs text-[#333333]">

@@ -1,4 +1,4 @@
-import {  useState, useRef } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
@@ -15,7 +15,7 @@ const EmailSignupForm: React.FC<{
   const router = useRouter();
   const emailInputRef = useRef<HTMLInputElement>();
   const passwordInputRef = useRef<HTMLInputElement>();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [acceptLaw, setAcceptLaw] = useState<boolean>(false);
   const [acceptLawError, setAcceptLawError] = useState<string>(
     "لطفا با قوانین tik3d موافقت نمایید"
@@ -52,6 +52,7 @@ const EmailSignupForm: React.FC<{
       }
 
       try {
+        setIsLoading(true);
         const response = await axios.post("/api/auth/email-signup", {
           email,
           password,
@@ -62,9 +63,10 @@ const EmailSignupForm: React.FC<{
           icon: "success",
           confirmButtonText: "فهمیدم!",
         });
-
         router.push(`/user-account/user-verification/${email}`);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         Swal.fire({
           title: "خطا",
           text:
@@ -118,7 +120,7 @@ const EmailSignupForm: React.FC<{
         {acceptLawError && <ErrorMessage message={acceptLawError} />}
       </div>
 
-      <SubmitButton text="ثبت نام" />
+      <SubmitButton text="ثبت نام" disabled={isLoading} />
       <div className="flex flex-row justify-between flex-nowrap items-center w-full text-[7px] xl:text-sm text-right font-light leading-[10px] xl:leading-[18px]">
         <CustomeLink href="/contact-us" text="به کمک نیاز دارید؟" />
         <span className="xl:text-xs text-[#333333]">

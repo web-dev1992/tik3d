@@ -4,7 +4,6 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import ImageItem from "@components/products/images/ImageItem";
 import { ObjectID } from "bson";
 
-
 const buttons = {
   prevButton: (
     <svg
@@ -41,8 +40,17 @@ const responsive = {
   1024: { items: 6 },
 };
 
-
-const Carousel:React.FC<{images:{_id:ObjectID, name:string, link:string, address:string, isSpecial:boolean}[]}> = (props) => {
+const Carousel: React.FC<{
+  images:
+    | {
+        _id: ObjectID;
+        name: string;
+        link: string;
+        address: string;
+        isSpecial: boolean;
+      }[]
+    | null;
+}> = (props) => {
   const { images } = props;
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
@@ -51,9 +59,17 @@ const Carousel:React.FC<{images:{_id:ObjectID, name:string, link:string, address
     }
   }, []);
   const handleDragStart = (e) => e.preventDefault();
-const items = images.map((image) => (
-  <ImageItem image={image} key={image._id.toString()} onDragStart={handleDragStart} />
-));
+let items;
+  if (images && images.length > 0) {
+     items = images.map((image) => (
+      <ImageItem
+        image={image}
+        key={image._id.toString()}
+        onDragStart={handleDragStart}
+      />
+    ));
+  }
+
   return (
     <div className=" w-11/12   m-auto my-10 h-max flex flex-col flex-nowrap justify-center items-center font-IRANSans overflow-hidden ">
       <h1 className="w-full my-5 flex justify-start md:justify-center text-navyBluee font-bold text-xl lg:text-2xl xl:text-4xl tracking-normal">

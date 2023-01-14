@@ -40,30 +40,37 @@ const buttons = {
   ),
 };
 
-
 const CommentList: React.FC<{
-  comments?: {
-    _id: ObjectId;
-    productId: ObjectId;
-    name: string;
-    email: string;
-    star: number;
-    image: string;
-    comment: string;
-  }[];
+  comments:
+    | {
+        _id: ObjectId;
+        productId: ObjectId;
+        name: string;
+        email: string;
+        star: number;
+        image: string;
+        comment: string;
+      }[]
+    | null;
 }> = (props) => {
   const [hasWindow, setHasWindow] = useState(false);
-  const { comments }=props;
+  const { comments } = props;
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHasWindow(true);
     }
   }, []);
   const handleDragStart = (e) => e.preventDefault();
-const items = comments.map((comment) => (
-  <Comment comment={comment} key={comment._id.toString()} onDragStart={handleDragStart} />
-));
-
+  let items;
+  if (comments && comments.length > 0) {
+    items = comments.map((comment) => (
+      <Comment
+        comment={comment}
+        key={comment._id.toString()}
+        onDragStart={handleDragStart}
+      />
+    ));
+  }
   return (
     <Fragment>
       <h3 className="w-full flex flex-row mt-16 mb-11 justify-center text-navyBluee text-center text-xl lg:text-2xl font-bold xl:text-4xl -tracking-normal leading-8 md:leading-9 xl:leading-[60px]">

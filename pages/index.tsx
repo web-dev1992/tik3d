@@ -9,22 +9,26 @@ import Head from "next/head";
 import Home from "@components/Home";
 
 interface HomePageProps {
-  images?: {
-    _id: ObjectId;
-    link: string;
-    address: string;
-    name: string;
-    isSpecial: boolean;
-  }[];
-  comments?: {
-    _id: ObjectId;
-    productId: ObjectId;
-    name: string;
-    email: string;
-    star: number;
-    image: string;
-    comment: string;
-  }[];
+  images:
+    | {
+        _id: ObjectId;
+        link: string;
+        address: string;
+        name: string;
+        isSpecial: boolean;
+      }[]
+    | null;
+  comments:
+    | {
+        _id: ObjectId;
+        productId: ObjectId;
+        name: string;
+        email: string;
+        star: number;
+        image: string;
+        comment: string;
+      }[]
+    | null;
   session?: Session;
 }
 const HomePage: NextPage = (props: HomePageProps) => {
@@ -49,9 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let homeProps;
   try {
-    apiImagesRes = await axios(
-      `${process.env.domain}/api/products/images`
-    );
+    apiImagesRes = await axios(`${process.env.domain}/api/products/images`);
     homeProps = { images: apiImagesRes.data.images };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);
@@ -59,9 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     homeProps = { images: null };
   }
   try {
-    apiCommentsRes = await axios(
-      `${process.env.domain}/api/comments`
-    );
+    apiCommentsRes = await axios(`${process.env.domain}/api/comments`);
     homeProps = { ...homeProps, comments: apiCommentsRes.data.comments };
   } catch (err) {
     console.error("err.response.data=======>", err.response.data);

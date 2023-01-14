@@ -2,7 +2,6 @@ import Images from "@components/products/images/Images";
 import { NextPage } from "next";
 import Head from "next/head";
 import axios from "axios";
-import config from "../../../next.config";
 import { GetServerSideProps } from "next/types";
 import { ObjectId } from "mongodb";
 

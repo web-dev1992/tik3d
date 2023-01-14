@@ -2,7 +2,6 @@ import Video from "@components/products/videos/Video";
 import { getSession } from "next-auth/react";
 import { NextPage } from "next";
 import Head from "next/head";
-import config from "../../../next.config";
 import axios from "axios";
 import { GetServerSideProps } from "next/types";
 import { parseCookies } from "../../../helper/parseCookie";

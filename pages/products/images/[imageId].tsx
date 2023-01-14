@@ -2,7 +2,6 @@ import ImageComponent from "@components/products/images/Image";
 import { getSession } from "next-auth/react";
 import { NextPage } from "next";
 import Head from "next/head";
-import config from "../../../next.config";
 import axios from "axios";
 import { parseCookies } from "../../../helper/parseCookie";
 import { GetServerSideProps } from "next/types";

@@ -1,7 +1,6 @@
 import Search from "@components/products/search/Search";
 import { NextPage } from "next";
 import Head from "next/head";
-import config from "../../../next.config";
 import axios from "axios";
 import { GetServerSideProps } from "next/types";
 import { ObjectId } from "mongodb";

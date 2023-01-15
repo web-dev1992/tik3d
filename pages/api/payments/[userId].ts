@@ -53,13 +53,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         ],
       });
       let remindedTime = 0;
-      if (payment !== null || payment.length > 0) {
+
+      if (payment !== null) {
         if (new Date().getTime() < new Date(payment.endAt).getTime()) {
           //calculate remindedd days from last active subscription
           remindedTime = payment.endAt.getTime() - new Date().getTime();
         }
       }
-
       const update = await db
         .collection("payments")
         .updateMany(
@@ -88,8 +88,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             remindedTime
         ),
       });
+      console.log("result2=========>", result2);
       res.status(201).json({
-        payment:result2,
+        payment: result2,
         message:
           "از خرید شما سپاسگزاریم، اشتراک قبلی به صورت خودکار غیرفعال و اشتراک تازه خریداری شده برای شما فعال می شود; زمان باقیمانده از اشتراک قبلی به اشتراک فعلی شما افزوده میشود!",
       });

@@ -27,6 +27,7 @@ const Payment = (props: PaymentProps) => {
   const subCtx = useSubContext();
   const discountRef = useRef<HTMLInputElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<string>("online");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [discount, setDiscount] = useState<{
     code: string;
     discountedPrice: number;
@@ -56,6 +57,7 @@ const Payment = (props: PaymentProps) => {
   };
   const submitPaymentHandler = async (event: FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     const data = {
       subId: props.subscription._id,
       amount: props.subscription.price,
@@ -72,16 +74,18 @@ const Payment = (props: PaymentProps) => {
         );
         setDiscount(null);
       }
-
-      setIsPaymentDone(true);
-      setIsPaymentSuccessful(true);
-      subCtx.setSubHandler(new Date(result.data.payment.endAt).getTime());
+      const response = await axios.get(
+        `/api/payments/get-active-payment/${props.userId}`
+      );
+      subCtx.setSubHandler(new Date(response.data.payment.endAt).getTime());
       Swal.fire({
         title: "تبریک",
         text: result.data.message,
         icon: "error",
         confirmButtonText: "ممنون!",
       });
+      setIsPaymentDone(true);
+      setIsPaymentSuccessful(true);
     } catch (err) {
       Swal.fire({
         title: "خطا",
@@ -90,6 +94,8 @@ const Payment = (props: PaymentProps) => {
         icon: "error",
         confirmButtonText: "فهمیدم!",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
   const discountHandler = async () => {
@@ -199,7 +205,7 @@ const Payment = (props: PaymentProps) => {
                 />
                 {acceptLawError && <ErrorMessage message={acceptLawError} />}
               </div>
-              <SubmitButton text="پرداخت" />
+              <SubmitButton text="پرداخت" disabled={isLoading} />
               <span className="w-full justify-start">
                 <CustomeLink href="/contact-us" text="به کمک نیاز دارید؟" />
               </span>

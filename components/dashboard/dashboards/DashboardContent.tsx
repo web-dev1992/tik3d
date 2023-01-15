@@ -24,11 +24,11 @@ const DashboardContent: React.FC<{
           className="flex flex-row flex-nowrap justify-center items-center gap-4 lg:gap-[30px] xl:gap-12 text-xl lg:text-2xl xl:text-4xl text-[#0F2137] leading-[30px] font-medium"
           style={{ direction: "ltr" }}
         >
-          <span>{faExpireDate[0]}</span>
+          <span>{faExpireDate[0] ?? 0}</span>
           <span className="text-[#4F96FF]">/</span>
-          <span>{faExpireDate[1]}</span>
+          <span>{faExpireDate[1] ?? 0}</span>
           <span className="text-[#4F96FF]">/</span>
-          <span>{faExpireDate[2]}</span>
+          <span>{faExpireDate[2] ?? 0}</span>
         </div>
         <button
           onClick={() => changeContentHandler("subscription")}
@@ -38,9 +38,9 @@ const DashboardContent: React.FC<{
           افزودن
         </button>
         <div className="bg-[#4F96FF] rounded-t-xl xl:rounded-t-3xl text-white h-10 w-[132px] lg:w-[151px] lg:h-11 xl:w-60 xl:h-[73px]  text-sm lg:text-base xl:text-2xl font-bold flex flex-row justify-center items-center ">
-          {expireDate &&
-            expireDate !== null &&
-            calRemindedDays(expireDate) + "روز مانده"}
+          {expireDate && expireDate !== null
+            ? calRemindedDays(expireDate) + "روز مانده"
+            : "بدون اشتراک"}
         </div>
       </div>
       <div className="lg:absolute lg:-bottom-5 flex flex-col lg:flex-row flex-nowrap justify-center items-center gap-2 lg:gap-6 ">

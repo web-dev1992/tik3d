@@ -21,15 +21,21 @@ export default function SubProvider(props: { children: JSX.Element }) {
 
   const [hasSub, setHasSub] = useState<boolean>(cookie.sub?.hasSub ?? false);
   const [expirationTime, setExpirationTime] = useState<number>(
-    cookie.sub?.expirationTime ?? 0
+    cookie.sub?.expireDate ?? 0
   );
-  const setSubHandler = useCallback((expirationTime: number) => {
+  const setSubHandler = useCallback((expireDate: number) => {
+    console.log("expireDate===>", expireDate);
+    console.log("new Date().getTime()====>", new Date().getTime());
     setHasSub(true);
-    setExpirationTime(expirationTime);
-    const sub = { hasSub: true, expirationTime: expirationTime };
+    setExpirationTime(expireDate);
+    console.log(
+      "expireDate - new Date().getTime()====>",
+      expireDate - new Date().getTime()
+    );
+    const sub = { hasSub: true, expireDate: expireDate };
     setCookie("sub", JSON.stringify(sub), {
       path: "/",
-      maxAge: expirationTime - new Date().getTime(),
+      maxAge: expireDate - new Date().getTime(),
       // domain:'http://localhost/3000',
       // httpOnly: true,
       sameSite: true,

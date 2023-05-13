@@ -1,15 +1,15 @@
 import { MongoClient } from "mongodb";
 // const uri = "mongodb://localhost:27017/Tik3D?directConnection=true";
 const connectionString = `mongodb+srv://${process.env.db_username}:${process.env.db_password}@${process.env.db_cluster}.fcm60hd.mongodb.net/${process.env.db_name}?retryWrites=true&w=majority`;
-export async function connectToDatabase(fn, res) {
-  const id = setTimeout(
-    () =>
-      res.json({
-        message:
-          "خطایی در سرویس بانک اطلاعاتی mongoose وجود دارد . این خطا مربوط به سایت atlas mongoose است و ارتباطی به سایت tik3dندارد، لطفا مجددا سعی نمایید!",
-      }),
-    7000
-  );
+export async function connectToDatabase() {
+  const id = setTimeout(() => {
+    throw (
+      (new Error(
+        "خطایی در سرویس بانک اطلاعاتی mongoose وجود دارد . این خطا مربوط به سایت atlas mongoose است و ارتباطی به سایت tik3dندارد، لطفا مجددا سعی نمایید!"
+      ),
+      7000)
+    );
+  });
 
   try {
     const client = await MongoClient.connect(
@@ -22,8 +22,10 @@ export async function connectToDatabase(fn, res) {
     }
     return client;
   } catch (err) {
-    console.log("an error has happend during connecting to atlas Mongoose database!");
+    console.log(
+      "an error has happend during connecting to atlas Mongoose database!"
+    );
     console.log(err);
-    res.status(500).json({ message: err.message });
+   throw new Error(err.message)
   }
 }

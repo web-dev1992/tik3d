@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "typeRoots": ["./types/"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -27,9 +23,14 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/ui/VideoPlayerComponent/VideoPlayer.js", "components/ui/VideoPlayerComponent/Controls/PlayIcon.js", "components/ui/VideoPlayerComponent/Controls/PauseIcon.js", "components/ui/VideoPlayerComponent/Controls/Controls.js", "components/ui/VideoPlayerComponent/VideoPlayer.js", "helper/db.ts", "mock/dns/index.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "components/ui/VideoPlayerComponent/VideoPlayer.js",
+    "components/ui/VideoPlayerComponent/Controls/PlayIcon.js",
+    "components/ui/VideoPlayerComponent/Controls/PauseIcon.js",
+    "components/ui/VideoPlayerComponent/Controls/Controls.js",
+    "components/ui/VideoPlayerComponent/VideoPlayer.js",
+    "helper/db.ts",
+    "mock/dns/index.js"
+  ],
+  "exclude": ["node_modules"]
 }

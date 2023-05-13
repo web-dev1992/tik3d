@@ -22,7 +22,7 @@ export async function connectToDatabase(fn, res) {
     }
     return client;
   } catch (err) {
-    console.log("an error has happend during connecting to database!");
+    console.log("an error has happend during connecting to atlas Mongoose database!");
     console.log(err);
     res.status(500).json({ message: err.message });
   }

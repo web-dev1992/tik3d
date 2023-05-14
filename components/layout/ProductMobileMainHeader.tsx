@@ -19,7 +19,7 @@ const ProductMobileMainHeader: React.FC<{
     searchHandler(searchKey);
   };
   return (
-    <div className="bg-[#F6F8FB]  md:hidden flex flex-col flex-nowrap justify-center  items-center w-11/12 h-max m-auto font-IRANSans pt-8 pb-6 gap-8">
+    <div className="bg-[#F6F8FB]  lg:hidden flex flex-col flex-nowrap justify-center  items-center w-11/12 h-max m-auto font-IRANSans pt-8 pb-6 gap-8">
       <div className="flex flex-row flex-nowrap justify-between items-center w-full h-8 gap-0 ">
         <div className="w-4/12 flex flex-row flex-nowrap justify-start items-center ">
           <Link href="/" passHref>

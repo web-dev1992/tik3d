@@ -54,7 +54,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let VideoPageProps;
   try {
-    apiVideoRes = await axios(`${process.env.domain}/api/products/videos/${id}`);
+    apiVideoRes = await axios(
+      `${process.env.domain}/api/products/videos/${id}`
+    );
     if (apiVideoRes.data.video.isSpecial === true) {
       const cookies = parseCookies(context.req);
       if (Object.keys(cookies).length > 0 && cookies.sub && session) {
@@ -77,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     }
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     VideoPageProps = { video: null };
   }
@@ -91,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     VideoPageProps = { ...VideoPageProps, comments: null };
   }

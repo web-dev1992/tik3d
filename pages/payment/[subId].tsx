@@ -53,7 +53,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
     paymentProps = { subscription: null };
   }

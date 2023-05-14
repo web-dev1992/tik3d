@@ -56,7 +56,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     apiImagesRes = await axios(`${process.env.domain}/api/products/images`);
     homeProps = { images: apiImagesRes.data.images };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
     homeProps = { images: null };
   }
@@ -64,7 +63,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     apiCommentsRes = await axios(`${process.env.domain}/api/comments`);
     homeProps = { ...homeProps, comments: apiCommentsRes.data.comments };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
     console.error("err.response.status=====>", err.response.status);
     homeProps = { ...homeProps, comments: null };
   }

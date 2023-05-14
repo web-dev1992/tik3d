@@ -22,7 +22,10 @@ const Audios = (props: AudioProps) => {
   const [audiosPerPage, setAudiosPerPage] = useState(20);
   const indexOfLastAudio = currentPage * audiosPerPage;
   const indexOfFirstAudio = indexOfLastAudio - audiosPerPage;
-  const currentAudios = audios.slice(indexOfFirstAudio, indexOfLastAudio);
+  const currentAudios =
+    audios !== null && audios.length > 0
+      ? audios.slice(indexOfFirstAudio, indexOfLastAudio)
+      : null;
   const { height, width } = useWindowDimensions();
   useEffect(() => {
     if (width >= 768) setAudiosPerPage(20);
@@ -40,26 +43,26 @@ const Audios = (props: AudioProps) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
-      <div className="flex flex-row justify-center items-start gap-6  xl:gap-10 my-[72px] m-auto w-11/12 sm:w-9/12 xl:w-full mt-5">
-        {/* sidebar */}
-        <ProductsSidebar />
-        {/* productlist */}
-        <div className="flex flex-col flex-nowrap justify-center items-center ">
-          <AudioProductList audios={currentAudios} />
-          {/* pagination */}
-          <div
-            className="flex flex-row justify-center items-center font-IRANSans mt-12 "
-            style={{ direction: "rtl" }}
-          >
+      {/* sidebar */}
+      <ProductsSidebar />
+      {/* productlist */}
+      <div className="flex flex-col flex-nowrap justify-center items-center w-full">
+        <AudioProductList audios={currentAudios} />
+        {/* pagination */}
+        <div
+          className="flex flex-row justify-center items-center font-IRANSans mt-12 "
+          style={{ direction: "rtl" }}
+        >
+          {audios !== null && (
             <Pagination
               ItemsPerPage={audiosPerPage}
-              totalItems={audios.length}
+              totalItems={audios !== null ? audios.length : 0}
               paginate={paginate}
               currentPage={currentPage}
               paginateFront={paginateFront}
               paginateBack={paginateBack}
             />
-          </div>
+          )}
         </div>
       </div>
     </ProductLayout>

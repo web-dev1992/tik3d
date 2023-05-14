@@ -15,9 +15,9 @@ const HomeItro = () => {
   );
 
   return (
-    <div className="w-full bg-[#F6F8FB] lg:pt-[117px] pb-[60px] xl:pt-[189px] xl:pb-24">
-      <div className="h-max flex flex-col lg:flex-row-reverse flex-nowrap  justift-start md:justify-center items-center w-[317px] sm:w-9/12 lg:w-[870px] xl:w-11/12 mr-[22px] ml-9 md:m-auto ">
-        <div className="aspect-square flex justify-center items-center w-[317px] h-[297px] lg:w-[480px] lg:h-[500px] xl:w-[772px] xl:h-[723px] mt-12 lg:mt-0 mix-blend-darken ">
+    <div className="w-full bg-[#F6F8FB] lg:pt-[117px] pb-[60px] xl:pt-[189px] xl:pb-24 xl:px-72 lg:px-44 pr-[22px] pl-9 ">
+      <div className="h-max flex flex-col lg:flex-row-reverse flex-nowrap  justift-start md:justify-center items-center w-full m-auto">
+        <div className="aspect-square flex justify-center items-center w-7/12 mt-12 lg:mt-0 mix-blend-darken ">
           {hasWindow && (
             <ReactPlayer
               url="/videos/webpack.mp4"
@@ -31,7 +31,7 @@ const HomeItro = () => {
           )}
         </div>
 
-        <div className="w-[264px] md:w-full lg:w-1/2 h-full flex flex-col justify-center items-start text-navyBluee font-IRANSans mr-6 lg:mr-0">
+        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-start text-navyBluee font-IRANSans ">
           <h1 className="text-right text-4xl xl:text-5xl xl:leading-[80px] font-bold leading-[47px] tracking-tight text-navyBlue my-4">
             ۲۰ برابر سریع تر طراحی کنید!
           </h1>

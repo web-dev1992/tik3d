@@ -31,15 +31,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiVideosRes;
   let VideoPageProps;
   try {
-    apiVideosRes = await axios(
-      `${process.env.domain}/api/products/videos`
-    );
+    apiVideosRes = await axios(`${process.env.domain}/api/products/videos`);
     VideoPageProps = {
       videos:
         apiVideosRes.data.videos.length !== 0 ? apiVideosRes.data.videos : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     VideoPageProps = { videos: null };
   }

@@ -25,7 +25,7 @@ const XlargMainHeader: React.FC<{
     searchHandler(searchKey);
   };
   return (
-    <div className="hidden xl:flex flex-col flex-nowrap justify-center items-center w-full h-52 m-auto font-IRANSans ">
+    <div className="hidden 2xl:flex flex-col flex-nowrap justify-center items-center w-full h-52 m-auto font-IRANSans ">
       <div className=" flex flex-row flex-nowrap justify-between items-start w-full h-16 gap-0 ">
         <div className=" w-44 h-14 flex flex-row flex-nowrap justify-start items-center  ">
           <Link href="/" passHref>

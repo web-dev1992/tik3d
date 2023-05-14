@@ -64,9 +64,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       audios:
         apiSearchRes.data.audios.length !== 0 ? apiSearchRes.data.audios : null,
     };
-  
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     SearchPageProps = { audios: null, videos: null, images: null };
   }

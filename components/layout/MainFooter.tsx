@@ -71,7 +71,7 @@ const MainFooter = () => {
           </div>
         </div>
       </div>
-      <div className="hidden xl:inline-block absolute -left-[124px] -bottom-2 h-[75px] w-[75px]">
+      {/* <div className="hidden xl:inline-block absolute -left-[124px] -bottom-2 h-[75px] w-[75px]">
         <Image
           src="/images/message.png"
           alt="message"
@@ -79,7 +79,7 @@ const MainFooter = () => {
           height={75}
           objectFit="contain"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

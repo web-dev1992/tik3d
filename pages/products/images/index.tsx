@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         apiImagesRes.data.images.length !== 0 ? apiImagesRes.data.images : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     ImagePageProps = { images: null };
   }

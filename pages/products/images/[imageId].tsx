@@ -52,7 +52,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let apiCommentsRes;
   let ImagePageProps;
   try {
-    apiImageRes = await axios(`${process.env.domain}/api/products/images/${id}`);
+    apiImageRes = await axios(
+      `${process.env.domain}/api/products/images/${id}`
+    );
     if (apiImageRes.data.image.isSpecial === true) {
       const cookies = parseCookies(context.req);
       if (Object.keys(cookies).length > 0 && cookies.sub && session) {
@@ -75,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     }
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     ImagePageProps = { image: null };
   }
@@ -89,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     ImagePageProps = { ...ImagePageProps, comments: null };
   }

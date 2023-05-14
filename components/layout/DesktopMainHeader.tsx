@@ -26,7 +26,7 @@ const DesktopMainHeader: React.FC<{
     searchHandler(searchKey);
   };
   return (
-    <div className=" hidden md:flex xl:hidden flex-col flex-nowrap justify-center items-center w-9/12 h-32 m-auto gap-4 font-IRANSans ">
+    <div className="hidden lg:flex 2xl:hidden flex-col flex-nowrap justify-center items-center w-full h-32 m-auto gap-4 font-IRANSans ">
       <div className=" flex flex-row flex-nowrap justify-between items-center w-full h-10">
         <div className=" w-1/2 flex flex-row flex-nowrap justify-start items-center ml-4">
           <Link href="/" passHref>

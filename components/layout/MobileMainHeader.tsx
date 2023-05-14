@@ -18,7 +18,7 @@ const MobileMainHeader: React.FC<{
     searchHandler(searchKey);
   };
   return (
-    <div className="  md:hidden flex flex-row flex-nowrap justify-between items-center w-11/12 h-9 m-auto font-IRANSans mt-8 mx-[22px] ">
+    <div className="lg:hidden flex flex-row flex-nowrap justify-between items-center w-full h-9 m-auto font-IRANSans mt-8  ">
       <div className=" w-4/12 flex flex-row flex-nowrap justify-start items-center ">
         <Link href="/" passHref>
           <a className="flex items-center">

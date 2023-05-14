@@ -45,7 +45,11 @@ const HomeContent = (props: HomeProps) => {
       <Ad />
       <Tik3dDesignApp />
       <Tik3dBanner />
-      <CommentList comments={comments ? comments.slice(0, 8) : null} />
+      <CommentList
+        comments={
+          comments !== null && comments.length > 0 ? comments.slice(0, 8) : null
+        }
+      />
       <Clients />
       <MainFooter />
     </MainLayout>

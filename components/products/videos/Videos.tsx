@@ -23,7 +23,8 @@ const Videos = (props: VideoProps) => {
   const [videosPerPage] = useState(12);
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
-  const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+  const currentVideos =
+    videos !== null ? videos.slice(indexOfFirstVideo, indexOfLastVideo) : null;
 
   // Change page
   const paginateFront = () => {
@@ -36,25 +37,25 @@ const Videos = (props: VideoProps) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
-      <div className="flex flex-row justify-center items-start gap-6  xl:gap-10 my-[72px] m-auto w-11/12 sm:w-9/12  xl:w-[1350px] mt-5">
-        {/* sidebar */}
-        <ProductsSidebar />
-        <div className=" flex flex-col flex-nowrap justify-center items-center ">
-          <VideoProductList videos={currentVideos} />
-          {/* pagination */}
-          <div
-            className="flex flex-row justify-center items-center font-IRANSans mt-12 "
-            style={{ direction: "rtl" }}
-          >
+      {/* sidebar */}
+      <ProductsSidebar />
+      <div className="flex flex-col flex-nowrap justify-center items-center w-full ">
+        <VideoProductList videos={currentVideos} />
+        {/* pagination */}
+        <div
+          className="flex flex-row justify-center items-center font-IRANSans mt-12 "
+          style={{ direction: "rtl" }}
+        >
+          {videos !== null && (
             <Pagination
               ItemsPerPage={videosPerPage}
-              totalItems={videos.length}
+              totalItems={videos !== null ? videos.length : 0}
               paginate={paginate}
               currentPage={currentPage}
               paginateFront={paginateFront}
               paginateBack={paginateBack}
             />
-          </div>
+          )}
         </div>
       </div>
     </ProductLayout>

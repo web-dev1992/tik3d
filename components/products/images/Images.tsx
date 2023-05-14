@@ -21,7 +21,8 @@ const Images = (props: ImageProps) => {
   const [imagesPerPage, setImagesPerPage] = useState(20);
   const indexOfLastImage = currentPage * imagesPerPage;
   const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-  const currentImages = images.slice(indexOfFirstImage, indexOfLastImage);
+  const currentImages =
+    images !== null ? images.slice(indexOfFirstImage, indexOfLastImage) : null;
   const { height, width } = useWindowDimensions();
   useEffect(() => {
     if (width >= 768) setImagesPerPage(20);
@@ -39,25 +40,25 @@ const Images = (props: ImageProps) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
-      <div className="flex flex-row justify-center items-start gap-6  xl:gap-10 my-[72px] m-auto w-11/12 sm:w-9/12 xl:w-full mt-5">
-        <ProductsSidebar />
-        {/* prosuctsLaist */}
-        <div className="flex flex-col flex-nowrap justify-center items-center ">
-          <ImageProductList images={currentImages} />
-          {/* pagination */}
-          <div
-            className="flex flex-row justify-center items-center font-IRANSans mt-12 "
-            style={{ direction: "rtl" }}
-          >
+      <ProductsSidebar />
+      {/* prosuctsLaist */}
+      <div className="flex flex-col flex-nowrap justify-center items-center w-full ">
+        <ImageProductList images={currentImages} />
+        {/* pagination */}
+        <div
+          className="flex flex-row justify-center items-center font-IRANSans mt-12 "
+          style={{ direction: "rtl" }}
+        >
+          {images !== null && (
             <Pagination
               ItemsPerPage={imagesPerPage}
-              totalItems={images.length}
+              totalItems={images !== null ? images.length : 0}
               paginate={paginate}
               currentPage={currentPage}
               paginateFront={paginateFront}
               paginateBack={paginateBack}
             />
-          </div>
+          )}
         </div>
       </div>
     </ProductLayout>

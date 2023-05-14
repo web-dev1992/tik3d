@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         apiAudiosRes.data.audios.length !== 0 ? apiAudiosRes.data.audios : null,
     };
   } catch (err) {
-    console.error("err.response.data=======>", err.response.data);
+    //
     console.error("err.response.status=====>", err.response.status);
     AudioPageProps = { audios: null };
   }

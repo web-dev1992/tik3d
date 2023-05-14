@@ -40,6 +40,8 @@ const Images = (props: ImageProps) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <ProductLayout>
+      <div className="flex flex-row justify-center items-start gap-6  xl:gap-10 my-[72px] m-auto w-full mt-5 xl:px-72 lg:px-44 px-[22px]">
+
       <ProductsSidebar />
       {/* prosuctsLaist */}
       <div className="flex flex-col flex-nowrap justify-center items-center w-full ">
@@ -60,6 +62,7 @@ const Images = (props: ImageProps) => {
             />
           )}
         </div>
+      </div>
       </div>
     </ProductLayout>
   );
